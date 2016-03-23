@@ -25,6 +25,7 @@ public class VirtueSurvey extends AppCompatActivity {
 
     private SQLiteDatabase database;
     public final static String RECORD_TABLE="virtueLog"; // name of table
+    private AppPreferences _appPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,10 @@ public class VirtueSurvey extends AppCompatActivity {
         dbHelper = new MyDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
 
+        _appPrefs = new AppPreferences(getApplicationContext());
+        final String activeVirtue = _appPrefs.getActiveVirtue();
+        Log.d("junk", "Active virtue is " + activeVirtue);
+
 
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
         btnNext = (Button) findViewById(R.id.nextBtn);
@@ -50,10 +55,11 @@ public class VirtueSurvey extends AppCompatActivity {
         btnNext.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (btnNext.getText().equals("Finish")) {
                     // Finish Clicked
 
-                    Integer[] surveyVals = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+                    Integer[] surveyVals = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
                     Switch s1 = (Switch) findViewById(R.id.temperanceSwitch);
                     Switch s2 = (Switch) findViewById(R.id.silenceSwitch);
                     Switch s3 = (Switch) findViewById(R.id.orderSwitch);
@@ -68,19 +74,71 @@ public class VirtueSurvey extends AppCompatActivity {
                     Switch s12 = (Switch) findViewById(R.id.chastitySwitch);
                     Switch s13 = (Switch) findViewById(R.id.humilitySwitch);
 
-                    if(s1.isChecked()) { surveyVals[0] = 1; } else { surveyVals[0] = 0;}
-                    if(s2.isChecked()) { surveyVals[1] = 1; } else { surveyVals[1] = 0;}
-                    if(s3.isChecked()) { surveyVals[2] = 1; } else { surveyVals[2] = 0;}
-                    if(s4.isChecked()) { surveyVals[3] = 1; } else { surveyVals[3] = 0;}
-                    if(s5.isChecked()) { surveyVals[4] = 1; } else { surveyVals[4] = 0;}
-                    if(s6.isChecked()) { surveyVals[5] = 1; } else { surveyVals[5] = 0;}
-                    if(s7.isChecked()) { surveyVals[6] = 1; } else { surveyVals[6] = 0;}
-                    if(s8.isChecked()) { surveyVals[7] = 1; } else { surveyVals[7] = 0;}
-                    if(s9.isChecked()) { surveyVals[8] = 1; } else { surveyVals[8] = 0;}
-                    if(s10.isChecked()) { surveyVals[9] = 1; } else { surveyVals[9] = 0;}
-                    if(s11.isChecked()) { surveyVals[10] = 1; } else { surveyVals[10] = 0;}
-                    if(s12.isChecked()) { surveyVals[11] = 1; } else { surveyVals[11] = 0;}
-                    if(s13.isChecked()) { surveyVals[12] = 1; } else { surveyVals[12] = 0;}
+                    if (s1.isChecked()) {
+                        surveyVals[0] = 1;
+                    } else {
+                        surveyVals[0] = 0;
+                    }
+                    if (s2.isChecked()) {
+                        surveyVals[1] = 1;
+                    } else {
+                        surveyVals[1] = 0;
+                    }
+                    if (s3.isChecked()) {
+                        surveyVals[2] = 1;
+                    } else {
+                        surveyVals[2] = 0;
+                    }
+                    if (s4.isChecked()) {
+                        surveyVals[3] = 1;
+                    } else {
+                        surveyVals[3] = 0;
+                    }
+                    if (s5.isChecked()) {
+                        surveyVals[4] = 1;
+                    } else {
+                        surveyVals[4] = 0;
+                    }
+                    if (s6.isChecked()) {
+                        surveyVals[5] = 1;
+                    } else {
+                        surveyVals[5] = 0;
+                    }
+                    if (s7.isChecked()) {
+                        surveyVals[6] = 1;
+                    } else {
+                        surveyVals[6] = 0;
+                    }
+                    if (s8.isChecked()) {
+                        surveyVals[7] = 1;
+                    } else {
+                        surveyVals[7] = 0;
+                    }
+                    if (s9.isChecked()) {
+                        surveyVals[8] = 1;
+                    } else {
+                        surveyVals[8] = 0;
+                    }
+                    if (s10.isChecked()) {
+                        surveyVals[9] = 1;
+                    } else {
+                        surveyVals[9] = 0;
+                    }
+                    if (s11.isChecked()) {
+                        surveyVals[10] = 1;
+                    } else {
+                        surveyVals[10] = 0;
+                    }
+                    if (s12.isChecked()) {
+                        surveyVals[11] = 1;
+                    } else {
+                        surveyVals[11] = 0;
+                    }
+                    if (s13.isChecked()) {
+                        surveyVals[12] = 1;
+                    } else {
+                        surveyVals[12] = 0;
+                    }
 
                     createRecord(surveyVals);
 
@@ -95,13 +153,16 @@ public class VirtueSurvey extends AppCompatActivity {
                             btnPrevious.setAlpha(1);
                             break;
                         case 13: // Humility
-                            Switch hs = (Switch) findViewById(R.id.humilitySwitch);
-                            Log.d("junk", "humility switch is " + Boolean.toString(hs.isChecked()));
+                            Switch cs = (Switch) findViewById(R.id.chastitySwitch);
+                            Log.d("junk", "chastity switch was " + Boolean.toString(cs.isChecked()));
                             btnNext.setText("Finish");
                             break;
                     }
                     Log.d("junk", "View Id (n):" + String.valueOf(viewAnimator.getDisplayedChild()));
 
+                }
+                if(Integer.parseInt(activeVirtue)==viewAnimator.getDisplayedChild()) {
+                    Log.d("junk","This is your virtue!!");
                 }
 
             }

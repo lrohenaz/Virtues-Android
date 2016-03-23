@@ -27,24 +27,207 @@
         android:fitsSystemWindows="true">
 
         <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Banjamin Franklins 13 Virtues"
+                android:id="@+id/virtueTitle"
+                android:paddingTop="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Benjamin Franklin was a wise man. He understood that a man could not improve himself without constantly reflecting upon his virtues. Choose a virtue to begin your journey."
+                android:id="@+id/virtueDesc"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/abc_text_size_subhead_material"
+                android:paddingTop="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="15dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_button" />
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Temperance"
+                        android:id="@+id/v1Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Silence"
+                        android:id="@+id/v2Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Order"
+                        android:id="@+id/v3Btn"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Resolution"
+                        android:id="@+id/v4Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Frugality"
+                        android:id="@+id/v5Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Industry"
+                        android:id="@+id/v6Btn"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Sincerity"
+                        android:id="@+id/v7Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Justice"
+                        android:id="@+id/v8Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Moderation"
+                        android:id="@+id/v9Btn"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Cleanliness"
+                        android:id="@+id/v10Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Tranquility"
+                        android:id="@+id/v11Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Chastity"
+                        android:id="@+id/v12Btn"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="Humility"
+                        android:id="@+id/v13Btn"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x"
+                        android:id="@+id/button14"
+                        android:visibility="invisible"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="z"
+                        android:id="@+id/button15"
+                        android:visibility="invisible"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fullscreen_content_controls"
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <Button
+                    android:id="@+id/chooseBtn"
+                    style="?metaButtonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/select_virtue_button" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
     </FrameLayout>
 
 </FrameLayout>

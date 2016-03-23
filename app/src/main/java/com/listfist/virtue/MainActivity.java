@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String RECORD_11="v11";
     public final static String RECORD_12="v12";
     public final static String RECORD_13="v13";
-
+    private AppPreferences _appPrefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("junk", "Let there be light...");
@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         updateList();
+        _appPrefs = new AppPreferences(getApplicationContext());
+        final String activeVirtue = _appPrefs.getActiveVirtue();
+        Log.d("junk", "Active virtue is " + activeVirtue);
     }
     public Cursor selectRecords() {
         String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};

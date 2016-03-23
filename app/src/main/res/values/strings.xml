@@ -6,7 +6,34 @@
     <string name="add_widget">Add widget</string>
     <string name="title_activity_virtue_survey">VirtueSurvey</string>
 
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_splash">Choose a Virtue</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="select_virtue_button">Choose</string>
+    <string name="v1_title">Temperance</string>
+    <string name="v1_desc">Eat not to dullness; drink not to elevation.</string>
+    <string name="v2_title">Sildence</string>
+    <string name="v2_desc">Speak not but what may benefit others or yourself; avoid trifling conversation.</string>
+    <string name="v3_title">Order</string>
+    <string name="v3_desc">Let all your things have their places; let each part of your business have its time.</string>
+    <string name="v4_title">Resolution</string>
+    <string name="v4_desc">Resolve to perform what you ought; perform without fail what you resolve.</string>
+    <string name="v5_title">Frugality</string>
+    <string name="v5_desc">Make no expense but to do good to others or yourself; i.e., waste nothing.</string>
+    <string name="v6_title">Industry</string>
+    <string name="v6_desc">Lose no time; be always employed in something useful; cut off all unnecessary actions.</string>
+    <string name="v7_title">Sincerity</string>
+    <string name="v7_desc">Use no hurtful deceit; think innocently and justly, and, if you speak, speak accordingly.</string>
+    <string name="v8_title">Justice</string>
+    <string name="v8_desc">Wrong none by doing injuries, or omitting the benefits that are your duty.</string>
+    <string name="v9_title">Moderation</string>
+    <string name="v9_desc">Avoid extremes; forbear resenting injuries so much as you think they deserve.</string>
+    <string name="v10_title">Cleanliness</string>
+    <string name="v10_desc">Tolerate no uncleanliness in body, cloaths, or habitation.</string>
+    <string name="v11_title">Tranquility</string>
+    <string name="v11_desc">Be not disturbed at trifles, or at accidents common or unavoidable.</string>
+    <string name="v12_title">Chastity</string>
+    <string name="v12_desc">Rarely use venery but for health or offspring, never to dullness, weakness, or the injury of your own or another\'s peace or reputation.</string>
+    <string name="v13_title">Humility</string>
+    <string name="v13_desc">Imitate Jesus and Socrates.</string>
 </resources>

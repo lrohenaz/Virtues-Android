@@ -69,7 +69,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Eat not to dullness; drink not to elevation."
+                        android:text="@string/v1_desc"
                         android:id="@+id/temperanceDescTxt"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -132,7 +132,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Speak not but what may benefit others or yourself; avoid trifling conversation."
+                        android:text="@string/v1_desc"
                         android:id="@+id/textView6"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -194,7 +194,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Let all your things have their places; let each part of your business have its time."
+                        android:text="@string/v3_desc"
                         android:id="@+id/textView11"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -256,7 +256,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Resolve to perform what you ought; perform without fail what you resolve."
+                        android:text="@string/v4_desc"
                         android:id="@+id/textView15"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -318,7 +318,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Make no expense but to do good to others or yourself; i.e., waste nothing."
+                        android:text="@string/v5_desc"
                         android:id="@+id/textView19"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -380,7 +380,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lose no time; be always employ&apos;d in something useful; cut off all unnecessary actions."
+                        android:text="@string/v6_desc"
                         android:id="@+id/textView23"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -442,7 +442,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Use no hurtful deceit; think innocently and justly, and, if you speak, speak accordingly."
+                        android:text="@string/v7_desc"
                         android:id="@+id/textView27"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -504,7 +504,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wrong none by doing injuries, or omitting the benefits that are your duty."
+                        android:text="@string/v8_desc"
                         android:id="@+id/textView31"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -566,7 +566,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Avoid extremes; forbear resenting injuries so much as you think they deserve."
+                        android:text="@string/v9_desc"
                         android:id="@+id/textView35"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -628,7 +628,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tolerate no uncleanliness in body, cloaths, or habitation."
+                        android:text="@string/v10_desc"
                         android:id="@+id/textView39"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -690,7 +690,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Be not disturbed at trifles, or at accidents common or unavoidable."
+                        android:text="@string/v11_desc"
                         android:id="@+id/textView43"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -752,7 +752,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rarely use venery but for health or offspring, never to dullness, weakness, or the injury of your own or another&apos;s peace or reputation."
+                        android:text="@string/v12_desc"
                         android:id="@+id/textView47"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -814,7 +814,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Imitate Jesus and Socrates."
+                        android:text="@string/v13_desc"
                         android:id="@+id/textView51"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
