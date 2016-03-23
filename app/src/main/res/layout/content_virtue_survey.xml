@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.listfist.virtue.VirtueSurvey"
+    tools:showIn="@layout/activity_virtue_survey">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ViewAnimator
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewAnimator" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/introLayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Daily Virtue Survey"
+                        android:id="@+id/textView54"
+                        android:layout_gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Answer each of the questions "
+                        android:id="@+id/textView56"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/temperanceLayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="1. Temperance."
+                        android:id="@+id/temperanceHdrTxt"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eat not to dullness; drink not to elevation."
+                        android:id="@+id/temperanceDescTxt"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout"
+                        android:layout_marginTop="100dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView3"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/temperanceSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView4"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/silenceLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="2. Silence"
+                        android:id="@+id/textView5"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Speak not but what may benefit others or yourself; avoid trifling conversation."
+                        android:id="@+id/textView6"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout2"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView7"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/silenceSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView8"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/orderLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="3. Order"
+                        android:id="@+id/textView10"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Let all your things have their places; let each part of your business have its time."
+                        android:id="@+id/textView11"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout4"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView12"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/orderSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView13"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/resolutionLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="4. Resolution"
+                        android:id="@+id/textView14"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resolve to perform what you ought; perform without fail what you resolve."
+                        android:id="@+id/textView15"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout5"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView16"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/resolutionSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView17"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/frugalityLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="5. Frugality"
+                        android:id="@+id/textView18"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Make no expense but to do good to others or yourself; i.e., waste nothing."
+                        android:id="@+id/textView19"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout6"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView20"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/frugalitySwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView21"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/industryLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="6. Industry"
+                        android:id="@+id/textView22"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lose no time; be always employ&apos;d in something useful; cut off all unnecessary actions."
+                        android:id="@+id/textView23"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout7"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView24"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/industrySwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView25"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/sincerityLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="7. Sincerity"
+                        android:id="@+id/textView26"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Use no hurtful deceit; think innocently and justly, and, if you speak, speak accordingly."
+                        android:id="@+id/textView27"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout8"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView28"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/sinceritySwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView29"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/justiceLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="8. Justice"
+                        android:id="@+id/textView30"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wrong none by doing injuries, or omitting the benefits that are your duty."
+                        android:id="@+id/textView31"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout9"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView32"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/justiceSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView33"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/moderationLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="9. Moderation"
+                        android:id="@+id/textView34"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Avoid extremes; forbear resenting injuries so much as you think they deserve."
+                        android:id="@+id/textView35"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout10"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView36"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/moderationSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView37"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cleanlinessLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="10. Cleanliness"
+                        android:id="@+id/textView38"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tolerate no uncleanliness in body, cloaths, or habitation."
+                        android:id="@+id/textView39"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout11"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView40"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cleanlinessSwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView41"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tranquilityLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="11. Tranquility"
+                        android:id="@+id/textView42"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Be not disturbed at trifles, or at accidents common or unavoidable."
+                        android:id="@+id/textView43"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout12"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView44"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tranquilitySwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView45"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chastityLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="12. Chastity"
+                        android:id="@+id/textView46"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rarely use venery but for health or offspring, never to dullness, weakness, or the injury of your own or another&apos;s peace or reputation."
+                        android:id="@+id/textView47"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout13"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView48"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/chastitySwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView49"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/humilityLayout" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="13. Humility"
+                        android:id="@+id/textView50"
+                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Imitate Jesus and Socrates."
+                        android:id="@+id/textView51"
+                        android:typeface="sans"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout14"
+                        android:layout_marginTop="100dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="No"
+                            android:id="@+id/textView52"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/humilitySwitch"
+                            android:layout_weight=".25"
+                            android:checked="false"
+                            android:layout_marginRight="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Yes"
+                            android:id="@+id/textView53"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ViewAnimator>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-80dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/backBtn"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:id="@+id/nextBtn"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
