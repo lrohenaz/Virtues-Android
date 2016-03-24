@@ -1,9 +1,5 @@
 package com.listfist.virtue;
-
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,34 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MyDatabaseHelper dbHelper;
 
-    private SQLiteDatabase database;
-    public final static String RECORD_TABLE="virtueLog"; // name of table
-
-    public final static String RECORD_ID="_id"; // id value for record
-    public final static String RECORD_TIME="dt";  // datetime of record
-    public final static String RECORD_1="v1";
-    public final static String RECORD_2="v2";
-    public final static String RECORD_3="v3";
-    public final static String RECORD_4="v4";
-    public final static String RECORD_5="v5";
-    public final static String RECORD_6="v6";
-    public final static String RECORD_7="v7";
-    public final static String RECORD_8="v8";
-    public final static String RECORD_9="v9";
-    public final static String RECORD_10="v10";
-    public final static String RECORD_11="v11";
-    public final static String RECORD_12="v12";
-    public final static String RECORD_13="v13";
     private AppPreferences _appPrefs;
+    NotificationReceiver notificationReceiver;
+    Calendar alarmStartTime = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("junk", "Let there be light...");
@@ -48,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Set up database
-        dbHelper = new MyDatabaseHelper(this);
-        database = dbHelper.getWritableDatabase();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
@@ -67,74 +42,74 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        updateList();
         _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
         Log.d("junk", "Active virtue is " + activeVirtue);
-    }
-    public Cursor selectRecords() {
-        String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
-        if(database!=null) {
-            Cursor mCursor = database.query(true, RECORD_TABLE, cols, null
-                    , null, null, null, null, null);
-            if (mCursor != null) {
-                mCursor.moveToFirst();
-            }
-            return mCursor; // iterate to get each value.
+        TextView yourVirtue = (TextView) findViewById(R.id.yourVirtue);
+        TextView goal = (TextView) findViewById(R.id.goalTxt);
+        String goaltxt;
+        switch(activeVirtue) {
+            case "1":
+                yourVirtue.setText(getResources().getString(R.string.v1_title));
+                goaltxt = goal.getText().toString();
+                goal.setText(goaltxt.replaceAll("\\bTemperance\\b", getResources().getString(R.string.v1_title)));
+                goaltxt = goal.getText().toString();
+                goal.setText(goaltxt.replaceAll("\\bfirst\\b", "second"));
+                break;
+            case "2":
+                yourVirtue.setText(getResources().getString(R.string.v2_title));
+                goaltxt = goal.getText().toString();
+                goal.setText(goaltxt.replaceAll("\\bTemperance\\b", getResources().getString(R.string.v2_title)));
+                goaltxt = goal.getText().toString();
+                goal.setText(goaltxt.replaceAll("\\bfirst\\b", "second"));
+                break;
+            case "3":
+                yourVirtue.setText(getResources().getString(R.string.v3_title));
+                goaltxt = goal.getText().toString();
+                goal.setText(goaltxt.replaceAll("\\bTemperance\\b", getResources().getString(R.string.v3_title)));
+                goaltxt = goal.getText().toString();
+                goal.setText(goaltxt.replaceAll("\\bfirst\\b", "second"));
+                break;
+            default:
+                break;
         }
-        else {
-            return null;
-        }
+        //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        //Intent alarmIntent = new Intent(MainActivity.this, NotificationReceiver.class);
+
+        //PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 777, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
+        //alarmManager.cancel(pendingIntent); // Clear previous alarm
+
+
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        notificationReceiver = new NotificationReceiver();
+        //notificationReceiver.setReminder(getApplicationContext(),alarmStartTime.getTimeInMillis());
+
     }
+
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d("junk", "Resuming...");
-    }
+        String notificationHour = String.valueOf(getHour(_appPrefs.getTime()));
+        String notificationMinute = String.valueOf(getMinute(_appPrefs.getTime()));
 
-    private void updateList() {
-        // Get the view to stick out data
-        LinearLayout container = (LinearLayout) findViewById(R.id.records);
-        Cursor mCursor = selectRecords();
-        if(mCursor!=null) {
-            for(int i=0;i<mCursor.getCount();i++) {
-                // Create a new horizontal layout
-                LinearLayout LL = new LinearLayout(this);
-                LL.setOrientation(LinearLayout.HORIZONTAL);
-                LL.setPadding(20,20,20,20);
-                LayoutParams LLParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                LL.setLayoutParams(LLParams);
+        //alarmStartTime.setTimeZone(TimeZone.getDefault());
+        Calendar now = Calendar.getInstance();
+        alarmStartTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(notificationHour));
+        alarmStartTime.set(Calendar.MINUTE, Integer.parseInt(notificationMinute));
+        alarmStartTime.set(Calendar.SECOND, 0);
 
-                TextView dummyView = new TextView(this);
-                LayoutParams dummyParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-                dummyView.setLayoutParams(dummyParams);
-
-                Log.d("junk", "Record "+ i+1 +"/"+ mCursor.getCount() +" Date: " +mCursor.getString(1));
-                Log.d("junk", "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
-                StringBuilder sb = new StringBuilder();
-                for(int x=0;x<15;x++) {
-                    // 0=id 1=datetime 2=virtue 1... 15=virtue 13
-                    if(x>1) {
-                        sb.append(mCursor.getInt(x)+"\t");
-                        Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
-                    }
-                    else {
-                        if(x==1) { // Append date
-                            sb.append(mCursor.getString(x));
-                        }
-                        Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x));
-                    }
-                }
-                dummyView.setText(sb);
-                LL.addView(dummyView);
-                if (container != null) {
-                    container.addView(LL);
-                }
-                mCursor.moveToNext();
-            }
+        if (now.after(alarmStartTime)) {
+            Log.d("junk","Added a day");
+            alarmStartTime.add(Calendar.DATE, 1);
         }
+        notificationReceiver.setReminder(getApplicationContext(), alarmStartTime.getTimeInMillis());
+        Log.d("junk", "Notification set for everyday " + alarmStartTime.getTime());
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -154,9 +129,28 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            MainActivity.this.startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_progress) {
+            Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+            MainActivity.this.startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static int getHour(String time) {
+        String[] pieces=time.split(":");
+
+        return(Integer.parseInt(pieces[0]));
+    }
+
+    public static int getMinute(String time) {
+        String[] pieces=time.split(":");
+
+        return(Integer.parseInt(pieces[1]));
     }
 }

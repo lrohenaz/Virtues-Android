@@ -37,17 +37,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Daily Virtue Survey"
+                        android:text="Evening Reflection"
                         android:id="@+id/textView54"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_gravity="center_horizontal"
+                        android:padding="20dp"
+                        android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Answer each of the questions "
+                        android:text="For each of the 13 Virtues, reccord where you have faultered. Be honest with yourself, think about each virtue and only click yes if you have lived up to your own expectations for that virtue today."
                         android:id="@+id/textView56"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_gravity="center_horizontal"
+                        android:typeface="serif"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -19,88 +19,32 @@
         android:id="@+id/linearLayout3">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Daily virtue survey reminder:"
-            android:id="@+id/textView" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="time"
-            android:ems="5"
-            android:id="@+id/editText"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true"
-            android:text="9:30 PM" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="In what time range do you exist?"
-            android:id="@+id/textView2"
-            android:layout_below="@+id/editText"
-            android:layout_alignParentStart="true" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText2"
-            android:layout_alignParentStart="true">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="time"
-                android:id="@+id/editText2"
-                android:layout_below="@+id/textView2"
-                android:layout_alignParentStart="true"
-                android:ems="5"
-                android:text="5 AM" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:id="@+id/dash" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="time"
-                android:ems="5"
-                android:id="@+id/editText3"
-                android:layout_alignTop="@+id/editText2"
-                android:layout_toEndOf="@+id/editText2"
-                android:text="10 PM" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="RECORDS"
-            android:id="@+id/textView9"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_alignParentStart="true" />
-
-        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/scrollView">
+            android:layout_height="wrap_content"
+            android:text="No Virtue Selected"
+            android:id="@+id/yourVirtue"
+            android:textSize="@dimen/abc_text_size_headline_material"
+            android:typeface="serif"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="20dp" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/records">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="DATE 01 02 03 04 05 06 07 08 09 10 11 12 13" />
-            </LinearLayout>
-        </ScrollView>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="&quot;In the first week, my great guard was to avoid every the least offense against Temperance, leaving the other virtues to their ordinary chance, only marking every evening the faults of the day.&quot;"
+            android:id="@+id/goalTxt"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="30dp"
+            android:paddingTop="0dp"
+            android:textSize="@dimen/abc_text_size_small_material"
+            android:typeface="serif" />
+
+
 
     </LinearLayout>
 
