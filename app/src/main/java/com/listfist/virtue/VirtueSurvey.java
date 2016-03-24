@@ -139,8 +139,13 @@ public class VirtueSurvey extends AppCompatActivity {
                     } else {
                         surveyVals[12] = 0;
                     }
-
-                    createRecord(surveyVals);
+                    String tid = getTodaysRecordId();
+                    if(tid!=null) {
+                        updateRecord(surveyVals, tid);
+                    }
+                    else {
+                        createRecord(surveyVals);
+                    }
 
                     Log.d("junk", "whaaaaat... i got the deetz");
 
@@ -187,6 +192,31 @@ public class VirtueSurvey extends AppCompatActivity {
         });
 
     }
+
+    private void updateRecord(Integer[] surveyVals, String _id) {
+        ContentValues values = new ContentValues();
+        // Put each value into the database
+        for(int x=0;x<13;x++) {
+            String colName = "v" + (x + 1);
+            values.put(colName, surveyVals[x]);
+            Log.d("junk", "pdated v" + (x + 1) + " - " + surveyVals[x]);
+        }
+       // database.update(RECORD_TABLE, null, values);
+        String strFilter = "_id=" + _id;
+        database.update(RECORD_TABLE,values,strFilter,null);
+    }
+
+    private String getTodaysRecordId() {
+        Cursor cursor = database.query(true, RECORD_TABLE, new String[]{"dt"}, "dt=date('now')",null,null,null,null,null);
+        if (cursor.getCount()>0) {
+            cursor.moveToFirst();
+            return cursor.getString(0);
+        }
+        else {
+            return null;
+        }
+    }
+
     public void createRecord(Integer[] vals){
         ContentValues values = new ContentValues();
         // Put each value into the database

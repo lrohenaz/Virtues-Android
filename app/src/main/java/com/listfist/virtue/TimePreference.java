@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 /**
  * Created by Zero on 3/23/2016.
@@ -14,6 +17,9 @@ public class TimePreference extends DialogPreference {
     private int lastHour=0;
     private int lastMinute=0;
     private TimePicker picker=null;
+
+    NotificationReceiver notificationReceiver;
+    Calendar alarmStartTime = Calendar.getInstance();
 
     public static int getHour(String time) {
         String[] pieces=time.split(":");
@@ -32,6 +38,7 @@ public class TimePreference extends DialogPreference {
 
         setPositiveButtonText("Set");
         setNegativeButtonText("Cancel");
+        notificationReceiver = new NotificationReceiver();
     }
 
     @Override
@@ -58,6 +65,22 @@ public class TimePreference extends DialogPreference {
             lastMinute=picker.getCurrentMinute();
 
             String time=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
+
+            String notificationHour = String.valueOf(getHour(time));
+            String notificationMinute = String.valueOf(getMinute(time));
+
+            //alarmStartTime.setTimeZone(TimeZone.getDefault());
+            Calendar now = Calendar.getInstance();
+            alarmStartTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(notificationHour));
+            alarmStartTime.set(Calendar.MINUTE, Integer.parseInt(notificationMinute));
+            alarmStartTime.set(Calendar.SECOND, 0);
+
+            if (now.after(alarmStartTime)) {
+                Log.d("junk", "Added a day");
+                alarmStartTime.add(Calendar.DATE, 1);
+            }
+            notificationReceiver.setReminder(getContext(), alarmStartTime.getTimeInMillis());
+            Log.d("junk", "Notification set for everyday " + alarmStartTime.getTime());
 
             if (callChangeListener(time)) {
                 persistString(time);

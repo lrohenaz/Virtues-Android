@@ -11,14 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
-
-
+    
     private AppPreferences _appPrefs;
-    NotificationReceiver notificationReceiver;
-    Calendar alarmStartTime = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,18 +68,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-        //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        //Intent alarmIntent = new Intent(MainActivity.this, NotificationReceiver.class);
-
-        //PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 777, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        //alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));
-        //alarmManager.cancel(pendingIntent); // Clear previous alarm
-
-
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-        notificationReceiver = new NotificationReceiver();
-        //notificationReceiver.setReminder(getApplicationContext(),alarmStartTime.getTimeInMillis());
 
     }
 
@@ -93,21 +76,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Log.d("junk", "Resuming...");
-        String notificationHour = String.valueOf(getHour(_appPrefs.getTime()));
-        String notificationMinute = String.valueOf(getMinute(_appPrefs.getTime()));
 
-        //alarmStartTime.setTimeZone(TimeZone.getDefault());
-        Calendar now = Calendar.getInstance();
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(notificationHour));
-        alarmStartTime.set(Calendar.MINUTE, Integer.parseInt(notificationMinute));
-        alarmStartTime.set(Calendar.SECOND, 0);
-
-        if (now.after(alarmStartTime)) {
-            Log.d("junk","Added a day");
-            alarmStartTime.add(Calendar.DATE, 1);
-        }
-        notificationReceiver.setReminder(getApplicationContext(), alarmStartTime.getTimeInMillis());
-        Log.d("junk", "Notification set for everyday " + alarmStartTime.getTime());
     }
 
 
@@ -143,14 +112,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static int getHour(String time) {
-        String[] pieces=time.split(":");
 
-        return(Integer.parseInt(pieces[0]));
+        if(time!="") {
+            String[] pieces = time.split(":");
+
+            return (Integer.parseInt(pieces[0]));
+        }
+        else {
+            return 0;
+        }
     }
 
     public static int getMinute(String time) {
-        String[] pieces=time.split(":");
+            if(time!=null) {
+                String[] pieces = time.split(":");
 
-        return(Integer.parseInt(pieces[1]));
-    }
+                return (Integer.parseInt(pieces[1]));
+            }
+            else {
+                return 0;
+            }
+        }
+
 }
+
