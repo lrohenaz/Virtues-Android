@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="@string/dummy_content"
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />
@@ -34,33 +33,38 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Banjamin Franklins 13 Virtues"
+                android:text="@string/default_virtue_title"
                 android:id="@+id/virtueTitle"
                 android:paddingTop="20dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/abc_text_size_large_material" />
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:typeface="serif"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Benjamin Franklin was a wise man. He understood that a man could not improve himself without constantly reflecting upon his virtues. Choose a virtue to begin your journey."
+                android:text="@string/default_virtue_desc"
                 android:id="@+id/virtueDesc"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/abc_text_size_subhead_material"
                 android:paddingTop="10dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
-                android:paddingBottom="15dp" />
+                android:paddingBottom="15dp"
+                android:height="120dp"
+                android:typeface="serif" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="10dp">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -71,23 +75,35 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Temperance"
+                        android:text="@string/v1_button_txt"
                         android:id="@+id/v1Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Silence"
+                        android:text="@string/v2_button_text"
                         android:id="@+id/v2Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Order"
+                        android:text="@string/v3_button_txt"
                         android:id="@+id/v3Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,24 +114,36 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Resolution"
+                        android:layout_height="match_parent"
+                        android:text="@string/v4_button_txt"
                         android:id="@+id/v4Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Frugality"
+                        android:layout_height="match_parent"
+                        android:text="@string/v5_button_txt"
                         android:id="@+id/v5Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Industry"
+                        android:layout_height="match_parent"
+                        android:text="@string/v6_button_txt"
                         android:id="@+id/v6Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,23 +155,35 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Sincerity"
+                        android:text="@string/v7_button_txt"
                         android:id="@+id/v7Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Justice"
+                        android:text="@string/v8_button_txt"
                         android:id="@+id/v8Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Moderation"
+                        android:text="@string/v9_button_txt"
                         android:id="@+id/v9Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -155,23 +195,35 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Cleanliness"
+                        android:text="@string/v10_button_txt"
                         android:id="@+id/v10Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Tranquility"
+                        android:text="@string/v11_button_txt"
                         android:id="@+id/v11Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:text="Chastity"
+                        android:text="@string/v12_button_txt"
                         android:id="@+id/v12Btn"
-                        android:layout_weight="1" />
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -179,13 +231,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Humility"
-                        android:id="@+id/v13Btn"
-                        android:layout_weight="1" />
 
                     <Button
                         android:layout_width="wrap_content"
@@ -194,6 +239,17 @@
                         android:id="@+id/button14"
                         android:visibility="invisible"
                         android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="@string/v13_button_txt"
+                        android:id="@+id/v13Btn"
+                        android:background="#007399"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"
+                        android:typeface="normal"
+                        android:layout_margin="3dp" />
 
                     <Button
                         android:layout_width="wrap_content"
@@ -222,7 +278,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/select_virtue_button" />
+                    android:text="@string/select_virtue_button"
+                    android:textColor="#ffffff" />
 
             </LinearLayout>
 

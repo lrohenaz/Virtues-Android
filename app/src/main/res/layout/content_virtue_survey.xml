@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.listfist.virtue.VirtueSurvey"
-    tools:showIn="@layout/activity_virtue_survey">
+    tools:context="com.listfist.virtue.VirtueSurvey">
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,7 +24,8 @@
             <ViewAnimator
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/viewAnimator" >
+                android:id="@+id/viewAnimator"
+                android:layout_weight="5">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -36,38 +36,39 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Evening Reflection"
-                        android:id="@+id/textView54"
+                        android:text="@string/nightly_review_title"
+                        android:id="@+id/nightlyReviewTxt"
                         android:layout_gravity="center_horizontal"
                         android:padding="20dp"
-                        android:typeface="serif" />
+                        android:typeface="serif"
+                        android:textIsSelectable="false"
+                        android:textSize="36sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="For each of the 13 Virtues, reccord where you have faultered. Be honest with yourself, think about each virtue and only click yes if you have lived up to your own expectations for that virtue today."
-                        android:id="@+id/textView56"
+                        android:text="@string/nightly_review_desc"
+                        android:id="@+id/nightlyReviewdesctxt"
                         android:layout_gravity="center_horizontal"
                         android:typeface="serif"
                         android:paddingLeft="20dp"
-                        android:paddingRight="20dp" />
+                        android:paddingRight="20dp"
+                        android:textSize="@dimen/abc_text_size_small_material" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/temperanceLayout">
+                    android:id="@+id/temperanceLayout"
+                    android:gravity="center_horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="1. Temperance."
-                        android:id="@+id/temperanceHdrTxt"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v1_title"
+                        android:id="@+id/v1HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
@@ -76,44 +77,29 @@
                         android:layout_height="wrap_content"
                         android:text="@string/v1_desc"
                         android:id="@+id/temperanceDescTxt"
-                        android:typeface="sans"
+                        android:typeface="serif"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout"
                         android:layout_marginTop="100dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView3"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/temperanceSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
+                            android:id="@+id/v1Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView4"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -129,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="2. Silence"
-                        android:id="@+id/textView5"
+                        android:id="@+id/v2HdrTxt"
                         android:textSize="@dimen/abc_text_size_headline_material"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
@@ -137,7 +123,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/v1_desc"
+                        android:text="@string/v2_desc"
                         android:id="@+id/textView6"
                         android:typeface="sans"
                         android:layout_marginLeft="10dp"
@@ -864,28 +850,29 @@
 
             </ViewAnimator>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:id="@+id/backBtn"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:id="@+id/nextBtn"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-80dp">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Back"
-                android:id="@+id/backBtn"
-                android:layout_weight="1" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Next"
-                android:id="@+id/nextBtn"
-                android:layout_weight="1" />
-        </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

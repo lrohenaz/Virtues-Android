@@ -21,12 +21,14 @@ import java.util.Objects;
 public class SplashActivity extends AppCompatActivity {
     private AppPreferences _appPrefs;
     String v="";
+    String action;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
-
+        Intent i = getIntent();
+        action = i.getStringExtra("action");
         setContentView(R.layout.activity_spash);
 
         Button choose = (Button) findViewById(R.id.chooseBtn);
@@ -48,11 +50,15 @@ public class SplashActivity extends AppCompatActivity {
 
         Log.d("junk","Active virtue is "+ activeVirtue);
         if(!Objects.equals(activeVirtue, "")) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+
+
+            if(!Objects.equals(action, "change_virtue")){
+            //if(action.equals("change_virtue")) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
-        else {
 
             v1Btn.setOnClickListener(new Button.OnClickListener(){
                 @Override
@@ -162,13 +168,19 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     _appPrefs.saveActiveVirtue(v);
-                    Log.d("junk", "Set active virtue to "+ v);
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Log.d("junk", "Set active virtue to " + v);
+                    if(Objects.equals(action, "change_virtue")){
+                        finish();
+                    }
+                    else {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             });
 
-        }
+
     }
 }

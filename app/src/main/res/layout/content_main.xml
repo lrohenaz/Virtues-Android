@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="No Virtue Selected"
             android:id="@+id/yourVirtue"
-            android:textSize="@dimen/abc_text_size_headline_material"
+            android:textSize="36sp"
             android:typeface="serif"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
@@ -44,6 +44,21 @@
             android:textSize="@dimen/abc_text_size_small_material"
             android:typeface="serif" />
 
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:layout_gravity="center_horizontal"
+            android:stepSize="1"
+            android:rating="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How&apos;s it going today?"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:padding="15dp" />
 
 
     </LinearLayout>

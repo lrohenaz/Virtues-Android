@@ -1,5 +1,6 @@
 package com.listfist.virtue;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     
     private AppPreferences _appPrefs;
+    Typeface face;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        face= Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
@@ -31,12 +35,20 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, VirtueSurvey.class);
                     MainActivity.this.startActivity(intent);
 
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Review Canceled", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
             });
         }
 
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("junk", "Resuming...");
         _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
         Log.d("junk", "Active virtue is " + activeVirtue);
@@ -50,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 goal.setText(goaltxt.replaceAll("\\bTemperance\\b", getResources().getString(R.string.v1_title)));
                 goaltxt = goal.getText().toString();
                 goal.setText(goaltxt.replaceAll("\\bfirst\\b", "second"));
+
+                yourVirtue.setTypeface(face);
                 break;
             case "2":
                 yourVirtue.setText(getResources().getString(R.string.v2_title));
@@ -57,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 goal.setText(goaltxt.replaceAll("\\bTemperance\\b", getResources().getString(R.string.v2_title)));
                 goaltxt = goal.getText().toString();
                 goal.setText(goaltxt.replaceAll("\\bfirst\\b", "second"));
+                yourVirtue.setTypeface(face);
                 break;
             case "3":
                 yourVirtue.setText(getResources().getString(R.string.v3_title));
@@ -64,21 +79,24 @@ public class MainActivity extends AppCompatActivity {
                 goal.setText(goaltxt.replaceAll("\\bTemperance\\b", getResources().getString(R.string.v3_title)));
                 goaltxt = goal.getText().toString();
                 goal.setText(goaltxt.replaceAll("\\bfirst\\b", "second"));
+                yourVirtue.setTypeface(face);
                 break;
             default:
                 break;
         }
 
+        if (yourVirtue != null) {
+            yourVirtue.setOnClickListener(new TextView.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+                    intent.putExtra("action","change_virtue");
+                    startActivity(intent);
+                    // finish();
+                }
+            });
+        }
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("junk", "Resuming...");
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,29 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public static int getHour(String time) {
-
-        if(time!="") {
-            String[] pieces = time.split(":");
-
-            return (Integer.parseInt(pieces[0]));
-        }
-        else {
-            return 0;
-        }
-    }
-
-    public static int getMinute(String time) {
-            if(time!=null) {
-                String[] pieces = time.split(":");
-
-                return (Integer.parseInt(pieces[1]));
-            }
-            else {
-                return 0;
-            }
-        }
 
 }
 

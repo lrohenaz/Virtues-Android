@@ -2,18 +2,18 @@
     <string name="app_name">Virtue</string>
     <string name="action_settings">Settings</string>
     <string name="action_progress">Progress</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Virtue</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
-    <string name="title_activity_virtue_survey">VirtueSurvey</string>
+    <string name="title_activity_virtue_survey">Review</string>
 
-    <string name="title_activity_splash">Choose a Virtue</string>
+    <string name="title_activity_splash">Virtue</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="select_virtue_button">Choose</string>
     <string name="v1_title">Temperance</string>
-    <string name="v1_desc">Eat not to dullness; drink not to elevation.</string>
-    <string name="v2_title">Sildence</string>
+    <string name="v1_desc">"Eat not to dullness; drink not to elevation."</string>
+    <string name="v2_title">Silence</string>
     <string name="v2_desc">Speak not but what may benefit others or yourself; avoid trifling conversation.</string>
     <string name="v3_title">Order</string>
     <string name="v3_desc">Let all your things have their places; let each part of your business have its time.</string>
@@ -99,4 +99,21 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_progress">ProgressActivity</string>
     <string name="progress_header">DATE\t\t\t\t\tT\t\tS\t\tO\t\tR\t\tF\t\tI\t\tS\t\tJ\t\tM\t\tC\t\tT\t\tC\t\tH</string>
+    <string name="v2_button_text">Silence</string>
+    <string name="v1_button_txt">Temperance</string>
+    <string name="v3_button_txt">Order</string>
+    <string name="v4_button_txt">Resolution</string>
+    <string name="v5_button_txt">Frugality</string>
+    <string name="v6_button_txt">Industry</string>
+    <string name="v7_button_txt">Sincerity</string>
+    <string name="v8_button_txt">Justice</string>
+    <string name="v9_button_txt">Moderation</string>
+    <string name="v10_button_txt">Cleanliness</string>
+    <string name="v11_button_txt">Tranquility</string>
+    <string name="v12_button_txt">Chastity</string>
+    <string name="v13_button_txt">Humility</string>
+    <string name="default_virtue_title">Choose a Virtue</string>
+    <string name="default_virtue_desc">The virtue you choose will be the focus of your energy this week. Your virtue will be updated each week.</string>
+    <string name="nightly_review_title">Nightly Review</string>
+    <string name="nightly_review_desc">For each of the 13 Virtues, reccord where you have faultered today. Be honest with yourself. Think carefully about each virtue and only click yes if you have lived up to your own expectations.</string>
 </resources>

@@ -15,7 +15,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     // Database creation sql statement
     private static final String DATABASE_CREATE =
-            "CREATE TABLE IF NOT EXISTS virtueLog( _id INTEGER PRIMARY KEY,dt DATETIME default current_timestamp, v1 INTEGER, v2 INTEGER, v3 integer, v4 INTEGER, v5 INTEGER, v6 INTEGER, v7 INTEGER, v8 INTEGER, v9 INTEGER, v10 INTEGER, v11 INTEGER, v12 INTEGER, v13 INTEGER);";
+            "CREATE TABLE IF NOT EXISTS virtueLog( _id INTEGER PRIMARY KEY,dt DATETIME default (datetime('now', 'localtime')), v1 INTEGER, v2 INTEGER, v3 INTEGER, v4 INTEGER, v5 INTEGER, v6 INTEGER, v7 INTEGER, v8 INTEGER, v9 INTEGER, v10 INTEGER, v11 INTEGER, v12 INTEGER, v13 INTEGER);";
 
     public MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

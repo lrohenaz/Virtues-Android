@@ -45,7 +45,8 @@
             android:name=".VirtueSurvey"
             android:label="@string/title_activity_virtue_survey"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.listfist.virtue.MainActivity" />
