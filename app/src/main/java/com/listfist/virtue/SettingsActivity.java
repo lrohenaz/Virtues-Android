@@ -192,7 +192,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // guidelines.
             //bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("time_key"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
+            //bindPreferenceSummaryToValue(findPreference("example_list"));
         }
 
         @Override

@@ -53,7 +53,8 @@
                         android:typeface="serif"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
-                        android:textSize="@dimen/abc_text_size_small_material" />
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -74,15 +75,14 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:text="@string/v1_desc"
-                        android:id="@+id/temperanceDescTxt"
+                        android:id="@+id/v1DescTxt"
                         android:typeface="serif"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
                         android:textSize="@dimen/abc_text_size_small_material"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -108,61 +108,89 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/silenceLayout" >
+                    android:id="@+id/silenceLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="2. Silence"
+                        android:text="@string/v2_title"
                         android:id="@+id/v2HdrTxt"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:text="@string/v2_desc"
-                        android:id="@+id/textView6"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:id="@+id/v2DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="150dp"
+                        android:id="@+id/linearLayout15"
+                        android:layout_marginTop="100dp" >
+
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/v2Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/orderLayout"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/v3_title"
+                        android:id="@+id/v3HdrTxt"
+                        android:textSize="36sp"
+                        android:layout_margin="20dp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="@string/v3_desc"
+                        android:id="@+id/v3DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout2"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView7"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/silenceSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView8"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v3Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -170,61 +198,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/orderLayout" >
+                    android:id="@+id/resolutionLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="3. Order"
-                        android:id="@+id/textView10"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v4_title"
+                        android:id="@+id/v4HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v3_desc"
-                        android:id="@+id/textView11"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v4_desc"
+                        android:id="@+id/v4DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout4"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView12"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/orderSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView13"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v4Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -232,61 +243,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/resolutionLayout" >
+                    android:id="@+id/frugalityLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="4. Resolution"
-                        android:id="@+id/textView14"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v5_title"
+                        android:id="@+id/v5HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v4_desc"
-                        android:id="@+id/textView15"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v5_desc"
+                        android:id="@+id/v5DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout5"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView16"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/resolutionSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView17"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v5Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -294,61 +288,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/frugalityLayout" >
+                    android:id="@+id/industryLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="5. Frugality"
-                        android:id="@+id/textView18"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v6_title"
+                        android:id="@+id/v6HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v5_desc"
-                        android:id="@+id/textView19"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v6_desc"
+                        android:id="@+id/v6DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout6"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView20"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/frugalitySwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView21"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v6Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -356,61 +333,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/industryLayout" >
+                    android:id="@+id/sincerityLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="6. Industry"
-                        android:id="@+id/textView22"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v7_title"
+                        android:id="@+id/v7HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v6_desc"
-                        android:id="@+id/textView23"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v7_desc"
+                        android:id="@+id/v7DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout7"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView24"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/industrySwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView25"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v7Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -418,61 +378,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/sincerityLayout" >
+                    android:id="@+id/justiceLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="7. Sincerity"
-                        android:id="@+id/textView26"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v8_title"
+                        android:id="@+id/v8HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v7_desc"
-                        android:id="@+id/textView27"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v8_desc"
+                        android:id="@+id/v8DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout8"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView28"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/sinceritySwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView29"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v8Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -480,61 +423,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/justiceLayout" >
+                    android:id="@+id/moderationLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="8. Justice"
-                        android:id="@+id/textView30"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v9_title"
+                        android:id="@+id/v9HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v8_desc"
-                        android:id="@+id/textView31"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v9_desc"
+                        android:id="@+id/v9DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout9"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView32"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/justiceSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView33"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v9Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -542,61 +468,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/moderationLayout" >
+                    android:id="@+id/cleanlinessLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="9. Moderation"
-                        android:id="@+id/textView34"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v10_title"
+                        android:id="@+id/v10HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v9_desc"
-                        android:id="@+id/textView35"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v10_desc"
+                        android:id="@+id/v10DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout10"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView36"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/moderationSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView37"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v10Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -604,61 +513,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/cleanlinessLayout" >
+                    android:id="@+id/tranquilityLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="10. Cleanliness"
-                        android:id="@+id/textView38"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v11_title"
+                        android:id="@+id/v11HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v10_desc"
-                        android:id="@+id/textView39"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v11_desc"
+                        android:id="@+id/v11DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout11"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView40"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/cleanlinessSwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView41"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v11Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -666,61 +558,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/tranquilityLayout" >
+                    android:id="@+id/chastityLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="11. Tranquility"
-                        android:id="@+id/textView42"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v12_title"
+                        android:id="@+id/v12HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v11_desc"
-                        android:id="@+id/textView43"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v12_desc"
+                        android:id="@+id/v12DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout12"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView44"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tranquilitySwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView45"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v12Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -728,123 +603,44 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/chastityLayout" >
+                    android:id="@+id/humilityLayout"
+                    android:gravity="center_horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="12. Chastity"
-                        android:id="@+id/textView46"
-                        android:textSize="@dimen/abc_text_size_headline_material"
+                        android:text="@string/v13_title"
+                        android:id="@+id/v13HdrTxt"
+                        android:textSize="36sp"
                         android:layout_margin="20dp"
                         android:typeface="serif" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v12_desc"
-                        android:id="@+id/textView47"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="40dp"
+                        android:text="@string/v13_desc"
+                        android:id="@+id/v13DescTxt"
+                        android:typeface="serif"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        android:textStyle="italic"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginBottom="150dp"
                         android:id="@+id/linearLayout13"
                         android:layout_marginTop="100dp" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView48"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/chastitySwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView49"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/humilityLayout" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="13. Humility"
-                        android:id="@+id/textView50"
-                        android:textSize="@dimen/abc_text_size_headline_material"
-                        android:layout_margin="20dp"
-                        android:typeface="serif" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/v13_desc"
-                        android:id="@+id/textView51"
-                        android:typeface="sans"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginBottom="150dp"
-                        android:id="@+id/linearLayout14"
-                        android:layout_marginTop="100dp" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="No"
-                            android:id="@+id/textView52"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end" />
-
-                        <Switch
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/humilitySwitch"
-                            android:layout_weight=".25"
-                            android:checked="false"
-                            android:layout_marginRight="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="Yes"
-                            android:id="@+id/textView53"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
+                            android:id="@+id/v13Rating"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -859,14 +655,14 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Back"
+                    android:text="@string/backBtn"
                     android:id="@+id/backBtn"
                     android:layout_weight="1" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Next"
+                    android:text="@string/nextBtn"
                     android:id="@+id/nextBtn"
                     android:layout_weight="1" />
             </LinearLayout>

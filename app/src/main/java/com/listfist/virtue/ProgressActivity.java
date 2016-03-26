@@ -77,8 +77,11 @@ public class ProgressActivity extends AppCompatActivity {
     public Cursor selectRecords() {
         String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
         if(database!=null) {
-            Cursor mCursor = database.query(true, RECORD_TABLE, cols, null
-                    , null, null, null, null, null);
+            String selectQuery = "SELECT _id, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
+            Log.d("junk",selectQuery);
+            Cursor mCursor = database.rawQuery(selectQuery, null);
+
+            //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
             if (mCursor != null) {
                 mCursor.moveToFirst();
             }
@@ -116,17 +119,41 @@ public class ProgressActivity extends AppCompatActivity {
                 Log.d("junk", "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
                 StringBuilder sb = new StringBuilder();
 
-                for(int x=0;x<15;x++) {
+                for(int x=1;x<15;x++) { //id is at 0, skip it
                     // 0=id 1=datetime 2=virtue 1... 15=virtue 13
                     if(x>1) {
-                        sb.append(mCursor.getInt(x)+"\t");
+                        sb.append(mCursor.getInt(x)+"\t\t");
                         Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
                     }
                     else {
                         if(x==1) { // Append date
-                            sb.append(mCursor.getString(x));
+                            switch(mCursor.getInt(x)) {
+                                case 0:
+                                    sb.append("Sun");
+                                    break;
+                                case 1:
+                                    sb.append("Mon");
+                                    break;
+                                case 2:
+                                    sb.append("Tue");
+                                    break;
+                                case 3:
+                                    sb.append("Wed");
+                                    break;
+                                case 4:
+                                    sb.append("Thu");
+                                    break;
+                                case 5:
+                                    sb.append("Fri");
+                                    break;
+                                case 6:
+                                    sb.append("Sat");
+                                    break;
+                            }
+                            sb.append("\t\t\t\t\t\t\t");
+
                         }
-                        Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x) +" - or - "+ mCursor.getInt(x));
+                        Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x) + " - or - " + mCursor.getInt(x));
                     }
                 }
                 dummyView.setText(sb);

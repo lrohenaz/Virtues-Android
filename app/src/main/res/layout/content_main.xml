@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="No Virtue Selected"
+            android:text="@string/yourVirtue"
             android:id="@+id/yourVirtue"
             android:textSize="36sp"
             android:typeface="serif"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="&quot;In the first week, my great guard was to avoid every the least offense against Temperance, leaving the other virtues to their ordinary chance, only marking every evening the faults of the day.&quot;"
+            android:text="@string/goalTxt"
             android:id="@+id/goalTxt"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"

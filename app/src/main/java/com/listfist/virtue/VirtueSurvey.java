@@ -64,84 +64,33 @@ public class VirtueSurvey extends AppCompatActivity {
 
                     Integer[] surveyVals = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
                     RatingBar r1 = (RatingBar) findViewById(R.id.v1Rating);
-                    Switch s2 = (Switch) findViewById(R.id.silenceSwitch);
-                    Switch s3 = (Switch) findViewById(R.id.orderSwitch);
-                    Switch s4 = (Switch) findViewById(R.id.resolutionSwitch);
-                    Switch s5 = (Switch) findViewById(R.id.frugalitySwitch);
-                    Switch s6 = (Switch) findViewById(R.id.industrySwitch);
-                    Switch s7 = (Switch) findViewById(R.id.sinceritySwitch);
-                    Switch s8 = (Switch) findViewById(R.id.justiceSwitch);
-                    Switch s9 = (Switch) findViewById(R.id.moderationSwitch);
-                    Switch s10 = (Switch) findViewById(R.id.cleanlinessSwitch);
-                    Switch s11 = (Switch) findViewById(R.id.tranquilitySwitch);
-                    Switch s12 = (Switch) findViewById(R.id.chastitySwitch);
-                    Switch s13 = (Switch) findViewById(R.id.humilitySwitch);
+                    RatingBar r2 = (RatingBar) findViewById(R.id.v2Rating);
+                    RatingBar r3 = (RatingBar) findViewById(R.id.v3Rating);
+                    RatingBar r4 = (RatingBar) findViewById(R.id.v4Rating);
+                    RatingBar r5 = (RatingBar) findViewById(R.id.v5Rating);
+                    RatingBar r6 = (RatingBar) findViewById(R.id.v6Rating);
+                    RatingBar r7 = (RatingBar) findViewById(R.id.v7Rating);
+                    RatingBar r8 = (RatingBar) findViewById(R.id.v8Rating);
+                    RatingBar r9 = (RatingBar) findViewById(R.id.v9Rating);
+                    RatingBar r10 = (RatingBar) findViewById(R.id.v10Rating);
+                    RatingBar r11 = (RatingBar) findViewById(R.id.v11Rating);
+                    RatingBar r12 = (RatingBar) findViewById(R.id.v12Rating);
+                    RatingBar r13 = (RatingBar) findViewById(R.id.v12Rating);
 
-                    if (r1.getNumStars() > 0) {
-                        surveyVals[0] = r1.getNumStars();
-                    } else {
-                        surveyVals[0] = 0;
-                    }
-                    if (s2.isChecked()) {
-                        surveyVals[1] = 1;
-                    } else {
-                        surveyVals[1] = 0;
-                    }
-                    if (s3.isChecked()) {
-                        surveyVals[2] = 1;
-                    } else {
-                        surveyVals[2] = 0;
-                    }
-                    if (s4.isChecked()) {
-                        surveyVals[3] = 1;
-                    } else {
-                        surveyVals[3] = 0;
-                    }
-                    if (s5.isChecked()) {
-                        surveyVals[4] = 1;
-                    } else {
-                        surveyVals[4] = 0;
-                    }
-                    if (s6.isChecked()) {
-                        surveyVals[5] = 1;
-                    } else {
-                        surveyVals[5] = 0;
-                    }
-                    if (s7.isChecked()) {
-                        surveyVals[6] = 1;
-                    } else {
-                        surveyVals[6] = 0;
-                    }
-                    if (s8.isChecked()) {
-                        surveyVals[7] = 1;
-                    } else {
-                        surveyVals[7] = 0;
-                    }
-                    if (s9.isChecked()) {
-                        surveyVals[8] = 1;
-                    } else {
-                        surveyVals[8] = 0;
-                    }
-                    if (s10.isChecked()) {
-                        surveyVals[9] = 1;
-                    } else {
-                        surveyVals[9] = 0;
-                    }
-                    if (s11.isChecked()) {
-                        surveyVals[10] = 1;
-                    } else {
-                        surveyVals[10] = 0;
-                    }
-                    if (s12.isChecked()) {
-                        surveyVals[11] = 1;
-                    } else {
-                        surveyVals[11] = 0;
-                    }
-                    if (s13.isChecked()) {
-                        surveyVals[12] = 1;
-                    } else {
-                        surveyVals[12] = 0;
-                    }
+                    surveyVals[0] = (int) r1.getRating();
+                    surveyVals[1] = (int) r2.getRating();
+                    surveyVals[2] = (int) r3.getRating();
+                    surveyVals[3] = (int) r4.getRating();
+                    surveyVals[4] = (int) r5.getRating();
+                    surveyVals[5] = (int) r6.getRating();
+                    surveyVals[6] = (int) r7.getRating();
+                    surveyVals[7] = (int) r8.getRating();
+                    surveyVals[8] = (int) r9.getRating();
+                    surveyVals[9] = (int) r10.getRating();
+                    surveyVals[10] = (int) r11.getRating();
+                    surveyVals[11] = (int) r12.getRating();
+                    surveyVals[12] = (int) r13.getRating();
+
                     String tid = getTodaysRecordId();
                     if (tid != null) {
                         updateRecord(surveyVals, tid);
@@ -167,8 +116,8 @@ public class VirtueSurvey extends AppCompatActivity {
                             tv.setTypeface(face);
                             break;
                         case 13: // Humility
-                            Switch cs = (Switch) findViewById(R.id.chastitySwitch);
-                            Log.d("junk", "chastity switch was " + Boolean.toString(cs.isChecked()));
+                            RatingBar rb = (RatingBar) findViewById(R.id.v12Rating);
+                            Log.d("junk", "chastity rating was " + rb.getRating());
                             btnNext.setText("Finish");
                             break;
                     }
@@ -177,6 +126,7 @@ public class VirtueSurvey extends AppCompatActivity {
                 }
                 if (Integer.parseInt(activeVirtue) == viewAnimator.getDisplayedChild()) {
                     Log.d("junk", "This is your virtue!!");
+
                 }
 
             }

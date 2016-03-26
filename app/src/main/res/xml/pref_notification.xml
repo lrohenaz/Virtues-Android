@@ -12,6 +12,7 @@
         android:defaultValue="@string/pref_default_time"
         android:inputType="time"
         android:key="time_key"
+        android:dependency="notifications_new_message"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"

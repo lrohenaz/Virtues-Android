@@ -116,4 +116,8 @@
     <string name="default_virtue_desc">The virtue you choose will be the focus of your energy this week. Your virtue will be updated each week.</string>
     <string name="nightly_review_title">Nightly Review</string>
     <string name="nightly_review_desc">For each of the 13 Virtues, reccord where you have faultered today. Be honest with yourself. Think carefully about each virtue and only click yes if you have lived up to your own expectations.</string>
+    <string name="nextBtn">Next</string>
+    <string name="backBtn">Back</string>
+    <string name="goalTxt">\"In the first week, my great guard was to avoid every the least offense against Temperance, leaving the other virtues to their ordinary chance, only marking every evening the faults of the day.\"</string>
+    <string name="yourVirtue">No Virtue Selected</string>
 </resources>
