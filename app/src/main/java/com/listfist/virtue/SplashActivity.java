@@ -20,9 +20,10 @@ import java.util.Objects;
  * status bar and navigation/system bar) with user interaction.
  */
 public class SplashActivity extends AppCompatActivity {
+    private static final String TAG = SplashActivity.class.getName();
     private AppPreferences _appPrefs;
     String v="";
-    String action;
+    private String action;
     Typeface face;
     Button choose;
     Button v1Btn;
@@ -66,12 +67,9 @@ public class SplashActivity extends AppCompatActivity {
         final TextView vTitle = (TextView) findViewById(R.id.virtueTitle);
         vTitle.setTypeface(face);
 
-        Log.d("junk","Active virtue is "+ activeVirtue);
-        if(!Objects.equals(activeVirtue, "")) {
-
-
-            if(!Objects.equals(action, "change_virtue")){
-            //if(action.equals("change_virtue")) {
+        Log.d(TAG,"Active virtue is "+ activeVirtue);
+        if(!equals(activeVirtue, "")) {
+            if(!equals(action, "change_virtue")){
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -226,8 +224,8 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     _appPrefs.saveActiveVirtue(v);
-                    Log.d("junk", "Set active virtue to " + v);
-                    if(Objects.equals(action, "change_virtue")){
+                    Log.d(TAG, "Set active virtue to " + v);
+                    if(action.equals("change_virtue")){
                         finish();
                     }
                     else {
@@ -235,7 +233,10 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
+                }
 
+                public boolean equals(Object a, Object b) {
+                    return (a == b) || (a != null && a.equals(b));
                 }
             });
 
@@ -257,5 +258,9 @@ public class SplashActivity extends AppCompatActivity {
         v11Btn.setBackgroundColor(stdColor);
         v12Btn.setBackgroundColor(stdColor);
         v13Btn.setBackgroundColor(stdColor);
+    }
+
+    public static boolean equals(Object a, Object b) {
+        return (a == b) || (a != null && a.equals(b));
     }
 }

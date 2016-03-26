@@ -22,15 +22,17 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Zero on 3/23/2016.
  */
 public class NotificationReceiver extends BroadcastReceiver {
         final public static String ONE_TIME = "onetime";
+    private static final String TAG = SplashActivity.class.getName();
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("junk","OnReceive");
+            Log.d(TAG,"OnReceive");
             //Intent notificationService = new Intent(context, NotificationService.class);
 
             //notificationService.setData((Uri.parse("custom://" + System.currentTimeMillis())));
@@ -48,7 +50,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             if(extras != null && extras.getBoolean(ONE_TIME, Boolean.FALSE)){
                 msgStr.append("One time Timer : ");
             }
-            Format formatter = new SimpleDateFormat("hh:mm:ss a");
+            Format formatter = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
             msgStr.append(formatter.format(new Date()));
 
             Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
@@ -85,7 +87,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             notification.ledOffMS = 1000;
             int NOTIFICATION_ID = 777;
             notificationManager.notify(NOTIFICATION_ID, notification);
-            Log.i("junk", "Notification sent.");
+            Log.i(TAG, "Notification sent.");
 
             //Release the lock
             wl.release();

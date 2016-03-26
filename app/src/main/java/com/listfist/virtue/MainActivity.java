@@ -18,10 +18,11 @@ public class MainActivity extends AppCompatActivity {
     private AppPreferences _appPrefs;
     Typeface face;
 
+    private static final String TAG = SplashActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("junk", "Let there be light...");
+        Log.d(TAG, "Let there be light...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -47,22 +48,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("junk", "Resuming...");
+        Log.d(TAG, "Resuming...");
         _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
         String reminderTime = _appPrefs.getTime();
         if(reminderTime.equals("0")) {
-            Log.d("junk","Reminder not set");
+            Log.d(TAG,"Reminder not set");
             _appPrefs.createDefaultReminder();
             reminderTime = _appPrefs.getTime();
             Snackbar.make(this.findViewById(android.R.id.content), "Reminder set for 10pm", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         }
-        Log.d("junk","Reminder is "+ reminderTime);
+        Log.d(TAG,"Reminder is "+ reminderTime);
 
 //        _appPrefs.
-        Log.d("junk", "Active virtue is " + activeVirtue);
+        Log.d(TAG, "Active virtue is " + activeVirtue);
         TextView yourVirtue = (TextView) findViewById(R.id.yourVirtue);
         yourVirtue.setTypeface(face);
         TextView goal = (TextView) findViewById(R.id.goalTxt);
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 _appPrefs.saveTodaysRating(String.valueOf((int) rating));
                 final String todaysRating = _appPrefs.getTodaysRating();
-                Log.d("junk", "saved todays rating " + todaysRating);
+                Log.d(TAG, "saved todays rating " + todaysRating);
             }
         });
 
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d("junk", "Create options menu...");
+        Log.d(TAG, "Create options menu...");
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("junk", "Menu Item Selected...");
+        Log.d(TAG, "Menu Item Selected...");
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.

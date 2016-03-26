@@ -25,7 +25,7 @@ public class NotificationService extends IntentService {
     public NotificationService() {
         super("notificationService");
     }
-
+    private static final String TAG = SplashActivity.class.getName();
     @Override
     protected void onHandleIntent(Intent intent) {
         Context context = this.getApplicationContext();
@@ -61,7 +61,7 @@ public class NotificationService extends IntentService {
         notification.ledOffMS = 1000;
         int NOTIFICATION_ID = 777;
         notificationManager.notify(NOTIFICATION_ID, notification);
-        Log.i("junk", "Notification sent.");
+        Log.i(TAG, "Notification sent.");
 
     }
 

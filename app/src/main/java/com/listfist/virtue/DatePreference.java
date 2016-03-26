@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Created by Zero on 3/23/2016.
@@ -85,7 +86,7 @@ public class DatePreference extends DialogPreference implements
      * @return the SimpleDateFormat used for XML dates
      */
     public static SimpleDateFormat formatter() {
-        return new SimpleDateFormat("yyyy.MM.dd");
+        return new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
     }
 
     /**
@@ -95,7 +96,7 @@ public class DatePreference extends DialogPreference implements
      * @return the SimpleDateFormat used for summary dates
      */
     public static SimpleDateFormat summaryFormatter() {
-        return new SimpleDateFormat("MMMM dd, yyyy");
+        return new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
     }
 
     @Override

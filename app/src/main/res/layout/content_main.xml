@@ -42,7 +42,8 @@
             android:paddingBottom="30dp"
             android:paddingTop="0dp"
             android:textSize="@dimen/abc_text_size_small_material"
-            android:typeface="serif" />
+            android:typeface="serif"
+            android:textAlignment="center" />
 
         <RatingBar
             android:layout_width="wrap_content"

@@ -56,7 +56,8 @@
                 android:paddingBottom="15dp"
                 android:height="100dp"
                 android:typeface="serif"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textAlignment="center" />
 
             <LinearLayout
                 android:orientation="vertical"

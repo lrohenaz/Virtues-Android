@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ProgressActivity extends AppCompatActivity {
-    private MyDatabaseHelper dbHelper;
+    private static final String TAG = SplashActivity.class.getName();
     private SQLiteDatabase database;
     public final static String RECORD_TABLE="virtueLog"; // name of table
 
@@ -43,33 +43,36 @@ public class ProgressActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(ProgressActivity.this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Clearing Progress")
-                        .setMessage("Are you sure you want to delete all of your records? This cannot be undone.")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                clearProgress();
-                                updateList();
-                                Snackbar.make(findViewById(android.R.id.content), "Cleared progress. Ahh a fresh start.", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
-                            }
+        if (fab != null) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new AlertDialog.Builder(ProgressActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Clearing Progress")
+                            .setMessage("Are you sure you want to delete all of your records? This cannot be undone.")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    clearProgress();
+                                    updateList();
+                                    View contentView = findViewById(android.R.id.content);
+                                            Snackbar.make(contentView, "Cleared progress. Ahh a fresh start.", Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                }
 
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
 
 
-            }
-        });
+                }
+            });
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Set up database
-        dbHelper = new MyDatabaseHelper(this);
+        MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
 
         updateList();
@@ -78,7 +81,7 @@ public class ProgressActivity extends AppCompatActivity {
         String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
         if(database!=null) {
             String selectQuery = "SELECT _id, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
-            Log.d("junk",selectQuery);
+            Log.d(TAG,selectQuery);
             Cursor mCursor = database.rawQuery(selectQuery, null);
 
             //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
@@ -115,15 +118,15 @@ public class ProgressActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams dummyParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dummyView.setLayoutParams(dummyParams);
 
-                Log.d("junk", "Record " + i + 1 + "/" + mCursor.getCount() + " Date: " + mCursor.getString(1));
-                Log.d("junk", "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
+                Log.d(TAG, "Record " + i + 1 + "/" + mCursor.getCount() + " Date: " + mCursor.getString(1));
+                Log.d(TAG, "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
                 StringBuilder sb = new StringBuilder();
 
                 for(int x=1;x<15;x++) { //id is at 0, skip it
                     // 0=id 1=datetime 2=virtue 1... 15=virtue 13
                     if(x>1) {
                         sb.append(mCursor.getInt(x)+"\t\t");
-                        Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
+                        Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
                     }
                     else {
                         if(x==1) { // Append date
@@ -153,7 +156,7 @@ public class ProgressActivity extends AppCompatActivity {
                             sb.append("\t\t\t\t\t\t\t");
 
                         }
-                        Log.d("junk", "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x) + " - or - " + mCursor.getInt(x));
+                        Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x) + " - or - " + mCursor.getInt(x));
                     }
                 }
                 dummyView.setText(sb);
