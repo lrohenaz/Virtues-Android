@@ -46,8 +46,6 @@
     <string name="pref_default_time">22:00</string>
 
 
-
-
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
@@ -102,4 +100,5 @@
     <string name="goalTxt">\"In the first week, my great guard was to avoid every the least offense against Temperance, leaving the other virtues to their ordinary chance, only marking every evening the faults of the day.\"</string>
     <string name="yourVirtue">No Virtue Selected</string>
     <string name="finishBtnTxt">Finish</string>
+    <string name="title_activity_progress_virtue">ProgressVirtueActivity</string>
 </resources>

@@ -1,24 +1,60 @@
 package com.listfist.virtue;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class ProgressActivity extends AppCompatActivity {
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+
+public class ProgressActivity extends AppCompatActivity implements OnChartValueSelectedListener {
     private static final String TAG = SplashActivity.class.getName();
     private SQLiteDatabase database;
     public final static String RECORD_TABLE="virtueLog"; // name of table
+    private Cursor cursor;
 
     public final static String RECORD_ID="_id"; // id value for record
     public final static String RECORD_TIME="dt";  // datetime of record
@@ -35,55 +71,169 @@ public class ProgressActivity extends AppCompatActivity {
     public final static String RECORD_11="v11";
     public final static String RECORD_12="v12";
     public final static String RECORD_13="v13";
+    private List<String> XAxisValues;
+    private List<IBarDataSet> dataSet;
+
+    private PieChart mChart;
+    private SeekBar mSeekBarX, mSeekBarY;
+    private TextView tvX, tvY;
+
+    private Typeface tf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (fab != null) {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new AlertDialog.Builder(ProgressActivity.this)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setTitle("Clearing Progress")
-                            .setMessage("Are you sure you want to delete all of your records? This cannot be undone.")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    clearProgress();
-                                    updateList();
-                                    View contentView = findViewById(android.R.id.content);
-                                            Snackbar.make(contentView, "Cleared progress. Ahh a fresh start.", Snackbar.LENGTH_LONG)
-                                            .setAction("Action", null).show();
-                                }
-
-                            })
-                            .setNegativeButton("No", null)
-                            .show();
-
-
-                }
-            });
-        }
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         // Set up database
         MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
 
-        updateList();
+        cursor = selectRecords();
+        // in this example, a BarChart is initialized from xml
+        /*
+        BarChart chart = (BarChart) findViewById(R.id.chart);
+        BarData data = new BarData(getXAxisValues(), getDataSet());
+        chart.setData(data);
+        chart.setDescription("My Chart");
+        chart.animateXY(2000, 2000);
+        chart.invalidate();
+        */
+
+        mChart = (PieChart) findViewById(R.id.chart1);
+        mChart.setUsePercentValues(false);
+        mChart.setDescription("");
+        mChart.setExtraOffsets(5, 10, 5, 5);
+
+        mChart.setDragDecelerationFrictionCoef(0.95f);
+
+        tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+
+        mChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
+        mChart.setCenterText(generateCenterSpannableText());
+
+        mChart.setDrawHoleEnabled(true);
+        mChart.setHoleColor(Color.WHITE);
+
+        mChart.setTransparentCircleColor(Color.WHITE);
+        mChart.setTransparentCircleAlpha(110);
+
+        mChart.setHoleRadius(58f);
+        mChart.setTransparentCircleRadius(61f);
+
+        mChart.setDrawCenterText(true);
+
+        mChart.setRotationAngle(0);
+        // enable rotation of the chart by touch
+        mChart.setRotationEnabled(true);
+        mChart.setHighlightPerTapEnabled(true);
+
+        // mChart.setUnit(" €");
+        // mChart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+        mChart.setOnChartValueSelectedListener(this);
+
+        setData(13, 65);
+
+        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        // mChart.spin(2000, 0, 360);
+
+        Legend l = mChart.getLegend();
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+
+        // Customize legend
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setWordWrapEnabled(true);
+        // customize display:
+        mChart.setDrawSliceText(false);
+        for (IDataSet<?> set : mChart.getData().getDataSets())
+            set.setDrawValues(!set.isDrawValuesEnabled());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.pie, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+            case R.id.actionClearProgress: {
+                //for (IDataSet<?> set : mChart.getData().getDataSets())
+                //    set.setDrawValues(!set.isDrawValuesEnabled());
+                clearProgress();
+                View contentView = findViewById(android.R.id.content);
+                Snackbar.make(contentView, "Cleared progress. Ahh a fresh start.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+            }
+            case R.id.actionToggleHole: {
+                if (mChart.isDrawHoleEnabled())
+                    mChart.setDrawHoleEnabled(false);
+                else
+                    mChart.setDrawHoleEnabled(true);
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionDrawCenter: {
+                if (mChart.isDrawCenterTextEnabled())
+                    mChart.setDrawCenterText(false);
+                else
+                    mChart.setDrawCenterText(true);
+                mChart.invalidate();
+                break;
+            }
+
+
+            case R.id.actionToggleXVals: {
+                mChart.setDrawSliceText(!mChart.isDrawSliceTextEnabled());
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionSave: {
+                // mChart.saveToGallery("title"+System.currentTimeMillis());
+                mChart.saveToPath("title" + System.currentTimeMillis(), "");
+                break;
+            }
+            case R.id.actionTogglePercent:
+                mChart.setUsePercentValues(!mChart.isUsePercentValuesEnabled());
+                mChart.invalidate();
+                break;
+            case R.id.animateX: {
+                mChart.animateX(1400);
+                break;
+            }
+            case R.id.animateY: {
+                mChart.animateY(1400);
+                break;
+            }
+            case R.id.animateXY: {
+                mChart.animateXY(1400, 1400);
+                break;
+            }
+        }
+        return true;
     }
     public Cursor selectRecords() {
-        String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
+        //String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
         if(database!=null) {
-            String selectQuery = "SELECT _id, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
-            Log.d(TAG,selectQuery);
+            String selectQuery = "SELECT *, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
             Cursor mCursor = database.rawQuery(selectQuery, null);
-
+            Log.d(TAG,"Query: "+ selectQuery);
             //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
             if (mCursor != null) {
                 mCursor.moveToFirst();
@@ -94,78 +244,182 @@ public class ProgressActivity extends AppCompatActivity {
             return null;
         }
     }
+
     private void clearProgress() {
-        //
-        LinearLayout container = (LinearLayout) findViewById(R.id.records);
-        container.removeAllViews();
         database.delete(RECORD_TABLE, null, null);
-        updateList();
+        mChart.invalidate();
     }
-    private void updateList() {
-        // Get the view to stick out data
-        LinearLayout container = (LinearLayout) findViewById(R.id.records);
-        Cursor mCursor = selectRecords();
-        if(mCursor!=null) {
-            for(int i=0;i<mCursor.getCount();i++) {
-                // Create a new horizontal layout
-                LinearLayout LL = new LinearLayout(this);
-                LL.setOrientation(LinearLayout.HORIZONTAL);
-                LL.setPadding(20,20,20,20);
-                ViewGroup.LayoutParams LLParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                LL.setLayoutParams(LLParams);
 
-                TextView dummyView = new TextView(this);
-                ViewGroup.LayoutParams dummyParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dummyView.setLayoutParams(dummyParams);
 
-                Log.d(TAG, "Record " + i + 1 + "/" + mCursor.getCount() + " Date: " + mCursor.getString(1));
-                Log.d(TAG, "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
-                StringBuilder sb = new StringBuilder();
+    private void setData(int count, float range) {
+        float mult = range;
+        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+        // IMPORTANT: In a PieChart, no values (Entry) should have the same
+        // xIndex (even if from different DataSets), since no values can be
+        // drawn above each other.
+        //for (int i = 0; i < count + 1; i++) {
+        //    yVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
+        //}
 
-                for(int x=1;x<15;x++) { //id is at 0, skip it
-                    // 0=id 1=datetime 2=virtue 1... 15=virtue 13
-                    if(x>1) {
-                        sb.append(mCursor.getInt(x)+"\t\t");
-                        Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
-                    }
-                    else {
-                        if(x==1) { // Append date
-                            switch(mCursor.getInt(x)) {
-                                case 0:
-                                    sb.append("Sun");
-                                    break;
-                                case 1:
-                                    sb.append("Mon");
-                                    break;
-                                case 2:
-                                    sb.append("Tue");
-                                    break;
-                                case 3:
-                                    sb.append("Wed");
-                                    break;
-                                case 4:
-                                    sb.append("Thu");
-                                    break;
-                                case 5:
-                                    sb.append("Fri");
-                                    break;
-                                case 6:
-                                    sb.append("Sat");
-                                    break;
-                            }
-                            sb.append("\t\t\t\t\t\t\t");
+        ArrayList<String> xVals = new ArrayList<String>();
 
+        if(cursor!=null&&cursor.getCount()>0) {
+            Log.d(TAG,"We've got "+ cursor.getCount() +" records");
+            // For each record, compute a new average for each characteristic and put into a new array
+
+            // Use that new array to populate the pie chart based on the averages
+            // A query to omit the records from n days old back would be good
+            ArrayList<Integer> avgs = new ArrayList<Integer>();
+
+            // Loop through each record
+            for(int x=0;x<cursor.getCount();x++) {
+                // Loop through each field
+                if(x==0) {   // If this is the first record just put the first values in as the average
+                    for(int p=0;p<cursor.getColumnCount();p++) {
+                        if(p>1) {
+                            avgs.add(cursor.getInt(p));
                         }
-                        Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x) + " - or - " + mCursor.getInt(x));
                     }
                 }
-                dummyView.setText(sb);
-                LL.addView(dummyView);
-                if (container != null) {
-                    container.addView(LL);
+                else {
+                    for(int p=0;p<cursor.getColumnCount();p++) {
+                        if(p>1) {
+                            avgs.set(p, ((cursor.getInt(p) + avgs.get(p)) / (x + 1)));
+                        }
+                    }
                 }
-                mCursor.moveToNext();
+                cursor.moveToNext();
+            }
+
+            // Loop through averages array and populate the chart data
+            Log.d(TAG,"We've got "+ count +" columns to add");
+            for (int i = 0; i < count; i++) {
+                Log.d(TAG,"Adding "+ avgs.get(i));
+                yVals1.add(new Entry((float) avgs.get(i), i));
             }
         }
+        else {
+            Log.d(TAG,"Nothing to show");
+            View contentView = findViewById(android.R.id.content);
+            Snackbar.make(contentView, "Record some data, come back, and we'll see what we can do for ya.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+
+        //if(mCursor!=null) {
+            for (int i = 1; i <= 13; i++) {
+                switch(i) {
+                    case 1:
+                        xVals.add(getResources().getString(R.string.v1_title));
+                        break;
+                    case 2:
+                        xVals.add(getResources().getString(R.string.v2_title));
+                        break;
+                    case 3:
+                        xVals.add(getResources().getString(R.string.v3_title));
+                        break;
+                    case 4:
+                        xVals.add(getResources().getString(R.string.v4_title));
+                        break;
+                    case 5:
+                        xVals.add(getResources().getString(R.string.v5_title));
+                        break;
+                    case 6:
+                        xVals.add(getResources().getString(R.string.v6_title));
+                        break;
+                    case 7:
+                        xVals.add(getResources().getString(R.string.v7_title));
+                        break;
+                    case 8:
+                        xVals.add(getResources().getString(R.string.v8_title));
+                        break;
+                    case 9:
+                        xVals.add(getResources().getString(R.string.v9_title));
+                        break;
+                    case 10:
+                        xVals.add(getResources().getString(R.string.v10_title));
+                        break;
+                    case 11:
+                        xVals.add(getResources().getString(R.string.v11_title));
+                        break;
+                    case 12:
+                        xVals.add(getResources().getString(R.string.v12_title));
+                        break;
+                    case 13:
+                        xVals.add(getResources().getString(R.string.v13_title));
+                        break;
+                }
+
+            }
+        //}
+        //for (int i = 0; i < count + 1; i++)
+            //xVals.add(mParties[i % mParties.length]);
+
+        PieDataSet dataSet = new PieDataSet(yVals1, "Virtues");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(xVals, dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTypeface(tf);
+        mChart.setData(data);
+
+        // undo all highlights
+        mChart.highlightValues(null);
+
+        mChart.invalidate();
     }
+
+    private SpannableString generateCenterSpannableText() {
+
+        SpannableString s = new SpannableString("Virtues\nSized by Average Score");
+        s.setSpan(new RelativeSizeSpan(1.7f), 0, 7, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 7, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 7, s.length(), 0);
+        return s;
+    }
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+
+        if (e == null)
+            return;
+        Log.i("VAL SELECTED",
+                "Value: " + e.getVal() + ", xIndex: " + e.getXIndex()
+                        + ", DataSet index: " + dataSetIndex);
+        //ToDo putextra including the clicked slice id
+        Intent intent = new Intent(ProgressActivity.this, ProgressVirtueActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onNothingSelected() {
+        Log.i("PieChart", "nothing selected");
+    }
+
 }

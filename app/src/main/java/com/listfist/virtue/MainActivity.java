@@ -14,10 +14,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
     private AppPreferences _appPrefs;
     Typeface face;
-
     private static final String TAG = SplashActivity.class.getName();
 
     @Override
@@ -28,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         face= Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     @Override

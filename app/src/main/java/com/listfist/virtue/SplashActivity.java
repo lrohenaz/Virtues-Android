@@ -223,9 +223,10 @@ public class SplashActivity extends AppCompatActivity {
             choose.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // Todo - Set 'switch virtue' reminder for 1 week from today
                     _appPrefs.saveActiveVirtue(v);
                     Log.d(TAG, "Set active virtue to " + v);
-                    if(action.equals("change_virtue")){
+                    if(equals(action, "change_virtue")){
                         finish();
                     }
                     else {

@@ -264,7 +264,6 @@ public class DatePreference extends DialogPreference implements
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
             }
-
             public SavedState[] newArray(int size) {
                 return new SavedState[size];
             }

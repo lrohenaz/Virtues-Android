@@ -7,8 +7,8 @@ android {
         applicationId "com.listfist.virtue"
         minSdkVersion 18
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "0.2"
     }
     buildTypes {
         release {
@@ -19,11 +19,14 @@ android {
     productFlavors {
     }
 }
-
+repositories {
+    maven { url "https://jitpack.io" }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.3'
 }
