@@ -60,8 +60,6 @@
                 android:value="com.listfist.virtue.MainActivity" />
         </activity>
 
-        <service android:name=".NotificationService" />
-
         <receiver
             android:name=".NotificationReceiver"
             android:process=":remote"></receiver>

@@ -1,4 +1,5 @@
 package com.listfist.virtue;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     private AppPreferences _appPrefs;
     Typeface face;
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        face= Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
+        face = Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
@@ -47,25 +50,34 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Resuming...");
         _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
+
         String reminderTime = _appPrefs.getTime();
-        if(reminderTime.equals("0")) {
-            Log.d(TAG,"Reminder not set");
+        if (reminderTime.equals("0")) {
+            Log.d(TAG, "Nightly Reminder not set");
             _appPrefs.createDefaultReminder();
             reminderTime = _appPrefs.getTime();
-            Snackbar.make(this.findViewById(android.R.id.content), "Reminder set for 10pm", Snackbar.LENGTH_LONG)
+            Snackbar.make(this.findViewById(android.R.id.content), "Nightly Reminder set for 10PM: ", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         }
-        Log.d(TAG,"Reminder is "+ reminderTime);
+        Log.d(TAG, "Reminder is " + reminderTime);
 
+        String changeVirtueTime = _appPrefs.getChangeVirtueTime();
+        if (changeVirtueTime.equals("0")) {
+            Log.d(TAG, "Change virtue reminder not set");
+            _appPrefs.createChangeVirtueReminder();
+            changeVirtueTime = _appPrefs.getChangeVirtueTime();
+            Snackbar.make(this.findViewById(android.R.id.content), "Reminder set - 'change virtue' in 7 days: ", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
 //        _appPrefs.
         Log.d(TAG, "Active virtue is " + activeVirtue);
         TextView yourVirtue = (TextView) findViewById(R.id.yourVirtue);
         yourVirtue.setTypeface(face);
         TextView goal = (TextView) findViewById(R.id.goalTxt);
         String goaltxt;
-        String title="";
-        switch(activeVirtue) {
+        String title = "";
+        switch (activeVirtue) {
             case "1":
                 title = getResources().getString(R.string.v1_title);
                 break;
@@ -112,32 +124,32 @@ public class MainActivity extends AppCompatActivity {
         goaltxt = goal.getText().toString();
         goal.setText(goaltxt.replaceAll("\\bfirst\\b", _appPrefs.getWeekWord()));
         RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
-        rb.setRating((float) Integer.parseInt(_appPrefs.getTodaysRating()));
+        rb.setRating((float) Integer.parseInt(_appPrefs.getRating(Integer.parseInt(activeVirtue))));
         rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                _appPrefs.saveTodaysRating(String.valueOf((int) rating));
+                _appPrefs.saveRating(Integer.parseInt(activeVirtue), (int) rating);
                 final String todaysRating = _appPrefs.getTodaysRating();
                 Log.d(TAG, "saved todays rating " + todaysRating);
             }
         });
 
 
-            if(yourVirtue!=null) {
-                yourVirtue.setOnClickListener(new TextView.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
-                        intent.putExtra("action", "change_virtue");
-                        startActivity(intent);
-                        // finish();
-                    }
-                });
-            }
+        if (yourVirtue != null) {
+            yourVirtue.setOnClickListener(new TextView.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+                    intent.putExtra("action", "change_virtue");
+                    startActivity(intent);
+                    // finish();
+                }
+            });
         }
+    }
 
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "Create options menu...");
         // Inflate the menu; this adds items to the action bar if it is present.

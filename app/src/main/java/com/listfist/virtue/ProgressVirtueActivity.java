@@ -1,5 +1,6 @@
 package com.listfist.virtue;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -26,23 +27,27 @@ import java.util.List;
 public class ProgressVirtueActivity extends AppCompatActivity {
     private static final String TAG = SplashActivity.class.getName();
     private SQLiteDatabase database;
-    public final static String RECORD_TABLE="virtueLog"; // name of table
+    public final static String RECORD_TABLE = "virtueLog"; // name of table
 
-    public final static String RECORD_ID="_id"; // id value for record
-    public final static String RECORD_TIME="dt";  // datetime of record
-    public final static String RECORD_1="v1";
-    public final static String RECORD_2="v2";
-    public final static String RECORD_3="v3";
-    public final static String RECORD_4="v4";
-    public final static String RECORD_5="v5";
-    public final static String RECORD_6="v6";
-    public final static String RECORD_7="v7";
-    public final static String RECORD_8="v8";
-    public final static String RECORD_9="v9";
-    public final static String RECORD_10="v10";
-    public final static String RECORD_11="v11";
-    public final static String RECORD_12="v12";
-    public final static String RECORD_13="v13";
+    public final static String RECORD_ID = "_id"; // id value for record
+    public final static String RECORD_TIME = "dt";  // datetime of record
+    public final static String RECORD_1 = "v1";
+    public final static String RECORD_2 = "v2";
+    public final static String RECORD_3 = "v3";
+    public final static String RECORD_4 = "v4";
+    public final static String RECORD_5 = "v5";
+    public final static String RECORD_6 = "v6";
+    public final static String RECORD_7 = "v7";
+    public final static String RECORD_8 = "v8";
+    public final static String RECORD_9 = "v9";
+    public final static String RECORD_10 = "v10";
+    public final static String RECORD_11 = "v11";
+    public final static String RECORD_12 = "v12";
+    public final static String RECORD_13 = "v13";
+    private Cursor cursor;
+    private int color;
+    private String datasetTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,29 +55,69 @@ public class ProgressVirtueActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent i = getIntent();
+        Integer vid = i.getIntExtra("virtue", 0);
+        color = i.getIntExtra("color", 0);
+
+        switch (vid) {
+            case 0:
+                break;
+            case 1:
+                datasetTitle = getResources().getString(R.string.v1_title);
+                break;
+            case 2:
+                datasetTitle = getResources().getString(R.string.v2_title);
+                break;
+            case 3:
+                datasetTitle = getResources().getString(R.string.v3_title);
+                break;
+            case 4:
+                datasetTitle = getResources().getString(R.string.v4_title);
+                break;
+            case 5:
+                datasetTitle = getResources().getString(R.string.v5_title);
+                break;
+            case 6:
+                datasetTitle = getResources().getString(R.string.v6_title);
+                break;
+            case 7:
+                datasetTitle = getResources().getString(R.string.v7_title);
+                break;
+            case 8:
+                datasetTitle = getResources().getString(R.string.v8_title);
+                break;
+            case 9:
+                datasetTitle = getResources().getString(R.string.v9_title);
+                break;
+            case 10:
+                datasetTitle = getResources().getString(R.string.v10_title);
+                break;
+            case 11:
+                datasetTitle = getResources().getString(R.string.v11_title);
+                break;
+            case 12:
+                datasetTitle = getResources().getString(R.string.v12_title);
+                break;
+            case 13:
+                datasetTitle = getResources().getString(R.string.v13_title);
+                break;
+        }
+        getSupportActionBar().setTitle(datasetTitle);
+        cursor = selectRecords();
         BarChart chart = (BarChart) findViewById(R.id.bchart);
         BarData data = new BarData(getXAxisValues(), getDataSet());
         chart.setData(data);
-        chart.setDescription("My Chart");
-        chart.animateXY(2000, 2000);
+        chart.setDescription("Rating over time");
+        chart.animateXY(1500, 1500);
         chart.invalidate();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public Cursor selectRecords() {
-        String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
-        if(database!=null) {
-            String selectQuery = "SELECT _id, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
-            Log.d(TAG,selectQuery);
+        String[] cols = new String[]{RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
+        if (database != null) {
+            String selectQuery = "SELECT * FROM " + RECORD_TABLE;
+            Log.d(TAG, selectQuery);
             Cursor mCursor = database.rawQuery(selectQuery, null);
 
             //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
@@ -80,21 +125,21 @@ public class ProgressVirtueActivity extends AppCompatActivity {
                 mCursor.moveToFirst();
             }
             return mCursor; // iterate to get each value.
-        }
-        else {
+        } else {
             return null;
         }
     }
+
     private void updateList() {
         // Get the view to stick out data
         LinearLayout container = (LinearLayout) findViewById(R.id.records);
         Cursor mCursor = selectRecords();
-        if(mCursor!=null) {
-            for(int i=0;i<mCursor.getCount();i++) {
+        if (mCursor != null) {
+            for (int i = 0; i < mCursor.getCount(); i++) {
                 // Create a new horizontal layout
                 LinearLayout LL = new LinearLayout(this);
                 LL.setOrientation(LinearLayout.HORIZONTAL);
-                LL.setPadding(20,20,20,20);
+                LL.setPadding(20, 20, 20, 20);
                 ViewGroup.LayoutParams LLParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 LL.setLayoutParams(LLParams);
 
@@ -106,15 +151,14 @@ public class ProgressVirtueActivity extends AppCompatActivity {
                 Log.d(TAG, "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
                 StringBuilder sb = new StringBuilder();
 
-                for(int x=1;x<15;x++) { //id is at 0, skip it
+                for (int x = 1; x < 15; x++) { //id is at 0, skip it
                     // 0=id 1=datetime 2=virtue 1... 15=virtue 13
-                    if(x>1) {
-                        sb.append(mCursor.getInt(x)+"\t\t");
+                    if (x > 1) {
+                        sb.append(mCursor.getInt(x) + "\t\t");
                         Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
-                    }
-                    else {
-                        if(x==1) { // Append date
-                            switch(mCursor.getInt(x)) {
+                    } else {
+                        if (x == 1) { // Append date
+                            switch (mCursor.getInt(x)) {
                                 case 0:
                                     sb.append("Sun");
                                     break;
@@ -174,73 +218,38 @@ public class ProgressVirtueActivity extends AppCompatActivity {
         ArrayList<IBarDataSet> dataSets = null;
 
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
-        BarEntry v1e1 = new BarEntry(110.000f, 0); // Jan
+        BarEntry v1e1 = new BarEntry(2, 0); // Jan
         valueSet1.add(v1e1);
-        BarEntry v1e2 = new BarEntry(40.000f, 1); // Feb
+        BarEntry v1e2 = new BarEntry(1, 1); // Feb
         valueSet1.add(v1e2);
-        BarEntry v1e3 = new BarEntry(60.000f, 2); // Mar
+        BarEntry v1e3 = new BarEntry(0, 2); // Mar
         valueSet1.add(v1e3);
-        BarEntry v1e4 = new BarEntry(30.000f, 3); // Apr
+        BarEntry v1e4 = new BarEntry(2, 3); // Apr
         valueSet1.add(v1e4);
-        BarEntry v1e5 = new BarEntry(90.000f, 4); // May
+        BarEntry v1e5 = new BarEntry(1, 4); // May
         valueSet1.add(v1e5);
-        BarEntry v1e6 = new BarEntry(100.000f, 5); // Jun
+        BarEntry v1e6 = new BarEntry(4, 5); // Jun
         valueSet1.add(v1e6);
-        BarEntry v1e7 = new BarEntry(110.000f, 6); // Jul
+        BarEntry v1e7 = new BarEntry(3, 6); // Jul
         valueSet1.add(v1e7);
-        BarEntry v1e8 = new BarEntry(40.000f, 7); // Aug
+        BarEntry v1e8 = new BarEntry(3, 7); // Aug
         valueSet1.add(v1e8);
-        BarEntry v1e9 = new BarEntry(60.000f, 8); // Sept
+        BarEntry v1e9 = new BarEntry(2, 8); // Sept
         valueSet1.add(v1e9);
-        BarEntry v1e10 = new BarEntry(30.000f, 9); // Oct
+        BarEntry v1e10 = new BarEntry(3, 9); // Oct
         valueSet1.add(v1e10);
-        BarEntry v1e11 = new BarEntry(90.000f, 10); // Nov
+        BarEntry v1e11 = new BarEntry(4, 10); // Nov
         valueSet1.add(v1e11);
-        BarEntry v1e12 = new BarEntry(100.000f, 11); // Dec
+        BarEntry v1e12 = new BarEntry(5, 11); // Dec
         valueSet1.add(v1e12);
 
 
-        ArrayList<BarEntry> valueSet2 = new ArrayList<>();
-        BarEntry v2e1 = new BarEntry(150.000f, 0); // Jan
-        valueSet2.add(v2e1);
-        BarEntry v2e2 = new BarEntry(90.000f, 1); // Feb
-        valueSet2.add(v2e2);
-        BarEntry v2e3 = new BarEntry(120.000f, 2); // Mar
-        valueSet2.add(v2e3);
-        BarEntry v2e4 = new BarEntry(60.000f, 3); // Apr
-        valueSet2.add(v2e4);
-        BarEntry v2e5 = new BarEntry(20.000f, 4); // May
-        valueSet2.add(v2e5);
-        BarEntry v2e6 = new BarEntry(80.000f, 5); // Jun
-        valueSet2.add(v2e6);
+        BarDataSet barDataSet1 = new BarDataSet(valueSet1, datasetTitle);
+        barDataSet1.setColor(color);
 
-        ArrayList<BarEntry> valueSet3 = new ArrayList<>();
-        BarEntry v3e1 = new BarEntry(50.000f, 0); // Jan
-        valueSet3.add(v3e1);
-        BarEntry v3e2 = new BarEntry(30.000f, 1); // Feb
-        valueSet3.add(v3e2);
-        BarEntry v3e3 = new BarEntry(10.000f, 2); // Mar
-        valueSet3.add(v3e3);
-        BarEntry v3e4 = new BarEntry(20.000f, 3); // Apr
-        valueSet3.add(v3e4);
-        BarEntry v3e5 = new BarEntry(30.000f, 4); // May
-        valueSet3.add(v3e5);
-        BarEntry v3e6 = new BarEntry(10.000f, 5); // Jun
-        valueSet3.add(v3e6);
-
-        BarDataSet barDataSet1 = new BarDataSet(valueSet1, "V1");
-        barDataSet1.setColor(Color.rgb(0, 155, 0));
-
-        BarDataSet barDataSet2 = new BarDataSet(valueSet2, "V2");
-        barDataSet1.setColor(Color.rgb(0, 0, 155));
-
-        BarDataSet barDataSet3 = new BarDataSet(valueSet3, "V3");
-        barDataSet3.setColor(Color.rgb(155, 0, 0));
 
         dataSets = new ArrayList<>();
         dataSets.add(barDataSet1);
-        dataSets.add(barDataSet2);
-        dataSets.add(barDataSet3);
         return dataSets;
     }
 

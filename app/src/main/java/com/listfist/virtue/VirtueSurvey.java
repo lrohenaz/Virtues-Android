@@ -21,15 +21,16 @@ import android.widget.TextView;
 import android.widget.ViewAnimator;
 
 
-
 public class VirtueSurvey extends AppCompatActivity {
     private static final String TAG = SplashActivity.class.getName();
     private static Button btnNext, btnPrevious, my_button;
     private static ViewAnimator viewAnimator;
-
+    private AppPreferences _appPrefs;
     private SQLiteDatabase database;
-    public final static String RECORD_TABLE="virtueLog"; // name of table
+    public final static String RECORD_TABLE = "virtueLog"; // name of table
+
     Typeface face;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +39,11 @@ public class VirtueSurvey extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        face= Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
+        face = Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
         MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
 
-        AppPreferences _appPrefs = new AppPreferences(getApplicationContext());
+        _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
         Log.d(TAG, "Active virtue is " + activeVirtue);
 
@@ -51,6 +52,7 @@ public class VirtueSurvey extends AppCompatActivity {
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
         btnNext = (Button) findViewById(R.id.nextBtn);
         btnPrevious = (Button) findViewById(R.id.backBtn);
+
         if (btnPrevious != null) {
             btnPrevious.setAlpha(0);
         }
@@ -59,35 +61,12 @@ public class VirtueSurvey extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView tv = null;
-                if(equals(btnNext.getText(), "Finish")){
+                if (equals(btnNext.getText(), "Finish")) {
                     // Finish Clicked
                     Integer[] surveyVals = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-                    RatingBar r1 = (RatingBar) findViewById(R.id.v1Rating);
-                    RatingBar r2 = (RatingBar) findViewById(R.id.v2Rating);
-                    RatingBar r3 = (RatingBar) findViewById(R.id.v3Rating);
-                    RatingBar r4 = (RatingBar) findViewById(R.id.v4Rating);
-                    RatingBar r5 = (RatingBar) findViewById(R.id.v5Rating);
-                    RatingBar r6 = (RatingBar) findViewById(R.id.v6Rating);
-                    RatingBar r7 = (RatingBar) findViewById(R.id.v7Rating);
-                    RatingBar r8 = (RatingBar) findViewById(R.id.v8Rating);
-                    RatingBar r9 = (RatingBar) findViewById(R.id.v9Rating);
-                    RatingBar r10 = (RatingBar) findViewById(R.id.v10Rating);
-                    RatingBar r11 = (RatingBar) findViewById(R.id.v11Rating);
-                    RatingBar r12 = (RatingBar) findViewById(R.id.v12Rating);
-                    RatingBar r13 = (RatingBar) findViewById(R.id.v12Rating);
-                    surveyVals[0] = (int) r1.getRating();
-                    surveyVals[1] = (int) r2.getRating();
-                    surveyVals[2] = (int) r3.getRating();
-                    surveyVals[3] = (int) r4.getRating();
-                    surveyVals[4] = (int) r5.getRating();
-                    surveyVals[5] = (int) r6.getRating();
-                    surveyVals[6] = (int) r7.getRating();
-                    surveyVals[7] = (int) r8.getRating();
-                    surveyVals[8] = (int) r9.getRating();
-                    surveyVals[9] = (int) r10.getRating();
-                    surveyVals[10] = (int) r11.getRating();
-                    surveyVals[11] = (int) r12.getRating();
-                    surveyVals[12] = (int) r13.getRating();
+                    for (int x = 0; x < 13; x++) {
+                        surveyVals[x] = Integer.parseInt(_appPrefs.getRating(x + 1));
+                    }
 
                     String tid = getTodaysRecordId();
                     if (tid != null) {
@@ -154,6 +133,7 @@ public class VirtueSurvey extends AppCompatActivity {
 
                 }
             }
+
             public boolean equals(Object a, Object b) {
                 return (a == b) || (a != null && a.equals(b));
             }
@@ -178,6 +158,118 @@ public class VirtueSurvey extends AppCompatActivity {
                 Log.d(TAG, "View Id (n):" + String.valueOf(viewAnimator.getDisplayedChild()));
             }
         });
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        _appPrefs = new AppPreferences(getApplicationContext());
+        RatingBar r1 = (RatingBar) findViewById(R.id.v1Rating);
+        RatingBar r2 = (RatingBar) findViewById(R.id.v2Rating);
+        RatingBar r3 = (RatingBar) findViewById(R.id.v3Rating);
+        RatingBar r4 = (RatingBar) findViewById(R.id.v4Rating);
+        RatingBar r5 = (RatingBar) findViewById(R.id.v5Rating);
+        RatingBar r6 = (RatingBar) findViewById(R.id.v6Rating);
+        RatingBar r7 = (RatingBar) findViewById(R.id.v7Rating);
+        RatingBar r8 = (RatingBar) findViewById(R.id.v8Rating);
+        RatingBar r9 = (RatingBar) findViewById(R.id.v9Rating);
+        RatingBar r10 = (RatingBar) findViewById(R.id.v10Rating);
+        RatingBar r11 = (RatingBar) findViewById(R.id.v11Rating);
+        RatingBar r12 = (RatingBar) findViewById(R.id.v12Rating);
+        RatingBar r13 = (RatingBar) findViewById(R.id.v13Rating);
+        r1.setRating(Integer.parseInt(_appPrefs.getRating(1)));
+        r2.setRating(Integer.parseInt(_appPrefs.getRating(2)));
+        r3.setRating(Integer.parseInt(_appPrefs.getRating(3)));
+        r4.setRating(Integer.parseInt(_appPrefs.getRating(4)));
+        r5.setRating(Integer.parseInt(_appPrefs.getRating(5)));
+        r6.setRating(Integer.parseInt(_appPrefs.getRating(6)));
+        r7.setRating(Integer.parseInt(_appPrefs.getRating(7)));
+        r8.setRating(Integer.parseInt(_appPrefs.getRating(8)));
+        r9.setRating(Integer.parseInt(_appPrefs.getRating(9)));
+        r10.setRating(Integer.parseInt(_appPrefs.getRating(10)));
+        r11.setRating(Integer.parseInt(_appPrefs.getRating(11)));
+        r12.setRating(Integer.parseInt(_appPrefs.getRating(12)));
+        r13.setRating(Integer.parseInt(_appPrefs.getRating(13)));
+        r1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(1, (int) rating);
+            }
+        });
+        r2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(2, (int) rating);
+            }
+        });
+        r3.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(3, (int) rating);
+            }
+        });
+        r4.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(4, (int) rating);
+            }
+        });
+        r5.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(5, (int) rating);
+            }
+        });
+        r6.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(6, (int) rating);
+            }
+        });
+        r7.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(7, (int) rating);
+            }
+        });
+        r8.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(8, (int) rating);
+            }
+        });
+        r9.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(9, (int) rating);
+            }
+        });
+        r10.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(10, (int) rating);
+            }
+        });
+        r11.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(11, (int) rating);
+            }
+        });
+        r12.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(12, (int) rating);
+            }
+        });
+        r13.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                _appPrefs.saveRating(13, (int) rating);
+            }
+        });
     }
 
     public static boolean equals(Object a, Object b) {
@@ -186,10 +278,10 @@ public class VirtueSurvey extends AppCompatActivity {
 
     private void updateRecord(Integer[] surveyVals, String _id) {
         String strFilter = "_id=" + _id;
-        Log.d(TAG,"Updating id "+ _id);
+        Log.d(TAG, "Updating id " + _id);
         ContentValues values = new ContentValues();
         // Put each value into the database
-        for(int x=0;x<13;x++) {
+        for (int x = 0; x < 13; x++) {
             String colName = "v" + (x + 1);
             values.put(colName, surveyVals[x]);
         }
@@ -197,27 +289,26 @@ public class VirtueSurvey extends AppCompatActivity {
     }
 
     private String getTodaysRecordId() {
-        String selectQuery = "SELECT * FROM "+ RECORD_TABLE +" WHERE dt > date('now','localtime','start of day')";
-        Log.d(TAG,selectQuery);
+        String selectQuery = "SELECT * FROM " + RECORD_TABLE + " WHERE dt > date('now','localtime','start of day')";
+        Log.d(TAG, selectQuery);
         Cursor cursor = database.rawQuery(selectQuery, null);
         Log.d(TAG, String.valueOf(cursor.getCount()));
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            Log.d(TAG,"found a record "+ cursor.getString(1));
+            Log.d(TAG, "found a record " + cursor.getString(1));
             String returntxt = cursor.getString(0);
             cursor.close();
             return returntxt;
-        }
-        else {
+        } else {
             cursor.close();
             return null;
         }
     }
 
-    public void createRecord(Integer[] vals){
+    public void createRecord(Integer[] vals) {
         ContentValues values = new ContentValues();
         // Put each value into the database
-        for(int x=0;x<13;x++) {
+        for (int x = 0; x < 13; x++) {
             String colName = "v" + (x + 1);
             values.put(colName, vals[x]);
             Log.d(TAG, "Added v" + (x + 1) + " - " + vals[x]);

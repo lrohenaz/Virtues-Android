@@ -21,19 +21,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -41,14 +32,11 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 public class ProgressActivity extends AppCompatActivity implements OnChartValueSelectedListener {
     private static final String TAG = SplashActivity.class.getName();
@@ -71,12 +59,9 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
     public final static String RECORD_11="v11";
     public final static String RECORD_12="v12";
     public final static String RECORD_13="v13";
-    private List<String> XAxisValues;
     private List<IBarDataSet> dataSet;
 
     private PieChart mChart;
-    private SeekBar mSeekBarX, mSeekBarY;
-    private TextView tvX, tvY;
 
     private Typeface tf;
 
@@ -181,50 +166,7 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
                         .setAction("Action", null).show();
                 break;
             }
-            case R.id.actionToggleHole: {
-                if (mChart.isDrawHoleEnabled())
-                    mChart.setDrawHoleEnabled(false);
-                else
-                    mChart.setDrawHoleEnabled(true);
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionDrawCenter: {
-                if (mChart.isDrawCenterTextEnabled())
-                    mChart.setDrawCenterText(false);
-                else
-                    mChart.setDrawCenterText(true);
-                mChart.invalidate();
-                break;
-            }
 
-
-            case R.id.actionToggleXVals: {
-                mChart.setDrawSliceText(!mChart.isDrawSliceTextEnabled());
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionSave: {
-                // mChart.saveToGallery("title"+System.currentTimeMillis());
-                mChart.saveToPath("title" + System.currentTimeMillis(), "");
-                break;
-            }
-            case R.id.actionTogglePercent:
-                mChart.setUsePercentValues(!mChart.isUsePercentValuesEnabled());
-                mChart.invalidate();
-                break;
-            case R.id.animateX: {
-                mChart.animateX(1400);
-                break;
-            }
-            case R.id.animateY: {
-                mChart.animateY(1400);
-                break;
-            }
-            case R.id.animateXY: {
-                mChart.animateXY(1400, 1400);
-                break;
-            }
         }
         return true;
     }
@@ -247,7 +189,9 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
 
     private void clearProgress() {
         database.delete(RECORD_TABLE, null, null);
-        mChart.invalidate();
+        mChart.clear();
+       // mChart.removeAllViews();
+       // mChart.invalidate();
     }
 
 
@@ -264,7 +208,7 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         ArrayList<String> xVals = new ArrayList<String>();
 
         if(cursor!=null&&cursor.getCount()>0) {
-            Log.d(TAG,"We've got "+ cursor.getCount() +" records");
+            Log.d(TAG,"We've got "+ cursor.getCount() +" records and "+ cursor.getColumnCount() +" columns");
             // For each record, compute a new average for each characteristic and put into a new array
 
             // Use that new array to populate the pie chart based on the averages
@@ -275,17 +219,13 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
             for(int x=0;x<cursor.getCount();x++) {
                 // Loop through each field
                 if(x==0) {   // If this is the first record just put the first values in as the average
-                    for(int p=0;p<cursor.getColumnCount();p++) {
-                        if(p>1) {
-                            avgs.add(cursor.getInt(p));
-                        }
+                    for(int p=0;p<13;p++) {
+                        avgs.add(cursor.getInt(p+2));
                     }
                 }
                 else {
-                    for(int p=0;p<cursor.getColumnCount();p++) {
-                        if(p>1) {
-                            avgs.set(p, ((cursor.getInt(p) + avgs.get(p)) / (x + 1)));
-                        }
+                    for(int p=0;p<13;p++) {
+                        avgs.set(p, ((cursor.getInt(p+2) + avgs.get(p)) / (x + 1)));
                     }
                 }
                 cursor.moveToNext();
@@ -412,8 +352,9 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         Log.i("VAL SELECTED",
                 "Value: " + e.getVal() + ", xIndex: " + e.getXIndex()
                         + ", DataSet index: " + dataSetIndex);
-        //ToDo putextra including the clicked slice id
         Intent intent = new Intent(ProgressActivity.this, ProgressVirtueActivity.class);
+        intent.putExtra("virtue", e.getXIndex());
+        intent.putExtra("color", mChart.getData().getColors()[e.getXIndex()]);
         startActivity(intent);
     }
 
