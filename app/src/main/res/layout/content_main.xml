@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/yourVirtue"
             android:id="@+id/yourVirtue"
-            android:textSize="36sp"
+            android:textSize="42sp"
             android:typeface="serif"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"

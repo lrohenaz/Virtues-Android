@@ -1,11 +1,15 @@
 package com.listfist.virtue;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,7 +20,7 @@ import android.widget.TextView;
 public class SplashActivity extends AppCompatActivity {
     private static final String TAG = SplashActivity.class.getName();
     private AppPreferences _appPrefs;
-    String v="";
+    Integer v=0;
     private String action;
     Typeface face;
     Button choose;
@@ -61,8 +65,9 @@ public class SplashActivity extends AppCompatActivity {
         final TextView vTitle = (TextView) findViewById(R.id.virtueTitle);
         vTitle.setTypeface(face);
 
-        Log.d(TAG,"Active virtue is "+ activeVirtue);
-        if(!equals(activeVirtue, "")) {
+        Log.d(TAG, "Active virtue is " + activeVirtue);
+
+        if(!equals(activeVirtue, "0")) {
             if(!equals(action, "change_virtue")){
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -70,176 +75,188 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
 
-            v1Btn.setOnClickListener(new Button.OnClickListener(){
+        v1Btn.setOnClickListener(new Button.OnClickListener(){
 
-                @Override
-                public void onClick(View view) {
-                    v="1";
-                    vDesc.setText(R.string.v1_desc);
-                    vTitle.setText(R.string.v1_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            @Override
+            public void onClick(View view) {
+                v=1;
+                vDesc.setText(R.string.v1_desc);
+                vTitle.setText(R.string.v1_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v2Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=2;
+                vDesc.setText(R.string.v2_desc);
+                vTitle.setText(R.string.v2_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v3Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=3;
+                vDesc.setText(R.string.v3_desc);
+                vTitle.setText(R.string.v3_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v4Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=4;
+                vDesc.setText(R.string.v4_desc);
+                vTitle.setText(R.string.v4_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v5Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=5;
+                vDesc.setText(R.string.v5_desc);
+                vTitle.setText(R.string.v5_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v6Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=6;
+                vDesc.setText(R.string.v6_desc);
+                vTitle.setText(R.string.v6_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v7Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=7;
+                vDesc.setText(R.string.v7_desc);
+                vTitle.setText(R.string.v7_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v8Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=8;
+                vDesc.setText(R.string.v8_desc);
+                vTitle.setText(R.string.v8_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v9Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=9;
+                vDesc.setText(R.string.v9_desc);
+                vTitle.setText(R.string.v9_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v10Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=10;
+                vDesc.setText(R.string.v10_desc);
+                vTitle.setText(R.string.v10_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v11Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=11;
+                vDesc.setText(R.string.v11_desc);
+                vTitle.setText(R.string.v11_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v12Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=12;
+                vDesc.setText(R.string.v12_desc);
+                vTitle.setText(R.string.v12_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+        v13Btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                v=13;
+                vDesc.setText(R.string.v13_desc);
+                vTitle.setText(R.string.v13_title);
+                removeColors();
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                _appPrefs.saveTodaysRating("0");
+            }
+        });
+        choose.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Set 'switch virtue' reminder for 1 week from today
+                if(v!=0) {
                     _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v2Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="2";
-                    vDesc.setText(R.string.v2_desc);
-                    vTitle.setText(R.string.v2_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v3Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="3";
-                    vDesc.setText(R.string.v3_desc);
-                    vTitle.setText(R.string.v3_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v4Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="4";
-                    vDesc.setText(R.string.v4_desc);
-                    vTitle.setText(R.string.v4_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v5Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="5";
-                    vDesc.setText(R.string.v5_desc);
-                    vTitle.setText(R.string.v5_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v6Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="6";
-                    vDesc.setText(R.string.v6_desc);
-                    vTitle.setText(R.string.v6_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v7Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="7";
-                    vDesc.setText(R.string.v7_desc);
-                    vTitle.setText(R.string.v7_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v8Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="8";
-                    vDesc.setText(R.string.v8_desc);
-                    vTitle.setText(R.string.v8_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v9Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="9";
-                    vDesc.setText(R.string.v9_desc);
-                    vTitle.setText(R.string.v9_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v10Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="10";
-                    vDesc.setText(R.string.v10_desc);
-                    vTitle.setText(R.string.v10_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v11Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="11";
-                    vDesc.setText(R.string.v11_desc);
-                    vTitle.setText(R.string.v11_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v12Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="12";
-                    vDesc.setText(R.string.v12_desc);
-                    vTitle.setText(R.string.v12_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            v13Btn.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    v="13";
-                    vDesc.setText(R.string.v13_desc);
-                    vTitle.setText(R.string.v13_title);
-                    removeColors();
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    _appPrefs.saveTodaysRating("0");
-                }
-            });
-            choose.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Set 'switch virtue' reminder for 1 week from today
 
-                    _appPrefs.saveActiveVirtue(v);
                     Log.d(TAG, "Set active virtue to " + v);
-                    if(equals(action, "change_virtue")){
-                        _appPrefs.createChangeVirtueReminder();
-                        finish();
+                    if(equals(action, "change_virtue")||equals(0,_appPrefs.getChangeVirtueDaysLeft())){
+                        if(!equals(String.valueOf(v),_appPrefs.getActiveVirtue())) {
+                            showChangeVirtueDialog();
+                        }
+                        else {
+                            _appPrefs.saveActiveVirtue(String.valueOf(v));
+                            _appPrefs.createChangeVirtueReminder();
+                            finish();
+                        }
                     }
                     else {
+                        _appPrefs.saveActiveVirtue(String.valueOf(v));
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
+                } else {
+                    blinkTitle();
                 }
+            }
 
-                public boolean equals(Object a, Object b) {
-                    return (a == b) || (a != null && a.equals(b));
-                }
-            });
-
-
+            public boolean equals(Object a, Object b) {
+                return (a == b) || (a != null && a.equals(b));
+            }
+        });
     }
 
+    private void blinkTitle() {
+        TextView tv = (TextView) findViewById(R.id.virtueTitle);
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(50); //You can manage the time of the blink with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(3);
+        tv.startAnimation(anim);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        selectActiveVirtue();
+    }
     private void removeColors() {
         int stdColor = getResources().getColor(R.color.colorPrimaryDark);
         v1Btn.setBackgroundColor(stdColor);
@@ -255,6 +272,69 @@ public class SplashActivity extends AppCompatActivity {
         v11Btn.setBackgroundColor(stdColor);
         v12Btn.setBackgroundColor(stdColor);
         v13Btn.setBackgroundColor(stdColor);
+    }
+
+    private void showChangeVirtueDialog() {
+        new AlertDialog.Builder(this).setMessage("Are you sure you want to change your virtue? Change is due in "+ _appPrefs.getChangeVirtueDaysLeft() +" days")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
+                        _appPrefs.saveActiveVirtue(String.valueOf(v));
+                        _appPrefs.saveRating(v, 0);
+                        _appPrefs.createChangeVirtueReminder();
+                        System.exit(0);
+                        finish();
+                    }
+                })
+                .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
+                        selectActiveVirtue();
+                    }
+                })
+                .show();
+    }
+
+    private void selectActiveVirtue() {
+        switch (Integer.parseInt(_appPrefs.getActiveVirtue())) {
+            case 1:
+                v1Btn.callOnClick();
+                break;
+            case 2:
+                v2Btn.callOnClick();
+                break;
+            case 3:
+                v3Btn.callOnClick();
+                break;
+            case 4:
+                v4Btn.callOnClick();
+                break;
+            case 5:
+                v5Btn.callOnClick();
+                break;
+            case 6:
+                v6Btn.callOnClick();
+                break;
+            case 7:
+                v7Btn.callOnClick();
+                break;
+            case 8:
+                v8Btn.callOnClick();
+                break;
+            case 9:
+                v9Btn.callOnClick();
+                break;
+            case 10:
+                v10Btn.callOnClick();
+                break;
+            case 11:
+                v11Btn.callOnClick();
+                break;
+            case 12:
+                v12Btn.callOnClick();
+                break;
+            case 13:
+                v13Btn.callOnClick();
+                break;
+        }
     }
 
     public static boolean equals(Object a, Object b) {

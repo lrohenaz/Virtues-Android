@@ -20,6 +20,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
+import java.util.Calendar;
+
 
 public class VirtueSurvey extends AppCompatActivity {
     private static final String TAG = SplashActivity.class.getName();
@@ -28,7 +30,19 @@ public class VirtueSurvey extends AppCompatActivity {
     private AppPreferences _appPrefs;
     private SQLiteDatabase database;
     public final static String RECORD_TABLE = "virtueLog"; // name of table
-
+    RatingBar r1;
+    RatingBar r2;
+    RatingBar r3;
+    RatingBar r4;
+    RatingBar r5;
+    RatingBar r6;
+    RatingBar r7;
+    RatingBar r8;
+    RatingBar r9;
+    RatingBar r10;
+    RatingBar r11;
+    RatingBar r12;
+    RatingBar r13;
     Typeface face;
 
     @Override
@@ -37,6 +51,19 @@ public class VirtueSurvey extends AppCompatActivity {
         setContentView(R.layout.activity_virtue_survey);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        r1 = (RatingBar) findViewById(R.id.v1Rating);
+        r2 = (RatingBar) findViewById(R.id.v2Rating);
+        r3 = (RatingBar) findViewById(R.id.v3Rating);
+        r4 = (RatingBar) findViewById(R.id.v4Rating);
+        r5 = (RatingBar) findViewById(R.id.v5Rating);
+        r6 = (RatingBar) findViewById(R.id.v6Rating);
+        r7 = (RatingBar) findViewById(R.id.v7Rating);
+        r8 = (RatingBar) findViewById(R.id.v8Rating);
+        r9 = (RatingBar) findViewById(R.id.v9Rating);
+        r10 = (RatingBar) findViewById(R.id.v10Rating);
+        r11 = (RatingBar) findViewById(R.id.v11Rating);
+        r12 = (RatingBar) findViewById(R.id.v12Rating);
+        r13 = (RatingBar) findViewById(R.id.v13Rating);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         face = Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
@@ -56,6 +83,41 @@ public class VirtueSurvey extends AppCompatActivity {
         if (btnPrevious != null) {
             btnPrevious.setAlpha(0);
         }
+        TextView msgTv = (TextView) findViewById(R.id.surveyMsg);
+        if(equals(getTodaysRecordId(),null)) {
+            //msgTv.setText("You have not recorded your virtues today. Click next to begin.");
+        }
+        else {
+            msgTv.setText("You've already recorded your virtues today. You can still click next to change them.");
+        }
+        // Clear all ratings if last launch of this activity was yesterday or later
+        Calendar c = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c2.setTimeInMillis(System.currentTimeMillis());
+
+        long st = _appPrefs.getLastSurveyTime();
+        long diff = System.currentTimeMillis() - st;
+        Log.d(TAG, "ms since last survey: " + diff);
+        c.add(Calendar.MILLISECOND, (int) (-1 * diff));
+        if(c.get(Calendar.DAY_OF_WEEK)!=c2.get(Calendar.DAY_OF_WEEK)) {
+            Log.d(TAG, "Its a new day! Clear your saved ratings");
+            r1.setRating(0);
+            r2.setRating(0);
+            r3.setRating(0);
+            r4.setRating(0);
+            r5.setRating(0);
+            r6.setRating(0);
+            r7.setRating(0);
+            r8.setRating(0);
+            r9.setRating(0);
+            r10.setRating(0);
+            r11.setRating(0);
+            r12.setRating(0);
+            r13.setRating(0);
+        }
+
+        _appPrefs.setLastSurveyTime();
+
         initViewAnimator();
         btnNext.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -130,7 +192,6 @@ public class VirtueSurvey extends AppCompatActivity {
                 }
                 if (Integer.parseInt(activeVirtue) == viewAnimator.getDisplayedChild()) {
                     Log.d(TAG, "This is your virtue!!");
-
                 }
             }
 
@@ -166,19 +227,6 @@ public class VirtueSurvey extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         _appPrefs = new AppPreferences(getApplicationContext());
-        RatingBar r1 = (RatingBar) findViewById(R.id.v1Rating);
-        RatingBar r2 = (RatingBar) findViewById(R.id.v2Rating);
-        RatingBar r3 = (RatingBar) findViewById(R.id.v3Rating);
-        RatingBar r4 = (RatingBar) findViewById(R.id.v4Rating);
-        RatingBar r5 = (RatingBar) findViewById(R.id.v5Rating);
-        RatingBar r6 = (RatingBar) findViewById(R.id.v6Rating);
-        RatingBar r7 = (RatingBar) findViewById(R.id.v7Rating);
-        RatingBar r8 = (RatingBar) findViewById(R.id.v8Rating);
-        RatingBar r9 = (RatingBar) findViewById(R.id.v9Rating);
-        RatingBar r10 = (RatingBar) findViewById(R.id.v10Rating);
-        RatingBar r11 = (RatingBar) findViewById(R.id.v11Rating);
-        RatingBar r12 = (RatingBar) findViewById(R.id.v12Rating);
-        RatingBar r13 = (RatingBar) findViewById(R.id.v13Rating);
         r1.setRating(Integer.parseInt(_appPrefs.getRating(1)));
         r2.setRating(Integer.parseInt(_appPrefs.getRating(2)));
         r3.setRating(Integer.parseInt(_appPrefs.getRating(3)));

@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity {
         goaltxt = goal.getText().toString();
         goal.setText(goaltxt.replaceAll("\\bfirst\\b", _appPrefs.getWeekWord()));
         RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
-        rb.setRating((float) Integer.parseInt(_appPrefs.getRating(Integer.parseInt(activeVirtue))));
+        rb.setRating(Integer.parseInt(_appPrefs.getRating(Integer.parseInt(activeVirtue))));
+        Log.d(TAG,"rating: "+ (int) rb.getRating());
         rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 _appPrefs.saveRating(Integer.parseInt(activeVirtue), (int) rating);
-                final String todaysRating = _appPrefs.getTodaysRating();
+                final String todaysRating = _appPrefs.getRating(Integer.parseInt(activeVirtue));
                 Log.d(TAG, "saved todays rating " + todaysRating);
             }
         });
@@ -173,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.action_progress) {
             Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+            MainActivity.this.startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_help) {
+            Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             MainActivity.this.startActivity(intent);
             return true;
         }

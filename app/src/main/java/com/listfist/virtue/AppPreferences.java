@@ -18,6 +18,7 @@ public class AppPreferences {
     public static final String KEY_PREFS_TODAYS_RATING = "todays_rating";
     public static final String KEY_PREFS_ACTIVE_VIRTUE = "active_virtue";
     public static final String KEY_PREFS_TIME = "time_key";
+    public static final String KEY_PREFS_SURVEY_TIME = "survey_time_key";
     public static final String KEY_PREFS_CHANGE_VIRTUE_TIME = "time_change_virtue";
     public static final String KEY_PREFS_V1_RATING = "v1";
     public static final String KEY_PREFS_V2_RATING = "v2";
@@ -42,6 +43,7 @@ public class AppPreferences {
     private int weekNo = 1;
     private String changeVirtueTime;
     private Context context;
+    private long lastSurveyTime;
 
     public AppPreferences(Context context) {
         notificationReceiver = new NotificationReceiver();
@@ -52,7 +54,7 @@ public class AppPreferences {
     }
 
     public String getActiveVirtue() {
-        return _sharedPrefs.getString(KEY_PREFS_ACTIVE_VIRTUE, "");
+        return _sharedPrefs.getString(KEY_PREFS_ACTIVE_VIRTUE, "0");
     }
 
     public String getTime() {
@@ -112,32 +114,46 @@ public class AppPreferences {
         switch (id) {
             case 0:
                 _prefsEditor.putString(KEY_PREFS_TODAYS_RATING, String.valueOf(rating));
+                break;
             case 1:
                 _prefsEditor.putString(KEY_PREFS_V1_RATING, String.valueOf(rating));
+                break;
             case 2:
                 _prefsEditor.putString(KEY_PREFS_V2_RATING, String.valueOf(rating));
+                break;
             case 3:
                 _prefsEditor.putString(KEY_PREFS_V3_RATING, String.valueOf(rating));
+                break;
             case 4:
                 _prefsEditor.putString(KEY_PREFS_V4_RATING, String.valueOf(rating));
+                break;
             case 5:
                 _prefsEditor.putString(KEY_PREFS_V5_RATING, String.valueOf(rating));
+                break;
             case 6:
                 _prefsEditor.putString(KEY_PREFS_V6_RATING, String.valueOf(rating));
+                break;
             case 7:
                 _prefsEditor.putString(KEY_PREFS_V7_RATING, String.valueOf(rating));
+                break;
             case 8:
                 _prefsEditor.putString(KEY_PREFS_V8_RATING, String.valueOf(rating));
+                break;
             case 9:
                 _prefsEditor.putString(KEY_PREFS_V9_RATING, String.valueOf(rating));
+                break;
             case 10:
                 _prefsEditor.putString(KEY_PREFS_V10_RATING, String.valueOf(rating));
+                break;
             case 11:
                 _prefsEditor.putString(KEY_PREFS_V11_RATING, String.valueOf(rating));
+                break;
             case 12:
                 _prefsEditor.putString(KEY_PREFS_V12_RATING, String.valueOf(rating));
+                break;
             case 13:
                 _prefsEditor.putString(KEY_PREFS_V13_RATING, String.valueOf(rating));
+                break;
         }
 
         _prefsEditor.commit();
@@ -214,5 +230,25 @@ public class AppPreferences {
 
     public String getChangeVirtueTime() {
         return _sharedPrefs.getString(KEY_PREFS_CHANGE_VIRTUE_TIME, "0");
+    }
+
+    public int getChangeVirtueDaysLeft() {
+        long differenceTime = System.currentTimeMillis() - Long.parseLong(getChangeVirtueTime());
+
+        int days = (int) (differenceTime / (1000*60*60*24));
+        int hours = (int) ((differenceTime - (1000*60*60*24*days)) / (1000*60*60));
+        int min = (int) (differenceTime - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
+
+        return days*-1;
+    }
+    public void setLastSurveyTime() {
+         String time = String.valueOf(System.currentTimeMillis());
+        _prefsEditor.putString(KEY_PREFS_SURVEY_TIME,time);
+        _prefsEditor.commit();
+    }
+    public long getLastSurveyTime() {
+        String st =  _sharedPrefs.getString(KEY_PREFS_SURVEY_TIME, "0");
+        lastSurveyTime = Long.parseLong(st);
+        return lastSurveyTime;
     }
 }

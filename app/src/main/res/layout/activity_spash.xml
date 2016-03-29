@@ -38,7 +38,7 @@
                 android:paddingTop="20dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
-                android:textSize="36sp"
+                android:textSize="42sp"
                 android:typeface="serif"
                 android:gravity="center_horizontal"
                 android:textColor="#e1f5fe" />

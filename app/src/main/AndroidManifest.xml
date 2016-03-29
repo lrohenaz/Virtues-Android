@@ -62,7 +62,7 @@
 
         <receiver
             android:name=".NotificationReceiver"
-            android:process=":remote"></receiver>
+            android:process=":remote" />
 
         <activity
             android:name=".ProgressActivity"
@@ -81,6 +81,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.listfist.virtue.ProgressActivity" />
+        </activity>
+        <activity
+            android:name=".HelpActivity"
+            android:label="@string/title_activity_help"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.listfist.virtue.MainActivity" />
         </activity>
     </application>
 
