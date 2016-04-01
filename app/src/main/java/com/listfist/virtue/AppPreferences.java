@@ -1,11 +1,19 @@
 package com.listfist.virtue;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Parcel;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import java.util.Calendar;
 
@@ -14,6 +22,7 @@ import java.util.Calendar;
  */
 public class AppPreferences {
     private static final String TAG = SplashActivity.class.getName();
+    public static final String KEY_PREFS_THEME = "theme";
     public static final String KEY_PREFS_WEEK = "week";
     public static final String KEY_PREFS_TODAYS_RATING = "todays_rating";
     public static final String KEY_PREFS_ACTIVE_VIRTUE = "active_virtue";
@@ -33,10 +42,13 @@ public class AppPreferences {
     public static final String KEY_PREFS_V11_RATING = "v11";
     public static final String KEY_PREFS_V12_RATING = "v12";
     public static final String KEY_PREFS_V13_RATING = "v13";
+    public static final String KEY_PREFS_RINGTONE = "notifications_new_message_ringtone";
+    public static final String KEY_PREFS_VIBRATE = "notifications_new_message_vibrate";
+    public static final String KEY_PREFS_WIDGET_ID = "WidgetId";
+    public static final String KEY_PREFS_WIDGET_TEXT_COLOR = "WidgetTextColor";
+    public static final String KEY_PREFS_WIDGET_TEXT_SIZE = "WidgetTextSize";
 
     NotificationReceiver notificationReceiver;
-
-    private static final String APP_SHARED_PREFS = MainActivity.class.getSimpleName(); //  Name of the file -.xml
 
     private SharedPreferences _sharedPrefs;
     private SharedPreferences.Editor _prefsEditor;
@@ -44,11 +56,15 @@ public class AppPreferences {
     private String changeVirtueTime;
     private Context context;
     private long lastSurveyTime;
+    private boolean vibrate;
+    private int theme;
+    private int widgetTextColor;
+    private boolean widgetId;
+    private float widgetTextSize;
 
     public AppPreferences(Context context) {
         notificationReceiver = new NotificationReceiver();
         this.context=context;
-        //this._sharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Activity.MODE_PRIVATE);
         this._sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         this._prefsEditor = _sharedPrefs.edit();
     }
@@ -57,11 +73,70 @@ public class AppPreferences {
         return _sharedPrefs.getString(KEY_PREFS_ACTIVE_VIRTUE, "0");
     }
 
+    public String getActiveVirtueName() {
+       String sid = _sharedPrefs.getString(KEY_PREFS_ACTIVE_VIRTUE, "0");
+        String name;
+        switch(Integer.parseInt(sid)) {
+            case 1:
+                name = context.getResources().getString(R.string.v1_title);
+                break;
+            case 2:
+                name = context.getResources().getString(R.string.v2_title);
+                break;
+            case 3:
+                name = context.getResources().getString(R.string.v3_title);
+                break;
+            case 4:
+                name = context.getResources().getString(R.string.v4_title);
+                break;
+            case 5:
+                name = context.getResources().getString(R.string.v5_title);
+                break;
+            case 6:
+                name = context.getResources().getString(R.string.v6_title);
+                break;
+            case 7:
+                name = context.getResources().getString(R.string.v7_title);
+                break;
+            case 8:
+                name = context.getResources().getString(R.string.v8_title);
+                break;
+            case 9:
+                name = context.getResources().getString(R.string.v9_title);
+                break;
+            case 10:
+                name = context.getResources().getString(R.string.v10_title);
+                break;
+            case 11:
+                name = context.getResources().getString(R.string.v11_title);
+                break;
+            case 12:
+                name = context.getResources().getString(R.string.v12_title);
+                break;
+            case 13:
+                name = context.getResources().getString(R.string.v13_title);
+                break;
+            default:
+                name = null;
+        }
+        return name;
+    }
+
     public String getTime() {
         return _sharedPrefs.getString(KEY_PREFS_TIME, "0");
     }
 
     public void saveActiveVirtue(String text) {
+        int awID = _sharedPrefs.getInt("WidgetId", AppWidgetManager.INVALID_APPWIDGET_ID);
+
+        //RemoteViews rv=new RemoteViews(context.getPackageName(),R.layout.virtue_widget);
+        //rv.setTextViewText(R.id.appwidget_text, _sharedPrefs.getString(KEY_PREFS_ACTIVE_VIRTUE, "0"));
+
+        //AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        //appWidgetManager.updateAppWidget(awID, rv);
+
+                //awp = new VirtueWidget();
+        //ourRemoteView.setFloat(R.id.textview, "setTextSize", 30);
         _prefsEditor.putString(KEY_PREFS_ACTIVE_VIRTUE, text);
         _prefsEditor.commit();
     }
@@ -71,8 +146,9 @@ public class AppPreferences {
         _prefsEditor.commit();
     }
 
-    public String getTodaysRating() {
-        return _sharedPrefs.getString(KEY_PREFS_TODAYS_RATING, "0");
+    public Uri getRingtone() {
+        String rt = _sharedPrefs.getString(KEY_PREFS_RINGTONE, "0");
+        return Uri.parse(rt);
     }
 
     public String getRating(int id) {
@@ -155,7 +231,6 @@ public class AppPreferences {
                 _prefsEditor.putString(KEY_PREFS_V13_RATING, String.valueOf(rating));
                 break;
         }
-
         _prefsEditor.commit();
     }
 
@@ -211,11 +286,12 @@ public class AppPreferences {
     public void createDefaultReminder() {
         // Default reminder time 10PM
         int hour = 22;
-        int minute = 0;
+        int minute = 00;
 
         // Create a new calendar and start with the time now
         Calendar nightlyReminder = Calendar.getInstance();
         nightlyReminder.setTimeInMillis(System.currentTimeMillis());
+
         // Set to default time
         nightlyReminder.set(Calendar.HOUR_OF_DAY, hour);
         nightlyReminder.set(Calendar.MINUTE, minute); // Reminder will trigger at 8am
@@ -234,11 +310,9 @@ public class AppPreferences {
 
     public int getChangeVirtueDaysLeft() {
         long differenceTime = System.currentTimeMillis() - Long.parseLong(getChangeVirtueTime());
-
         int days = (int) (differenceTime / (1000*60*60*24));
         int hours = (int) ((differenceTime - (1000*60*60*24*days)) / (1000*60*60));
         int min = (int) (differenceTime - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
-
         return days*-1;
     }
     public void setLastSurveyTime() {
@@ -250,5 +324,34 @@ public class AppPreferences {
         String st =  _sharedPrefs.getString(KEY_PREFS_SURVEY_TIME, "0");
         lastSurveyTime = Long.parseLong(st);
         return lastSurveyTime;
+    }
+    public Boolean getVibrate() {
+        return  _sharedPrefs.getBoolean(KEY_PREFS_VIBRATE, true);
+    }
+    public Boolean getTheme() {
+        return  _sharedPrefs.getBoolean(KEY_PREFS_THEME, true);
+    }
+    public void saveWidgetId(int appWidgetId) {
+        _prefsEditor.putInt(KEY_PREFS_WIDGET_ID, appWidgetId);
+        _prefsEditor.commit();
+    }
+    public int getWidgetId() {
+        return  _sharedPrefs.getInt(KEY_PREFS_WIDGET_ID, 0);
+    }
+    public int getWidgetTextColor() {
+        return  _sharedPrefs.getInt(KEY_PREFS_WIDGET_TEXT_COLOR, 0);
+    }
+    public void saveWidgetTextColor(int widgetTextColor) {
+        _prefsEditor.putInt(KEY_PREFS_WIDGET_TEXT_COLOR, widgetTextColor);
+        _prefsEditor.commit();
+    }
+
+    public float getWidgetTextSize() {
+        return  _sharedPrefs.getFloat(KEY_PREFS_WIDGET_TEXT_SIZE, 42);
+    }
+
+    public void saveWidgetTextSize(float size) {
+        _prefsEditor.putFloat(KEY_PREFS_WIDGET_TEXT_SIZE, size);
+        _prefsEditor.commit();
     }
 }

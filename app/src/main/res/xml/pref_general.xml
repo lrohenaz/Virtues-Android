@@ -1,4 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="theme"
+        android:title="@string/pref_title_theme" />
+    <Preference
+        android:key="widget"
+        android:title="@string/pref_title_widget" />
 </PreferenceScreen>

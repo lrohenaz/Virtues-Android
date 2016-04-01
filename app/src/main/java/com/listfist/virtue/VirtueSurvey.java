@@ -47,6 +47,13 @@ public class VirtueSurvey extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        _appPrefs = new AppPreferences(getApplicationContext());
+        if(_appPrefs.getTheme()) {
+            setTheme(R.style.AppTheme);
+        }
+        else {
+            setTheme(R.style.AppThemeDark);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_virtue_survey);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,17 +85,20 @@ public class VirtueSurvey extends AppCompatActivity {
         tv.setTypeface(face);
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
         btnNext = (Button) findViewById(R.id.nextBtn);
+        btnNext.setText("Begin");
         btnPrevious = (Button) findViewById(R.id.backBtn);
 
         if (btnPrevious != null) {
             btnPrevious.setAlpha(0);
         }
         TextView msgTv = (TextView) findViewById(R.id.surveyMsg);
+        Typeface osr = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+        msgTv.setTypeface(osr);
         if(equals(getTodaysRecordId(),null)) {
             //msgTv.setText("You have not recorded your virtues today. Click next to begin.");
         }
         else {
-            msgTv.setText("You've already recorded your virtues today. You can still click next to change them.");
+            msgTv.setText("You've already recorded your virtues today. Continuing will update your responses.");
         }
         // Clear all ratings if last launch of this activity was yesterday or later
         Calendar c = Calendar.getInstance();
@@ -144,6 +154,7 @@ public class VirtueSurvey extends AppCompatActivity {
                             tv = (TextView) findViewById(R.id.v1HdrTxt);
                             btnPrevious.setAlpha(1);
                             btnPrevious.setEnabled(true);
+                            btnNext.setText("Next");
                             break;
                         case 2:
                             tv = (TextView) findViewById(R.id.v2HdrTxt);
@@ -214,6 +225,7 @@ public class VirtueSurvey extends AppCompatActivity {
                     case 12: // Chastity
                         btnNext.setAlpha(1);
                         btnNext.setEnabled(true);
+                        btnNext.setText("Begin");
                         break;
                 }
                 Log.d(TAG, "View Id (n):" + String.valueOf(viewAnimator.getDisplayedChild()));
@@ -367,20 +379,14 @@ public class VirtueSurvey extends AppCompatActivity {
 
     void initViewAnimator() {
         //Load animations for in and out for viewanimator
-        //final Animation inAnim = AnimationUtils.loadAnimation(this,
-        //        android.R.anim.fade_in);
-        //final Animation outAnim = AnimationUtils.loadAnimation(this,
-        //        android.R.anim.fade_out);
-
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
-        fadeIn.setStartOffset(400);
-        fadeIn.setDuration(200);
+        fadeIn.setStartOffset(200);
+        fadeIn.setDuration(100);
 
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-        fadeOut.setDuration(100);
-
+        fadeOut.setDuration(50);
 
         viewAnimator.setInAnimation(fadeIn);
         viewAnimator.setOutAnimation(fadeOut);

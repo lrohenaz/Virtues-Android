@@ -2,11 +2,14 @@ package com.listfist.virtue;
 
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.media.audiofx.BassBoost;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +21,14 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -35,6 +42,9 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+    public static AppPreferences _appPrefs;
+    public boolean themeholder=true;
+    private static Activity thisActivity;
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -119,14 +129,42 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        _appPrefs = new AppPreferences(getApplicationContext());
+        if(_appPrefs.getTheme()) {
+            setTheme(R.style.AppTheme);
+            themeholder=true;
+        }
+        else {
+            setTheme(R.style.AppThemeDark);
+            themeholder=false;
+        }
         super.onCreate(savedInstanceState);
         setupActionBar();
-    }
 
-    /**
+        thisActivity = com.listfist.virtue.SettingsActivity.this;
+    }
+    @Override
+    protected void onResume() {
+        _appPrefs = new AppPreferences(getApplicationContext());
+        if(themeholder == _appPrefs.getTheme()) {
+            // No Refresh needed
+        }
+        else {
+            // Refresh the view
+            finish();
+            startActivity(getIntent());
+            //recreate();
+        }
+        super.onResume();
+
+        Log.d("TAG","Resumed?");
+    }
+        /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
     private void setupActionBar() {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(com.listfist.virtue.R.id.toolbar);
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             // Show the Up button in the action bar.
@@ -143,6 +181,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return true;
         }
+
         return super.onMenuItemSelected(featureId, item);
     }
 
@@ -182,24 +221,50 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static class GeneralPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
+            _appPrefs = new AppPreferences(getActivity());
+            if(_appPrefs.getTheme()) {
+                this.getActivity().setTheme(R.style.AppTheme);
+            }
+            else {
+                this.getActivity().setTheme(R.style.AppThemeDark);
+            }
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
-
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
             //bindPreferenceSummaryToValue(findPreference("example_text"));
-            bindPreferenceSummaryToValue(findPreference("time_key"));
-            //bindPreferenceSummaryToValue(findPreference("example_list"));
+            Preference themePref = (Preference) findPreference("theme");
+            themePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                public boolean onPreferenceClick(Preference preference) {
+                    //open browser or intent here
+                    Log.d("TAG","Clicked!!");
+                    thisActivity.recreate();
+                    //rootView.invalidate();
+                    //rootView.requestLayout();
+                    return true;
+                }
+            });
+            Preference widgetPref = (Preference) findPreference("widget");
+            widgetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent i = new Intent(getActivity(), VirtueWidgetConfigureActivity.class);
+                    i.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, _appPrefs.getWidgetId());
+                    startActivity(i);
+                    getActivity().finish();
+                    return true;
+                }
+            });
         }
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                //startActivity(new Intent(getActivity(), SettingsActivity.class));
+                getActivity().finish();
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -223,6 +288,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+            bindPreferenceSummaryToValue(findPreference("time_key"));
         }
 
         @Override

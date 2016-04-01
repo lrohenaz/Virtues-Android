@@ -1,7 +1,12 @@
 package com.listfist.virtue;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,20 +19,33 @@ import android.view.MenuItem;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private AppPreferences _appPrefs;
     Typeface face;
     private static final String TAG = SplashActivity.class.getName();
 
+    public static final int LIGHT = 1;
+    public static final int DARK = 0;
+    Boolean themeholder = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Let there be light...");
         super.onCreate(savedInstanceState);
+        _appPrefs = new AppPreferences(getApplicationContext());
+        if(_appPrefs.getTheme()) {
+            setTheme(R.style.AppTheme);
+            themeholder=true;
+        }
+        else {
+            setTheme(R.style.AppThemeDark);
+            themeholder=false;
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         face = Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
@@ -36,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, VirtueSurvey.class);
                     MainActivity.this.startActivity(intent);
-
                     Snackbar.make(view, "Review Canceled", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -46,11 +63,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        if(themeholder.equals(_appPrefs.getTheme())) {
+            // No Refresh needed
+
+        }
+        else {
+            // Refresh the view
+            //recreate();
+            finish();
+            startActivity(getIntent());
+        }
         super.onResume();
-        Log.d(TAG, "Resuming...");
         _appPrefs = new AppPreferences(getApplicationContext());
         final String activeVirtue = _appPrefs.getActiveVirtue();
-
         String reminderTime = _appPrefs.getTime();
         if (reminderTime.equals("0")) {
             Log.d(TAG, "Nightly Reminder not set");
@@ -70,10 +95,12 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(this.findViewById(android.R.id.content), "Reminder set - 'change virtue' in 7 days: ", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
-//        _appPrefs.
+        // _appPrefs.
         Log.d(TAG, "Active virtue is " + activeVirtue);
         TextView yourVirtue = (TextView) findViewById(R.id.yourVirtue);
         yourVirtue.setTypeface(face);
+        yourVirtue.setTextColor(Color.rgb(130,130,130));
+        yourVirtue.setShadowLayer(1.5f, -2, 2, Color.argb(55,5,5,5));
         TextView goal = (TextView) findViewById(R.id.goalTxt);
         String goaltxt;
         String title = "";
@@ -123,9 +150,13 @@ public class MainActivity extends AppCompatActivity {
         goal.setText(goaltxt.replaceAll("\\bTemperance\\b", title));
         goaltxt = goal.getText().toString();
         goal.setText(goaltxt.replaceAll("\\bfirst\\b", _appPrefs.getWeekWord()));
+        TextView ratingMsg = (TextView) findViewById(R.id.ratingMsg);
+        Typeface osr = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+        ratingMsg.setTypeface(osr);
+
         RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
         rb.setRating(Integer.parseInt(_appPrefs.getRating(Integer.parseInt(activeVirtue))));
-        Log.d(TAG,"rating: "+ (int) rb.getRating());
+        Log.d(TAG, "rating: " + (int) rb.getRating());
         rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -135,6 +166,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //stars.getDrawable(2).setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_ATOP); //selected
+        //stars.getDrawable(1).setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP); //partially selected
+        //stars.getDrawable(0).setColorFilter(getResources().getColor(R.color.colorSecondaryDark), PorterDuff.Mode.SRC_ATOP); //not selected
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+        }
+        else {
+            // Older versions dont theme the start very nicely, just turn them to solid accent color for the current theme
+            if(themeholder) {
+                rb.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorAccentDark), PorterDuff.Mode.SRC_ATOP);
+            }
+            else {
+                rb.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+            }
+        }
 
         if (yourVirtue != null) {
             yourVirtue.setOnClickListener(new TextView.OnClickListener() {
@@ -184,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }
 

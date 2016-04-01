@@ -67,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Log.d(TAG, "Active virtue is " + activeVirtue);
 
-        if(!equals(activeVirtue, "0")) {
+        if(!equals(activeVirtue, "0")) { // 0 means first start - no virtue selected yet
             if(!equals(action, "change_virtue")){
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -220,6 +220,8 @@ public class SplashActivity extends AppCompatActivity {
                             showChangeVirtueDialog();
                         }
                         else {
+
+
                             _appPrefs.saveActiveVirtue(String.valueOf(v));
                             _appPrefs.createChangeVirtueReminder();
                             finish();
