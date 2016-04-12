@@ -4,16 +4,16 @@
     <header
         android:id="@+id/build_icon"
         android:fragment="com.listfist.virtue.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_build_black_24dp"
+        android:icon="@drawable/ic_build_white_24dp"
         android:title="@string/pref_header_general" />
     <header
         android:fragment="com.listfist.virtue.SettingsActivity$NotificationPreferenceFragment"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_notifications_white_24dp"
         android:title="@string/pref_header_notifications" />
 
     <header
         android:fragment="com.listfist.virtue.SettingsActivity$DataSyncPreferenceFragment"
-        android:icon="@drawable/ic_sync_black_24dp"
+        android:icon="@drawable/ic_sync_white_24dp"
         android:title="@string/pref_header_data_sync" />
 
 </preference-headers>

@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.os.ResultReceiver;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
@@ -58,8 +59,18 @@ public class NotificationReceiver extends BroadcastReceiver {
                     context.getResources().getDimensionPixelSize(android.R.dimen.notification_large_icon_height),
                     true);
 
-            // Build & send notifications
-            String action=intent.getAction();
+
+        // Build & send notifications
+        String action=intent.getAction();
+
+        if(action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+            // Check to see if todays timer exists, otherwise create it.
+            // Check nightly reminder is set, otherwise set it to default time
+            Log.d(TAG,"Boot caught by receiver, should be making sure reminder is set here.");
+            // Check if widget needs update
+            _appPrefs.regenerateReminder();
+        }
+
             if(equals(action, ACTION_NIGHTLY)){
                 Intent mIntent = new Intent(context, VirtueSurvey.class);
                 Bundle bundle = new Bundle();
@@ -73,8 +84,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 builder.setSubText("Time to make your journal entry for today...");
                 builder.setNumber(102);
                 builder.setContentIntent(pendingIntent);
-                builder.setTicker("Log your virtues!" +
-                        "");
+                builder.setTicker("Log your virtues!");
                 builder.setSmallIcon(R.mipmap.ic_launcher);
                 builder.setLargeIcon(bm);
                 builder.setAutoCancel(true);

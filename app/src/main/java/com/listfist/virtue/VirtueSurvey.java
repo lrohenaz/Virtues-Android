@@ -6,9 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -23,7 +26,9 @@ import android.widget.ViewAnimator;
 import java.util.Calendar;
 
 
-public class VirtueSurvey extends AppCompatActivity {
+public class VirtueSurvey extends AppCompatActivity implements
+        GestureDetector.OnGestureListener,
+        GestureDetector.OnDoubleTapListener{
     private static final String TAG = SplashActivity.class.getName();
     private static Button btnNext, btnPrevious, my_button;
     private static ViewAnimator viewAnimator;
@@ -44,6 +49,8 @@ public class VirtueSurvey extends AppCompatActivity {
     RatingBar r12;
     RatingBar r13;
     Typeface face;
+    private GestureDetectorCompat mDetector;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,31 +107,7 @@ public class VirtueSurvey extends AppCompatActivity {
         else {
             msgTv.setText("You've already recorded your virtues today. Continuing will update your responses.");
         }
-        // Clear all ratings if last launch of this activity was yesterday or later
-        Calendar c = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c2.setTimeInMillis(System.currentTimeMillis());
 
-        long st = _appPrefs.getLastSurveyTime();
-        long diff = System.currentTimeMillis() - st;
-        Log.d(TAG, "ms since last survey: " + diff);
-        c.add(Calendar.MILLISECOND, (int) (-1 * diff));
-        if(c.get(Calendar.DAY_OF_WEEK)!=c2.get(Calendar.DAY_OF_WEEK)) {
-            Log.d(TAG, "Its a new day! Clear your saved ratings");
-            r1.setRating(0);
-            r2.setRating(0);
-            r3.setRating(0);
-            r4.setRating(0);
-            r5.setRating(0);
-            r6.setRating(0);
-            r7.setRating(0);
-            r8.setRating(0);
-            r9.setRating(0);
-            r10.setRating(0);
-            r11.setRating(0);
-            r12.setRating(0);
-            r13.setRating(0);
-        }
 
         _appPrefs.setLastSurveyTime();
 
@@ -233,6 +216,13 @@ public class VirtueSurvey extends AppCompatActivity {
         });
 
 
+        // Instantiate the gesture detector with the
+        // application context and an implementation of
+        // GestureDetector.OnGestureListener
+        mDetector = new GestureDetectorCompat(this,this);
+        // Set the gesture detector as the double tap
+        // listener.
+        mDetector.setOnDoubleTapListener(this);
     }
 
     @Override
@@ -390,6 +380,78 @@ public class VirtueSurvey extends AppCompatActivity {
 
         viewAnimator.setInAnimation(fadeIn);
         viewAnimator.setOutAnimation(fadeOut);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        // Be sure to call the superclass implementation
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent event) {
+        Log.d(TAG,"onDown: " + event.toString());
+        return true;
+    }
+    private static final int SWIPE_DISTANCE_THRESHOLD = 100;
+    private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2,
+                           float velocityX, float velocityY) {
+        float distanceX = e2.getX() - e1.getX();
+        float distanceY = e2.getY() - e1.getY();
+        if (Math.abs(distanceX) > Math.abs(distanceY)
+                && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD
+                && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+            if (distanceX > 0)
+                btnPrevious.callOnClick();
+            else
+                btnNext.callOnClick();
+            return true;
+        }
+        return false;
+    };
+
+    @Override
+    public void onLongPress(MotionEvent event) {
+        Log.d(TAG, "onLongPress: " + event.toString());
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+                            float distanceY) {
+        Log.d(TAG, "onScroll: " + e1.toString()+e2.toString());
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent event) {
+        Log.d(TAG, "onShowPress: " + event.toString());
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent event) {
+        Log.d(TAG, "onSingleTapUp: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent event) {
+        Log.d(TAG, "onDoubleTap: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent event) {
+        Log.d(TAG, "onDoubleTapEvent: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent event) {
+        Log.d(TAG, "onSingleTapConfirmed: " + event.toString());
+        return true;
     }
 
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_home"
+            android:orderInCategory="100"
+            android:title="@string/action_home" />
+        <item
+            android:id="@+id/action_progress"
+            android:orderInCategory="100"
+            android:title="@string/action_progress" />
+
+        </group>
+    <group android:visible="false">
+        <item
+            android:id="@+id/action_virtue_group"
+            android:title="@string/action_virtue_group">
+            <menu>
+                <group
+                    android:checkableBehavior="single"
+                    android:visible="false">
+                    <item
+                        android:id="@+id/action_v1"
+                        android:orderInCategory="100"
+                        android:title="@string/v1_title" />
+                    <item
+                        android:id="@+id/action_v2"
+                        android:orderInCategory="100"
+                        android:title="@string/v2_title" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_settings"
+            android:orderInCategory="100"
+            android:title="@string/action_settings" />
+        <item
+            android:id="@+id/action_help"
+            android:orderInCategory="100"
+            android:title="@string/action_help" />
+    </group>
+</menu>

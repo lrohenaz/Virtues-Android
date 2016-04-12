@@ -42,8 +42,10 @@
         <item name="android:listViewStyle">@style/ListViewDark</item>
         <item name="android:dividerHeight">1dp</item>
         <item name="android:drawSelectorOnTop">false</item>
+        <item name="android:preferenceStyle">@style/PreferenceStyleDark</item>
     </style>
-
+    <style name="PreferenceStyleDark" parent="AppThemeDark">
+    </style>
     <style name="AppThemeDark.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -60,13 +62,19 @@
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
+
     <style name="FullscreenDarkActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
     <style name="ListViewDark" parent="@android:style/Widget.ListView">
-        <item name="android:divider">@color/black_overlay</item>
-        <item name="android:dividerHeight">1px</item>
+        <item name="android:itemBackground">@color/colorPrimaryDark</item>
+        <item name="android:listSelector">@color/colorAccentDark</item>
+        <item name="android:cacheColorHint">@color/colorAccentDark</item>
+        <item name="android:divider">@color/colorSecondaryDark</item>
+        <item name="android:dividerHeight">1dp</item>
         <item name="android:listChoiceIndicatorSingle">@color/colorAccentDark</item>
         <item name="android:listChoiceBackgroundIndicator">@color/colorAccentDark</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPressedHighlight">@color/colorAccentDark</item>
     </style>
 </resources>

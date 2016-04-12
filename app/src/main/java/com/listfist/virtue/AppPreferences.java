@@ -354,4 +354,19 @@ public class AppPreferences {
         _prefsEditor.putFloat(KEY_PREFS_WIDGET_TEXT_SIZE, size);
         _prefsEditor.commit();
     }
+
+    public void regenerateReminder() {
+        int hour = Integer.parseInt(_sharedPrefs.getString(KEY_PREFS_TIME, "0").split(":")[0]);
+        int minute = Integer.parseInt(_sharedPrefs.getString(KEY_PREFS_TIME, "0").split(":")[1]);
+
+        // Create a new calendar and start with the time now
+        Calendar nightlyReminder = Calendar.getInstance();
+        nightlyReminder.setTimeInMillis(System.currentTimeMillis());
+
+        // Set to default time
+        nightlyReminder.set(Calendar.HOUR_OF_DAY, hour);
+        nightlyReminder.set(Calendar.MINUTE, minute); // Reminder will trigger at 8am
+        nightlyReminder.set(Calendar.SECOND, 0);
+        notificationReceiver.setReminder(context, nightlyReminder.getTimeInMillis());
+    }
 }
