@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -66,9 +67,12 @@ public class NotificationReceiver extends BroadcastReceiver {
         if(action.equals(Intent.ACTION_BOOT_COMPLETED)) {
             // Check to see if todays timer exists, otherwise create it.
             // Check nightly reminder is set, otherwise set it to default time
-            Log.d(TAG,"Boot caught by receiver, should be making sure reminder is set here.");
             // Check if widget needs update
             _appPrefs.regenerateReminder();
+            // update widget
+            if(_appPrefs.getWidgetId()!=0) {
+                VirtueWidget.updateAppWidget(ctxt, AppWidgetManager.getInstance(context),_appPrefs.getWidgetId());
+            }
         }
 
             if(equals(action, ACTION_NIGHTLY)){

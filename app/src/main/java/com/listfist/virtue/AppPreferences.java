@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -42,6 +43,32 @@ public class AppPreferences {
     public static final String KEY_PREFS_V11_RATING = "v11";
     public static final String KEY_PREFS_V12_RATING = "v12";
     public static final String KEY_PREFS_V13_RATING = "v13";
+    public static final String KEY_PREFS_V1_CTITLE = "v1ct";
+    public static final String KEY_PREFS_V2_CTITLE = "v2ct";
+    public static final String KEY_PREFS_V3_CTITLE = "v3ct";
+    public static final String KEY_PREFS_V4_CTITLE = "v4ct";
+    public static final String KEY_PREFS_V5_CTITLE = "v5ct";
+    public static final String KEY_PREFS_V6_CTITLE = "v6ct";
+    public static final String KEY_PREFS_V7_CTITLE = "v7ct";
+    public static final String KEY_PREFS_V8_CTITLE = "v8ct";
+    public static final String KEY_PREFS_V9_CTITLE = "v9ct";
+    public static final String KEY_PREFS_V10_CTITLE = "v10ct";
+    public static final String KEY_PREFS_V11_CTITLE = "v11ct";
+    public static final String KEY_PREFS_V12_CTITLE = "v12ct";
+    public static final String KEY_PREFS_V13_CTITLE = "v13ct";
+    public static final String KEY_PREFS_V1_CDEF = "v1df";
+    public static final String KEY_PREFS_V2_CDEF = "v2df";
+    public static final String KEY_PREFS_V3_CDEF = "v3df";
+    public static final String KEY_PREFS_V4_CDEF = "v4df";
+    public static final String KEY_PREFS_V5_CDEF = "v5df";
+    public static final String KEY_PREFS_V6_CDEF = "v6df";
+    public static final String KEY_PREFS_V7_CDEF = "v7df";
+    public static final String KEY_PREFS_V8_CDEF = "v8df";
+    public static final String KEY_PREFS_V9_CDEF = "v9df";
+    public static final String KEY_PREFS_V10_CDEF = "v10df";
+    public static final String KEY_PREFS_V11_CDEF = "v11df";
+    public static final String KEY_PREFS_V12_CDEF = "v12df";
+    public static final String KEY_PREFS_V13_CDEF = "v13df";
     public static final String KEY_PREFS_RINGTONE = "notifications_new_message_ringtone";
     public static final String KEY_PREFS_VIBRATE = "notifications_new_message_vibrate";
     public static final String KEY_PREFS_WIDGET_ID = "WidgetId";
@@ -368,5 +395,185 @@ public class AppPreferences {
         nightlyReminder.set(Calendar.MINUTE, minute); // Reminder will trigger at 8am
         nightlyReminder.set(Calendar.SECOND, 0);
         notificationReceiver.setReminder(context, nightlyReminder.getTimeInMillis());
+    }
+public String getCustomTitle(int v) {
+    String s=null;
+    switch(v) {
+        case 1:
+            s=  _sharedPrefs.getString(KEY_PREFS_V1_CTITLE, context.getResources().getString(R.string.v1_title));
+            break;
+        case 2:
+            s=  _sharedPrefs.getString(KEY_PREFS_V2_CTITLE, context.getResources().getString(R.string.v2_title));
+            break;
+        case 3:
+            s=  _sharedPrefs.getString(KEY_PREFS_V3_CTITLE, context.getResources().getString(R.string.v3_title));
+            break;
+        case 4:
+            s=  _sharedPrefs.getString(KEY_PREFS_V4_CTITLE, context.getResources().getString(R.string.v4_title));
+            break;
+        case 5:
+            s=  _sharedPrefs.getString(KEY_PREFS_V5_CTITLE, context.getResources().getString(R.string.v5_title));
+            break;
+        case 6:
+            s=  _sharedPrefs.getString(KEY_PREFS_V6_CTITLE, context.getResources().getString(R.string.v6_title));
+            break;
+        case 7:
+            s=  _sharedPrefs.getString(KEY_PREFS_V7_CTITLE, context.getResources().getString(R.string.v7_title));
+            break;
+        case 8:
+            s=  _sharedPrefs.getString(KEY_PREFS_V8_CTITLE, context.getResources().getString(R.string.v8_title));
+            break;
+        case 9:
+            s=  _sharedPrefs.getString(KEY_PREFS_V9_CTITLE, context.getResources().getString(R.string.v9_title));
+            break;
+        case 10:
+            s=  _sharedPrefs.getString(KEY_PREFS_V10_CTITLE, context.getResources().getString(R.string.v10_title));
+            break;
+        case 11:
+            s=  _sharedPrefs.getString(KEY_PREFS_V11_CTITLE, context.getResources().getString(R.string.v11_title));
+            break;
+        case 12:
+            s=  _sharedPrefs.getString(KEY_PREFS_V12_CTITLE, context.getResources().getString(R.string.v12_title));
+            break;
+        case 13:
+            s=  _sharedPrefs.getString(KEY_PREFS_V13_CTITLE, context.getResources().getString(R.string.v13_title));
+            break;
+    }
+    return s;
+}
+
+    public String getCustomDesc(int v) {
+        String s=null;
+        switch(v) {
+            case 1:
+                s=  _sharedPrefs.getString(KEY_PREFS_V1_CDEF, context.getResources().getString(R.string.v1_desc));
+                break;
+            case 2:
+                s=  _sharedPrefs.getString(KEY_PREFS_V2_CDEF, context.getResources().getString(R.string.v2_desc));
+                break;
+            case 3:
+                s=  _sharedPrefs.getString(KEY_PREFS_V3_CDEF, context.getResources().getString(R.string.v3_desc));
+                break;
+            case 4:
+                s=  _sharedPrefs.getString(KEY_PREFS_V4_CDEF, context.getResources().getString(R.string.v4_desc));
+                break;
+            case 5:
+                s=  _sharedPrefs.getString(KEY_PREFS_V5_CDEF, context.getResources().getString(R.string.v5_desc));
+                break;
+            case 6:
+                s=  _sharedPrefs.getString(KEY_PREFS_V6_CDEF, context.getResources().getString(R.string.v6_desc));
+                break;
+            case 7:
+                s=  _sharedPrefs.getString(KEY_PREFS_V7_CDEF, context.getResources().getString(R.string.v7_desc));
+                break;
+            case 8:
+                s=  _sharedPrefs.getString(KEY_PREFS_V8_CDEF, context.getResources().getString(R.string.v8_desc));
+                break;
+            case 9:
+                s=  _sharedPrefs.getString(KEY_PREFS_V9_CDEF, context.getResources().getString(R.string.v9_desc));
+                break;
+            case 10:
+                s=  _sharedPrefs.getString(KEY_PREFS_V10_CDEF, context.getResources().getString(R.string.v10_desc));
+                break;
+            case 11:
+                s=  _sharedPrefs.getString(KEY_PREFS_V11_CDEF, context.getResources().getString(R.string.v11_desc));
+                break;
+            case 12:
+                s=  _sharedPrefs.getString(KEY_PREFS_V12_CDEF, context.getResources().getString(R.string.v12_desc));
+                break;
+            case 13:
+                s=  _sharedPrefs.getString(KEY_PREFS_V13_CDEF, context.getResources().getString(R.string.v13_desc));
+                break;
+        }
+        return s;
+    }
+    public void saveCustomTitle(int v, String text) {
+        switch(v) {
+            case 1:
+                _prefsEditor.putString(KEY_PREFS_V1_CTITLE, text);
+                break;
+            case 2:
+                _prefsEditor.putString(KEY_PREFS_V2_CTITLE, text);
+                break;
+            case 3:
+                _prefsEditor.putString(KEY_PREFS_V3_CTITLE, text);
+                break;
+            case 4:
+                _prefsEditor.putString(KEY_PREFS_V4_CTITLE, text);
+                break;
+            case 5:
+                _prefsEditor.putString(KEY_PREFS_V5_CTITLE, text);
+                break;
+            case 6:
+                _prefsEditor.putString(KEY_PREFS_V6_CTITLE, text);
+                break;
+            case 7:
+                _prefsEditor.putString(KEY_PREFS_V7_CTITLE, text);
+                break;
+            case 8:
+                _prefsEditor.putString(KEY_PREFS_V8_CTITLE, text);
+                break;
+            case 9:
+                _prefsEditor.putString(KEY_PREFS_V9_CTITLE, text);
+                break;
+            case 10:
+                _prefsEditor.putString(KEY_PREFS_V10_CTITLE, text);
+                break;
+            case 11:
+                _prefsEditor.putString(KEY_PREFS_V11_CTITLE, text);
+                break;
+            case 12:
+                _prefsEditor.putString(KEY_PREFS_V12_CTITLE, text);
+                break;
+            case 13:
+                _prefsEditor.putString(KEY_PREFS_V13_CTITLE, text);
+                break;
+        }
+        _prefsEditor.commit();
+    }
+
+    public void saveCustomDef(int v, String text) {
+        switch(v) {
+            case 1:
+                _prefsEditor.putString(KEY_PREFS_V1_CDEF, text);
+                break;
+            case 2:
+                _prefsEditor.putString(KEY_PREFS_V2_CDEF, text);
+                break;
+            case 3:
+                _prefsEditor.putString(KEY_PREFS_V3_CDEF, text);
+                break;
+            case 4:
+                _prefsEditor.putString(KEY_PREFS_V4_CDEF, text);
+                break;
+            case 5:
+                _prefsEditor.putString(KEY_PREFS_V5_CDEF, text);
+                break;
+            case 6:
+                _prefsEditor.putString(KEY_PREFS_V6_CDEF, text);
+                break;
+            case 7:
+                _prefsEditor.putString(KEY_PREFS_V7_CDEF, text);
+                break;
+            case 8:
+                _prefsEditor.putString(KEY_PREFS_V8_CDEF, text);
+                break;
+            case 9:
+                _prefsEditor.putString(KEY_PREFS_V9_CDEF, text);
+                break;
+            case 10:
+                _prefsEditor.putString(KEY_PREFS_V10_CDEF, text);
+                break;
+            case 11:
+                _prefsEditor.putString(KEY_PREFS_V11_CDEF, text);
+                break;
+            case 12:
+                _prefsEditor.putString(KEY_PREFS_V12_CDEF, text);
+                break;
+            case 13:
+                _prefsEditor.putString(KEY_PREFS_V13_CDEF, text);
+                break;
+        }
+        _prefsEditor.commit();
     }
 }

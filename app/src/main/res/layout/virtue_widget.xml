@@ -1,15 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/widget_margin">
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/appwidget_img"
         android:background="@android:color/transparent"
         android:src="@drawable/abc_ic_clear_mtrl_alpha"
-        android:contentDescription="virtue"
-        android:layout_centerInParent="true" />
-
-</RelativeLayout>
+        android:contentDescription="@string/app_name"
+     />
+</LinearLayout>

@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -61,6 +63,19 @@ public class SplashActivity extends AppCompatActivity {
         v11Btn = (Button) findViewById(R.id.v11Btn);
         v12Btn = (Button) findViewById(R.id.v12Btn);
         v13Btn = (Button) findViewById(R.id.v13Btn);
+        v1Btn.setText(_appPrefs.getCustomTitle(1));
+        v2Btn.setText(_appPrefs.getCustomTitle(2));
+        v3Btn.setText(_appPrefs.getCustomTitle(3));
+        v4Btn.setText(_appPrefs.getCustomTitle(4));
+        v5Btn.setText(_appPrefs.getCustomTitle(5));
+        v6Btn.setText(_appPrefs.getCustomTitle(6));
+        v7Btn.setText(_appPrefs.getCustomTitle(7));
+        v8Btn.setText(_appPrefs.getCustomTitle(8));
+        v9Btn.setText(_appPrefs.getCustomTitle(9));
+        v10Btn.setText(_appPrefs.getCustomTitle(10));
+        v11Btn.setText(_appPrefs.getCustomTitle(11));
+        v12Btn.setText(_appPrefs.getCustomTitle(12));
+        v13Btn.setText(_appPrefs.getCustomTitle(13));
         final TextView vDesc = (TextView) findViewById(R.id.virtueDesc);
         final TextView vTitle = (TextView) findViewById(R.id.virtueTitle);
         vTitle.setTypeface(face);
@@ -80,8 +95,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=1;
-                vDesc.setText(R.string.v1_desc);
-                vTitle.setText(R.string.v1_title);
+                vDesc.setText(_appPrefs.getCustomDesc(1));
+                vTitle.setText(_appPrefs.getCustomTitle(1));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -90,8 +105,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=2;
-                vDesc.setText(R.string.v2_desc);
-                vTitle.setText(R.string.v2_title);
+                vDesc.setText(_appPrefs.getCustomDesc(2));
+                vTitle.setText(_appPrefs.getCustomTitle(2));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -100,8 +115,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=3;
-                vDesc.setText(R.string.v3_desc);
-                vTitle.setText(R.string.v3_title);
+                vDesc.setText(_appPrefs.getCustomDesc(3));
+                vTitle.setText(_appPrefs.getCustomTitle(3));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -110,8 +125,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=4;
-                vDesc.setText(R.string.v4_desc);
-                vTitle.setText(R.string.v4_title);
+                vDesc.setText(_appPrefs.getCustomDesc(4));
+                vTitle.setText(_appPrefs.getCustomTitle(4));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -120,8 +135,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=5;
-                vDesc.setText(R.string.v5_desc);
-                vTitle.setText(R.string.v5_title);
+                vDesc.setText(_appPrefs.getCustomDesc(5));
+                vTitle.setText(_appPrefs.getCustomTitle(5));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -130,8 +145,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=6;
-                vDesc.setText(R.string.v6_desc);
-                vTitle.setText(R.string.v6_title);
+                vDesc.setText(_appPrefs.getCustomDesc(6));
+                vTitle.setText(_appPrefs.getCustomTitle(6));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -140,8 +155,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=7;
-                vDesc.setText(R.string.v7_desc);
-                vTitle.setText(R.string.v7_title);
+                vDesc.setText(_appPrefs.getCustomDesc(7));
+                vTitle.setText(_appPrefs.getCustomTitle(7));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -150,8 +165,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=8;
-                vDesc.setText(R.string.v8_desc);
-                vTitle.setText(R.string.v8_title);
+                vDesc.setText(_appPrefs.getCustomDesc(8));
+                vTitle.setText(_appPrefs.getCustomTitle(8));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -160,8 +175,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=9;
-                vDesc.setText(R.string.v9_desc);
-                vTitle.setText(R.string.v9_title);
+                vDesc.setText(_appPrefs.getCustomDesc(9));
+                vTitle.setText(_appPrefs.getCustomTitle(9));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -170,8 +185,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=10;
-                vDesc.setText(R.string.v10_desc);
-                vTitle.setText(R.string.v10_title);
+                vDesc.setText(_appPrefs.getCustomDesc(10));
+                vTitle.setText(_appPrefs.getCustomTitle(10));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -180,8 +195,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=11;
-                vDesc.setText(R.string.v11_desc);
-                vTitle.setText(R.string.v11_title);
+                vDesc.setText(_appPrefs.getCustomDesc(11));
+                vTitle.setText(_appPrefs.getCustomTitle(11));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -190,8 +205,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=12;
-                vDesc.setText(R.string.v12_desc);
-                vTitle.setText(R.string.v12_title);
+                vDesc.setText(_appPrefs.getCustomDesc(12));
+                vTitle.setText(_appPrefs.getCustomTitle(12));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
@@ -200,13 +215,105 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 v=13;
-                vDesc.setText(R.string.v13_desc);
-                vTitle.setText(R.string.v13_title);
+                vDesc.setText(_appPrefs.getCustomDesc(13));
+                vTitle.setText(_appPrefs.getCustomTitle(13));
                 removeColors();
                 view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 _appPrefs.saveTodaysRating("0");
             }
         });
+        v1Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(1);
+                return true; //return true if we handle the result or something?
+            }
+        });
+        v2Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(2);
+                return true;
+            }
+        });
+        v3Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(3);
+                return true;
+            }
+        });
+        v4Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(4);
+                return true;
+            }
+        });
+        v5Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(5);
+                return true;
+            }
+        });
+        v6Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(6);
+                return true;
+            }
+        });
+        v7Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(7);
+                return true;
+            }
+        });
+        v8Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(8);
+                return true;
+            }
+        });
+        v9Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(9);
+                return true;
+            }
+        });
+        v10Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(10);
+                return true;
+            }
+        });
+        v11Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(11);
+                return true;
+            }
+        });
+        v12Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(12);
+                return true;
+            }
+        });
+        v13Btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEditVirtueDialog(13);
+                return true;
+            }
+        });
+
         choose.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,6 +349,139 @@ public class SplashActivity extends AppCompatActivity {
                 return (a == b) || (a != null && a.equals(b));
             }
         });
+    }
+
+    private void showEditVirtueDialog(final int v) {
+        final AlertDialog ad;
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SplashActivity.this);
+        final LinearLayout ll = new LinearLayout(SplashActivity.this);
+        LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setLayoutParams(llp);
+
+        final EditText newVirtueName = new EditText(SplashActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        newVirtueName.setLayoutParams(lp);
+
+        final EditText def = new EditText(SplashActivity.this);
+        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        def.setLayoutParams(lp2);
+
+        newVirtueName.setText(_appPrefs.getCustomTitle(v));
+        def.setText(_appPrefs.getCustomDesc(v));
+
+
+        ll.addView(newVirtueName, 0);
+        ll.addView(def, 1);
+
+        // ad = alertDialogBuilder.create();
+        alertDialogBuilder.setView(ll);
+        alertDialogBuilder.setIcon(R.drawable.ic_build_white_24dp);
+        alertDialogBuilder.setMessage("customize virtue");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Save", null);
+        alertDialogBuilder.setNegativeButton("Cancel",null);
+        alertDialogBuilder.setNeutralButton("Default",null);
+        ad = alertDialogBuilder.create();
+        ad.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button b = ad.getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG,"save Clicked "+ newVirtueName.getText() +" - "+ def.getText());
+                        _appPrefs.saveCustomTitle(v,newVirtueName.getText().toString());
+                        _appPrefs.saveCustomDef(v,def.getText().toString());
+                        ad.dismiss();
+                        Intent intent = getIntent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        finish();
+                        startActivity(intent);
+                    }
+                });
+
+                Button negBtn = ad.getButton(AlertDialog.BUTTON_NEGATIVE);
+                negBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG,"Cancel Clicked");
+                        ad.dismiss();
+                    }
+                });
+
+                Button defaultBtn = ad.getButton(AlertDialog.BUTTON_NEUTRAL);
+                defaultBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG,"Default clicked ");
+                        switch(v) {
+                            case 1:
+                                newVirtueName.setText(getResources().getString(R.string.v1_title));
+                                def.setText(getResources().getString(R.string.v1_desc));
+                                break;
+                            case 2:
+                                newVirtueName.setText(getResources().getString(R.string.v2_title));
+                                def.setText(getResources().getString(R.string.v2_desc));
+                                break;
+                            case 3:
+                                newVirtueName.setText(getResources().getString(R.string.v3_title));
+                                def.setText(getResources().getString(R.string.v3_desc));
+                                break;
+                            case 4:
+                                newVirtueName.setText(getResources().getString(R.string.v4_title));
+                                def.setText(getResources().getString(R.string.v4_desc));
+                                break;
+                            case 5:
+                                newVirtueName.setText(getResources().getString(R.string.v5_title));
+                                def.setText(getResources().getString(R.string.v5_desc));
+                                break;
+                            case 6:
+                                newVirtueName.setText(getResources().getString(R.string.v6_title));
+                                def.setText(getResources().getString(R.string.v6_desc));
+                                break;
+                            case 7:
+                                newVirtueName.setText(getResources().getString(R.string.v7_title));
+                                def.setText(getResources().getString(R.string.v7_desc));
+                                break;
+                            case 8:
+                                newVirtueName.setText(getResources().getString(R.string.v8_title));
+                                def.setText(getResources().getString(R.string.v8_desc));
+                                break;
+                            case 9:
+                                newVirtueName.setText(getResources().getString(R.string.v9_title));
+                                def.setText(getResources().getString(R.string.v9_desc));
+                                break;
+                            case 10:
+                                newVirtueName.setText(getResources().getString(R.string.v10_title));
+                                def.setText(getResources().getString(R.string.v10_desc));
+                                break;
+                            case 11:
+                                newVirtueName.setText(getResources().getString(R.string.v11_title));
+                                def.setText(getResources().getString(R.string.v11_desc));
+                                break;
+                            case 12:
+                                newVirtueName.setText(getResources().getString(R.string.v12_title));
+                                def.setText(getResources().getString(R.string.v12_desc));
+                                break;
+                            case 13:
+                                newVirtueName.setText(getResources().getString(R.string.v13_title));
+                                def.setText(getResources().getString(R.string.v13_desc));
+                                break;
+                        }
+                    }
+                });
+            }
+        });
+        ad.show();
     }
 
     private void blinkTitle() {

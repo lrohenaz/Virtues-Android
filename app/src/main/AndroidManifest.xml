@@ -30,11 +30,14 @@
 
         <receiver android:name=".VirtueWidget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"
+                    android:label="@string/app_name"/>
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/virtue_widget_info" />
+                android:resource="@xml/virtue_widget_info"
+                android:label="@string/app_name"
+                />
         </receiver>
 
         <activity android:name=".VirtueWidgetConfigureActivity">

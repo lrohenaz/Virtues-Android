@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -50,21 +52,36 @@ public class VirtueSurvey extends AppCompatActivity implements
     RatingBar r13;
     Typeface face;
     private GestureDetectorCompat mDetector;
-
+    Boolean themeholder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         _appPrefs = new AppPreferences(getApplicationContext());
+        themeholder=_appPrefs.getTheme();
         if(_appPrefs.getTheme()) {
             setTheme(R.style.AppTheme);
+            themeholder=true;
         }
         else {
             setTheme(R.style.AppThemeDark);
+            themeholder=false;
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_virtue_survey);
+        // Set up toolbar & navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            if(themeholder) {
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+            }
+            else {
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimaryDark)));
+            }
+        }
         r1 = (RatingBar) findViewById(R.id.v1Rating);
         r2 = (RatingBar) findViewById(R.id.v2Rating);
         r3 = (RatingBar) findViewById(R.id.v3Rating);
@@ -116,6 +133,7 @@ public class VirtueSurvey extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 TextView tv = null;
+                TextView def = null;
                 if (equals(btnNext.getText(), "Finish")) {
                     // Finish Clicked
                     Integer[] surveyVals = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -135,45 +153,84 @@ public class VirtueSurvey extends AppCompatActivity implements
                     switch (viewAnimator.getDisplayedChild()) {
                         case 1: // Temperance
                             tv = (TextView) findViewById(R.id.v1HdrTxt);
+                            def = (TextView) findViewById(R.id.v1DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(1));
+                            def.setText(_appPrefs.getCustomDesc(1));
                             btnPrevious.setAlpha(1);
                             btnPrevious.setEnabled(true);
                             btnNext.setText("Next");
                             break;
                         case 2:
                             tv = (TextView) findViewById(R.id.v2HdrTxt);
+                            def = (TextView) findViewById(R.id.v2DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(2));
+                            def.setText(_appPrefs.getCustomDesc(2));
                             break;
                         case 3:
                             tv = (TextView) findViewById(R.id.v3HdrTxt);
+                            def = (TextView) findViewById(R.id.v3DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(3));
+                            def.setText(_appPrefs.getCustomDesc(3));
                             break;
                         case 4:
                             tv = (TextView) findViewById(R.id.v4HdrTxt);
+                            def = (TextView) findViewById(R.id.v4DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(4));
+                            def.setText(_appPrefs.getCustomDesc(4));
                             break;
                         case 5:
                             tv = (TextView) findViewById(R.id.v5HdrTxt);
+                            def = (TextView) findViewById(R.id.v5DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(5));
+                            def.setText(_appPrefs.getCustomDesc(5));
                             break;
                         case 6:
                             tv = (TextView) findViewById(R.id.v6HdrTxt);
+                            def = (TextView) findViewById(R.id.v6DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(6));
+                            def.setText(_appPrefs.getCustomDesc(6));
                             break;
                         case 7:
                             tv = (TextView) findViewById(R.id.v7HdrTxt);
+                            def = (TextView) findViewById(R.id.v7DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(7));
+                            def.setText(_appPrefs.getCustomDesc(7));
                             break;
                         case 8:
                             tv = (TextView) findViewById(R.id.v8HdrTxt);
+                            def = (TextView) findViewById(R.id.v8DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(8));
+                            def.setText(_appPrefs.getCustomDesc(8));
                             break;
                         case 9:
                             tv = (TextView) findViewById(R.id.v9HdrTxt);
+                            def = (TextView) findViewById(R.id.v9DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(9));
+                            def.setText(_appPrefs.getCustomDesc(9));
                             break;
                         case 10:
                             tv = (TextView) findViewById(R.id.v10HdrTxt);
+                            def = (TextView) findViewById(R.id.v10DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(10));
+                            def.setText(_appPrefs.getCustomDesc(10));
                             break;
                         case 11:
                             tv = (TextView) findViewById(R.id.v11HdrTxt);
+                            def = (TextView) findViewById(R.id.v11DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(11));
+                            def.setText(_appPrefs.getCustomDesc(11));
                             break;
                         case 12:
                             tv = (TextView) findViewById(R.id.v12HdrTxt);
+                            def = (TextView) findViewById(R.id.v12DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(12));
+                            def.setText(_appPrefs.getCustomDesc(12));
                             break;
                         case 13:
                             tv = (TextView) findViewById(R.id.v13HdrTxt);
+                            def = (TextView) findViewById(R.id.v13DescTxt);
+                            tv.setText(_appPrefs.getCustomTitle(13));
+                            def.setText(_appPrefs.getCustomDesc(13));
                             RatingBar rb = (RatingBar) findViewById(R.id.v12Rating);
                             Log.d(TAG, "chastity rating was " + rb.getRating());
                             btnNext.setText(R.string.finishBtnTxt);
@@ -182,6 +239,7 @@ public class VirtueSurvey extends AppCompatActivity implements
                     if (tv != null) {
                         tv.setTypeface(face);
                     }
+
                     Log.d(TAG, "View Id (n):" + String.valueOf(viewAnimator.getDisplayedChild()));
                 }
                 if (Integer.parseInt(activeVirtue) == viewAnimator.getDisplayedChild()) {

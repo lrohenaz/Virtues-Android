@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -64,13 +66,37 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
     private PieChart mChart;
 
     private Typeface tf;
+    Boolean themeholder;
+    private AppPreferences _appPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        _appPrefs = new AppPreferences(getApplicationContext());
+        themeholder=_appPrefs.getTheme();
+        if(_appPrefs.getTheme()) {
+            setTheme(R.style.AppTheme);
+            themeholder=true;
+        }
+        else {
+            setTheme(R.style.AppThemeDark);
+            themeholder=false;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            if(themeholder) {
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary))); // set your desired color
+            }
+            else {
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimaryDark))); // set your desired color
+            }
+        }
+
         // Set up database
         MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
@@ -173,7 +199,7 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
     public Cursor selectRecords() {
         //String[] cols = new String[] {RECORD_ID, RECORD_TIME, RECORD_1, RECORD_2, RECORD_3, RECORD_4, RECORD_5, RECORD_6, RECORD_7, RECORD_8, RECORD_9, RECORD_10, RECORD_11, RECORD_12, RECORD_13};
         if(database!=null) {
-            String selectQuery = "SELECT *, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
+            String selectQuery = "SELECT _id, strftime('%w', dt), v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13 FROM "+ RECORD_TABLE;
             Cursor mCursor = database.rawQuery(selectQuery, null);
             Log.d(TAG,"Query: "+ selectQuery);
             //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
@@ -235,7 +261,7 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
             Log.d(TAG,"We've got "+ count +" columns to add");
             for (int i = 0; i < count; i++) {
                 Log.d(TAG,"Adding "+ avgs.get(i));
-                yVals1.add(new Entry((float) avgs.get(i), i));
+                yVals1.add(new Entry((float) avgs.get(i)+1, i));
             }
         }
         else {
