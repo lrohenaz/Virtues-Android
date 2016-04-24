@@ -1,6 +1,5 @@
 package com.listfist.virtue;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,11 +7,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
@@ -66,20 +63,20 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
     private PieChart mChart;
 
     private Typeface tf;
-    Boolean themeholder;
+    Boolean lightTheme;
     private AppPreferences _appPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         _appPrefs = new AppPreferences(getApplicationContext());
-        themeholder=_appPrefs.getTheme();
+        lightTheme =_appPrefs.getTheme();
         if(_appPrefs.getTheme()) {
             setTheme(R.style.AppTheme);
-            themeholder=true;
+            lightTheme =true;
         }
         else {
             setTheme(R.style.AppThemeDark);
-            themeholder=false;
+            lightTheme =false;
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
@@ -89,11 +86,13 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         if(actionBar!=null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-            if(themeholder) {
+            if(lightTheme) {
                 actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary))); // set your desired color
+
             }
             else {
                 actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimaryDark))); // set your desired color
+
             }
         }
 
@@ -122,14 +121,18 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
 
         mChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
-        mChart.setCenterText(generateCenterSpannableText());
 
         mChart.setDrawHoleEnabled(true);
-        mChart.setHoleColor(Color.WHITE);
-
-        mChart.setTransparentCircleColor(Color.WHITE);
+        if(lightTheme) {
+            mChart.setHoleColor(Color.WHITE);
+            mChart.setTransparentCircleColor(Color.WHITE);
+        }
+        else {
+            mChart.setHoleColor(R.color.black_overlay);
+            mChart.setTransparentCircleColor(R.color.colorAccentDark);
+        }
+        mChart.setCenterText(generateCenterSpannableText());
         mChart.setTransparentCircleAlpha(110);
-
         mChart.setHoleRadius(58f);
         mChart.setTransparentCircleRadius(61f);
 
@@ -139,7 +142,6 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         // enable rotation of the chart by touch
         mChart.setRotationEnabled(true);
         mChart.setHighlightPerTapEnabled(true);
-
         // mChart.setUnit(" €");
         // mChart.setDrawUnitsInChart(true);
 
@@ -160,6 +162,12 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         // Customize legend
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         l.setWordWrapEnabled(true);
+        if(lightTheme) {
+
+        }
+        else {
+            l.setTextColor(getResources().getColor(R.color.colorAccentDark));
+        }
         // customize display:
         mChart.setDrawSliceText(false);
         for (IDataSet<?> set : mChart.getData().getDataSets())
@@ -275,43 +283,43 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
             for (int i = 1; i <= 13; i++) {
                 switch(i) {
                     case 1:
-                        xVals.add(getResources().getString(R.string.v1_title));
+                        xVals.add(_appPrefs.getCustomTitle(1));
                         break;
                     case 2:
-                        xVals.add(getResources().getString(R.string.v2_title));
+                        xVals.add(_appPrefs.getCustomTitle(2));
                         break;
                     case 3:
-                        xVals.add(getResources().getString(R.string.v3_title));
+                        xVals.add(_appPrefs.getCustomTitle(3));
                         break;
                     case 4:
-                        xVals.add(getResources().getString(R.string.v4_title));
+                        xVals.add(_appPrefs.getCustomTitle(4));
                         break;
                     case 5:
-                        xVals.add(getResources().getString(R.string.v5_title));
+                        xVals.add(_appPrefs.getCustomTitle(5));
                         break;
                     case 6:
-                        xVals.add(getResources().getString(R.string.v6_title));
+                        xVals.add(_appPrefs.getCustomTitle(6));
                         break;
                     case 7:
-                        xVals.add(getResources().getString(R.string.v7_title));
+                        xVals.add(_appPrefs.getCustomTitle(7));
                         break;
                     case 8:
-                        xVals.add(getResources().getString(R.string.v8_title));
+                        xVals.add(_appPrefs.getCustomTitle(8));
                         break;
                     case 9:
-                        xVals.add(getResources().getString(R.string.v9_title));
+                        xVals.add(_appPrefs.getCustomTitle(9));
                         break;
                     case 10:
-                        xVals.add(getResources().getString(R.string.v10_title));
+                        xVals.add(_appPrefs.getCustomTitle(10));
                         break;
                     case 11:
-                        xVals.add(getResources().getString(R.string.v11_title));
+                        xVals.add(_appPrefs.getCustomTitle(11));
                         break;
                     case 12:
-                        xVals.add(getResources().getString(R.string.v12_title));
+                        xVals.add(_appPrefs.getCustomTitle(12));
                         break;
                     case 13:
-                        xVals.add(getResources().getString(R.string.v13_title));
+                        xVals.add(_appPrefs.getCustomTitle(13));
                         break;
                 }
 
@@ -350,9 +358,6 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
 
         PieData data = new PieData(xVals, dataSet);
         data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
-        data.setValueTypeface(tf);
         mChart.setData(data);
 
         // undo all highlights
@@ -362,11 +367,18 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
     }
 
     private SpannableString generateCenterSpannableText() {
-
         SpannableString s = new SpannableString("Virtues\nSized by Average Score");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 7, 0);
+        s.setSpan(new RelativeSizeSpan(1.9f), 0, 7, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 7, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 7, s.length(), 0);
+
+
+        if(lightTheme) {
+            s.setSpan(new ForegroundColorSpan(Color.GRAY), 7, s.length(), 0);
+        }
+        else {
+            s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccentDark)), 0, 7, 0);
+            s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccentDark)), 7, s.length(), 0);
+        }
         return s;
     }
 
@@ -379,7 +391,7 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
                 "Value: " + e.getVal() + ", xIndex: " + e.getXIndex()
                         + ", DataSet index: " + dataSetIndex);
         Intent intent = new Intent(ProgressActivity.this, ProgressVirtueActivity.class);
-        intent.putExtra("virtue", e.getXIndex());
+        intent.putExtra("virtue", e.getXIndex()+1);
         intent.putExtra("color", mChart.getData().getColors()[e.getXIndex()]);
         startActivity(intent);
     }

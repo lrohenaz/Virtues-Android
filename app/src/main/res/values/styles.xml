@@ -53,7 +53,7 @@
 
     <style name="AppThemeDark.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <style name="AppThemeDark.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="AppThemeDark.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
     <style name="FullscreenThemeDark" parent="AppThemeDark">
         <item name="android:actionBarStyle">@style/FullscreenDarkActionBarStyle</item>

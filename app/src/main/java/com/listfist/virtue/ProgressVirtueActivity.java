@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ProgressVirtueActivity extends AppCompatActivity {
@@ -47,68 +48,96 @@ public class ProgressVirtueActivity extends AppCompatActivity {
     private Cursor cursor;
     private int color;
     private String datasetTitle;
+    Integer vid;
+    private AppPreferences _appPrefs;
+    Boolean lightTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        _appPrefs = new AppPreferences(getApplicationContext());
+        lightTheme =_appPrefs.getTheme();
+        if(_appPrefs.getTheme()) {
+            setTheme(R.style.AppTheme);
+            lightTheme =true;
+        }
+        else {
+            setTheme(R.style.AppThemeDark);
+            lightTheme =false;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress_virtue);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Intent i = getIntent();
-        Integer vid = i.getIntExtra("virtue", 0);
+        vid = i.getIntExtra("virtue", 0);
         color = i.getIntExtra("color", 0);
+
+        // Set up database
+        MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
+        database = dbHelper.getWritableDatabase();
 
         switch (vid) {
             case 0:
                 break;
             case 1:
-                datasetTitle = getResources().getString(R.string.v1_title);
+                datasetTitle = _appPrefs.getCustomTitle(1);
                 break;
             case 2:
-                datasetTitle = getResources().getString(R.string.v2_title);
+                datasetTitle = _appPrefs.getCustomTitle(2);
                 break;
             case 3:
-                datasetTitle = getResources().getString(R.string.v3_title);
+                datasetTitle = _appPrefs.getCustomTitle(3);
                 break;
             case 4:
-                datasetTitle = getResources().getString(R.string.v4_title);
+                datasetTitle = _appPrefs.getCustomTitle(4);
                 break;
             case 5:
-                datasetTitle = getResources().getString(R.string.v5_title);
+                datasetTitle = _appPrefs.getCustomTitle(5);
                 break;
             case 6:
-                datasetTitle = getResources().getString(R.string.v6_title);
+                datasetTitle = _appPrefs.getCustomTitle(6);
                 break;
             case 7:
-                datasetTitle = getResources().getString(R.string.v7_title);
+                datasetTitle = _appPrefs.getCustomTitle(7);
                 break;
             case 8:
-                datasetTitle = getResources().getString(R.string.v8_title);
+                datasetTitle = _appPrefs.getCustomTitle(8);
                 break;
             case 9:
-                datasetTitle = getResources().getString(R.string.v9_title);
+                datasetTitle = _appPrefs.getCustomTitle(9);
                 break;
             case 10:
-                datasetTitle = getResources().getString(R.string.v10_title);
+                datasetTitle = _appPrefs.getCustomTitle(10);
                 break;
             case 11:
-                datasetTitle = getResources().getString(R.string.v11_title);
+                datasetTitle = _appPrefs.getCustomTitle(11);
                 break;
             case 12:
-                datasetTitle = getResources().getString(R.string.v12_title);
+                datasetTitle = _appPrefs.getCustomTitle(12);
                 break;
             case 13:
-                datasetTitle = getResources().getString(R.string.v13_title);
+                datasetTitle = _appPrefs.getCustomTitle(13);
                 break;
         }
         getSupportActionBar().setTitle(datasetTitle);
         cursor = selectRecords();
         BarChart chart = (BarChart) findViewById(R.id.bchart);
         BarData data = new BarData(getXAxisValues(), getDataSet());
+
+        if(!lightTheme) {
+            chart.setDescriptionColor(Color.DKGRAY);
+            chart.getXAxis().setTextColor(getResources().getColor(R.color.colorAccentDark));
+            chart.getAxisLeft().setTextColor(getResources().getColor(R.color.colorAccentDark));
+            chart.getAxisRight().setTextColor(getResources().getColor(R.color.colorAccentDark));
+            chart.getLegend().setTextColor(getResources().getColor(R.color.colorAccentDark));
+        }
         chart.setData(data);
+
         chart.setDescription("Rating over time");
         chart.animateXY(1500, 1500);
+
+
         chart.invalidate();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -130,71 +159,34 @@ public class ProgressVirtueActivity extends AppCompatActivity {
         }
     }
 
-    private void updateList() {
-        // Get the view to stick out data
-        LinearLayout container = (LinearLayout) findViewById(R.id.records);
-        Cursor mCursor = selectRecords();
-        if (mCursor != null) {
-            for (int i = 0; i < mCursor.getCount(); i++) {
-                // Create a new horizontal layout
-                LinearLayout LL = new LinearLayout(this);
-                LL.setOrientation(LinearLayout.HORIZONTAL);
-                LL.setPadding(20, 20, 20, 20);
-                ViewGroup.LayoutParams LLParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                LL.setLayoutParams(LLParams);
+    private double getMonthAvg(int month) {
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(System.currentTimeMillis());
+        int thisYear = c.get(Calendar.YEAR); // Note: Months start at 0 not 1
 
-                TextView dummyView = new TextView(this);
-                ViewGroup.LayoutParams dummyParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dummyView.setLayoutParams(dummyParams);
+        double avg=0;
 
-                Log.d(TAG, "Record " + i + 1 + "/" + mCursor.getCount() + " Date: " + mCursor.getString(1));
-                Log.d(TAG, "virtue 2: " + mCursor.getInt(3) + " v2 type: " + mCursor.getInt(3));
-                StringBuilder sb = new StringBuilder();
+        Log.d(TAG,"Current month: "+ month);
+        String query = "SELECT * FROM "+ RECORD_TABLE +" WHERE strftime('%m', "+ RECORD_TIME +") = '"+ String.format("%02d", month) +"' AND strftime('%Y', "+ RECORD_TIME +") = '"+ thisYear +"'";
 
-                for (int x = 1; x < 15; x++) { //id is at 0, skip it
-                    // 0=id 1=datetime 2=virtue 1... 15=virtue 13
-                    if (x > 1) {
-                        sb.append(mCursor.getInt(x) + "\t\t");
-                        Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getInt(x));
-                    } else {
-                        if (x == 1) { // Append date
-                            switch (mCursor.getInt(x)) {
-                                case 0:
-                                    sb.append("Sun");
-                                    break;
-                                case 1:
-                                    sb.append("Mon");
-                                    break;
-                                case 2:
-                                    sb.append("Tue");
-                                    break;
-                                case 3:
-                                    sb.append("Wed");
-                                    break;
-                                case 4:
-                                    sb.append("Thu");
-                                    break;
-                                case 5:
-                                    sb.append("Fri");
-                                    break;
-                                case 6:
-                                    sb.append("Sat");
-                                    break;
-                            }
-                            sb.append("\t\t\t\t\t\t\t");
+        Cursor curse = database.rawQuery(query, null);
 
-                        }
-                        Log.d(TAG, "column " + mCursor.getColumnName(x) + " - " + mCursor.getString(x) + " - or - " + mCursor.getInt(x));
-                    }
-                }
-                dummyView.setText(sb);
-                LL.addView(dummyView);
-                if (container != null) {
-                    container.addView(LL);
-                }
-                mCursor.moveToNext();
+        //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
+        if (curse != null) {
+            int ctr=0;
+            curse.moveToFirst();
+            Log.d(TAG,"Found "+ curse.getCount() +" records for month "+ month);
+            for(int x=0;x<curse.getCount();x++) {
+                int val = curse.getInt(vid-1);
+                avg = avg + val;
+                ctr++;
+                avg = avg / ctr;
             }
+            Log.d(TAG,"Average Score: "+ avg);
+            curse.close();
         }
+
+        return avg;
     }
 
     public List<String> getXAxisValues() {
@@ -215,39 +207,26 @@ public class ProgressVirtueActivity extends AppCompatActivity {
     }
 
     public List<IBarDataSet> getDataSet() {
+        // get current month
+        // ToDo - make chart end with current month and go back 1 year
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(System.currentTimeMillis());
+        int thisMonth = c.get(Calendar.MONTH)+1; // Note: Months start at 0 not 1
+
         ArrayList<IBarDataSet> dataSets = null;
 
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
-        BarEntry v1e1 = new BarEntry(2, 0); // Jan
-        valueSet1.add(v1e1);
-        BarEntry v1e2 = new BarEntry(1, 1); // Feb
-        valueSet1.add(v1e2);
-        BarEntry v1e3 = new BarEntry(0, 2); // Mar
-        valueSet1.add(v1e3);
-        BarEntry v1e4 = new BarEntry(2, 3); // Apr
-        valueSet1.add(v1e4);
-        BarEntry v1e5 = new BarEntry(1, 4); // May
-        valueSet1.add(v1e5);
-        BarEntry v1e6 = new BarEntry(4, 5); // Jun
-        valueSet1.add(v1e6);
-        BarEntry v1e7 = new BarEntry(3, 6); // Jul
-        valueSet1.add(v1e7);
-        BarEntry v1e8 = new BarEntry(3, 7); // Aug
-        valueSet1.add(v1e8);
-        BarEntry v1e9 = new BarEntry(2, 8); // Sept
-        valueSet1.add(v1e9);
-        BarEntry v1e10 = new BarEntry(3, 9); // Oct
-        valueSet1.add(v1e10);
-        BarEntry v1e11 = new BarEntry(4, 10); // Nov
-        valueSet1.add(v1e11);
-        BarEntry v1e12 = new BarEntry(5, 11); // Dec
-        valueSet1.add(v1e12);
-
+        for(int z=0;z<12;z++) {
+            double num = getMonthAvg(z);
+            BarEntry v1e1 = new BarEntry((float) num, z); // Jan
+            valueSet1.add(v1e1);
+        }
 
         BarDataSet barDataSet1 = new BarDataSet(valueSet1, datasetTitle);
         barDataSet1.setColor(color);
-
-
+        if(!lightTheme) {
+            barDataSet1.setValueTextColor(getResources().getColor(R.color.colorAccentDark));
+        }
         dataSets = new ArrayList<>();
         dataSets.add(barDataSet1);
         return dataSets;
