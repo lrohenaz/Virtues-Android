@@ -17,12 +17,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -32,7 +30,10 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = SplashActivity.class.getName();
     private AppPreferences _appPrefs;
-    Typeface face;
+
+    // Fonts
+    Typeface oldEurope;
+    Typeface osr;
 
     // Themes
     public static final int LIGHT = 1;
@@ -45,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
     private String mActivityTitle;
     private NavigationView mDrawerNavigation;
     private ArrayAdapter<String> mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get shared preferences
         _appPrefs = new AppPreferences(getApplicationContext());
         // Apply theme from prefs
-        if (_appPrefs.getTheme()) {
+        if (_appPrefs.getTheme()) {             // Light Theme
             setTheme(R.style.AppTheme);
             themeholder = true;
-        } else {
+        } else {                                // Dark Theme
             setTheme(R.style.AppThemeDark);
             themeholder = false;
         }
@@ -70,43 +72,37 @@ public class MainActivity extends AppCompatActivity {
         mActivityTitle = getTitle().toString();
         getSupportActionBar().setTitle("");
         setupDrawer();
-        mDrawerNavigation = (NavigationView)findViewById(R.id.nvView);
+        mDrawerNavigation = (NavigationView) findViewById(R.id.nvView);
 
-
-        if(actionBar!=null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-            if(themeholder) {
+            if (themeholder) {
                 actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
                 mDrawerNavigation.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            }
-            else {
+            } else {
                 actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimaryDark))); // set your desired color
                 mDrawerNavigation.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         }
-
-
+        // Set Home as selected
         mDrawerNavigation.getMenu().getItem(0).setChecked(true);
 
-        mDrawerNavigation. 	setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        mDrawerNavigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                Log.d(TAG,item.getTitle().toString());
+                Log.d(TAG, item.getTitle().toString());
                 Intent intent;
-                switch(item.getItemId()) {
+                switch (item.getItemId()) {
                     case R.id.action_home:
-                        // Useless here
                         break;
                     case R.id.action_help:
                         intent = new Intent(MainActivity.this, HelpActivity.class);
                         MainActivity.this.startActivity(intent);
                         break;
                     case R.id.virtueExpandableList:
-                        Log.d(TAG,"I think this means you clicked the expandable listview?");
                         break;
                     case R.id.action_v1:
-
                         break;
                     case R.id.action_v2:
                         break;
@@ -119,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.startActivity(intent);
                         break;
                     case R.id.action_virtue_group:
-                        Log.d(TAG,"Virtues");
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -128,10 +123,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-       // String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+
+        // ToDo
+        // String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
         //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         //mDrawerList.setAdapter(mAdapter);
-       // mDrawerList.
+        // mDrawerList.
 
         // Journal Button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -148,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Fonts
-        face = Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
+        oldEurope = Typeface.createFromAsset(getAssets(), "OldEurope.ttf");
+        osr = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
 
         // Clear all ratings if last launch of this activity was yesterday or later
         Calendar c = Calendar.getInstance();
@@ -159,22 +157,22 @@ public class MainActivity extends AppCompatActivity {
         long diff = System.currentTimeMillis() - st;
         Log.d(TAG, "ms since last survey: " + diff);
         c.add(Calendar.MILLISECOND, (int) (-1 * diff));
-        if(c.get(Calendar.DAY_OF_WEEK)!=c2.get(Calendar.DAY_OF_WEEK)) {
+        if (c.get(Calendar.DAY_OF_WEEK) != c2.get(Calendar.DAY_OF_WEEK)) {
             Log.d(TAG, "Its a new day! Clear your saved ratings");
-            _appPrefs.saveRating(0,0);
-            _appPrefs.saveRating(1,0);
-            _appPrefs.saveRating(2,0);
-            _appPrefs.saveRating(3,0);
-            _appPrefs.saveRating(4,0);
-            _appPrefs.saveRating(5,0);
-            _appPrefs.saveRating(6,0);
-            _appPrefs.saveRating(7,0);
-            _appPrefs.saveRating(8,0);
-            _appPrefs.saveRating(9,0);
-            _appPrefs.saveRating(10,0);
-            _appPrefs.saveRating(11,0);
-            _appPrefs.saveRating(12,0);
-            _appPrefs.saveRating(13,0);
+            _appPrefs.saveRating(0, 0);
+            _appPrefs.saveRating(1, 0);
+            _appPrefs.saveRating(2, 0);
+            _appPrefs.saveRating(3, 0);
+            _appPrefs.saveRating(4, 0);
+            _appPrefs.saveRating(5, 0);
+            _appPrefs.saveRating(6, 0);
+            _appPrefs.saveRating(7, 0);
+            _appPrefs.saveRating(8, 0);
+            _appPrefs.saveRating(9, 0);
+            _appPrefs.saveRating(10, 0);
+            _appPrefs.saveRating(11, 0);
+            _appPrefs.saveRating(12, 0);
+            _appPrefs.saveRating(13, 0);
         }
     }
 
@@ -213,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         final String activeVirtue = _appPrefs.getActiveVirtue();
         Log.d(TAG, "Active virtue is " + activeVirtue);
         TextView yourVirtue = (TextView) findViewById(R.id.yourVirtue);
-        yourVirtue.setTypeface(face);
+        yourVirtue.setTypeface(oldEurope);
         yourVirtue.setTextColor(Color.rgb(130, 130, 130));
         yourVirtue.setShadowLayer(1.5f, -2, 2, Color.argb(55, 5, 5, 5));
         TextView goal = (TextView) findViewById(R.id.goalTxt);
@@ -282,7 +280,6 @@ public class MainActivity extends AppCompatActivity {
         // Primary rating bar
         RatingBar rb = (RatingBar) findViewById(R.id.ratingBar);
         rb.setRating(Integer.parseInt(_appPrefs.getRating(Integer.parseInt(activeVirtue))));
-        Log.d(TAG, "rating: " + (int) rb.getRating());
         rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -294,7 +291,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Message under rating bar
         TextView ratingMsg = (TextView) findViewById(R.id.ratingMsg);
-        Typeface osr = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         ratingMsg.setTypeface(osr);
 
         // Handle theming ratingbar for older devices
@@ -351,17 +347,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // ToDo - For jumplist navigation
         // if (mDrawerToggle.onOptionsItemSelected(item)) {
         //     return true;
         // }
-        Log.d(TAG, "ITEM: " + item.toString());
-        Log.d(TAG, "Menu Item Selected...");
+
+        Log.d(TAG, "ITEM SELECTED: " + item.toString());
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             MainActivity.this.startActivity(intent);
@@ -383,7 +379,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
 

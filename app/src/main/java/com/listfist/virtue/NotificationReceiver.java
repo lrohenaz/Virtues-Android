@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -89,11 +90,13 @@ public class NotificationReceiver extends BroadcastReceiver {
                 builder.setNumber(102);
                 builder.setContentIntent(pendingIntent);
                 builder.setTicker("Log your virtues!");
-                builder.setSmallIcon(R.mipmap.ic_launcher);
+                builder.setSmallIcon(R.drawable.ic_stat_action_assessment);
                 builder.setLargeIcon(bm);
                 builder.setAutoCancel(true);
                 builder.setSound(soundUri);
-                builder.setPriority(Notification.PRIORITY_HIGH);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    builder.setPriority(Notification.PRIORITY_HIGH);
+                }
                 Notification notification = builder.build();
                 notification.flags |= Notification.FLAG_AUTO_CANCEL | Notification.FLAG_SHOW_LIGHTS;
                 if(_appPrefs.getVibrate()) {
@@ -119,11 +122,13 @@ public class NotificationReceiver extends BroadcastReceiver {
                 builder.setNumber(101);
                 builder.setContentIntent(pendingIntent);
                 builder.setTicker("Change your virtue!");
-                builder.setSmallIcon(R.mipmap.ic_launcher);
+                builder.setSmallIcon(R.drawable.ic_stat_social_school);
                 builder.setLargeIcon(bm);
                 builder.setAutoCancel(true);
                 builder.setSound(soundUri);
-                builder.setPriority(Notification.PRIORITY_HIGH);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    builder.setPriority(Notification.PRIORITY_HIGH);
+                }
                 Notification notification = builder.build();
                 notification.flags |= Notification.FLAG_AUTO_CANCEL | Notification.FLAG_SHOW_LIGHTS;
                 if(_appPrefs.getVibrate()) {

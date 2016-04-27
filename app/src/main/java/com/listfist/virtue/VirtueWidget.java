@@ -53,6 +53,7 @@ public class VirtueWidget extends AppWidgetProvider {
         paint.setTypeface(typeface);
         paint.setColor(color);
         paint.setTextSize(fontSizePX);
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setShadowLayer(5,2,-2, R.color.black_overlay);
         int textWidth = (int) (paint.measureText(text) + pad * 2);
         int height = (int) (fontSizePX / 0.75);
