@@ -4,4 +4,7 @@
         android:id="@+id/actionClearProgress"
         android:title="ClearProgress">
     </item>
+    <item
+        android:id="@+id/actionHistory"
+        android:title="History"></item>
 </menu>

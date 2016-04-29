@@ -129,11 +129,12 @@ public class ProgressVirtueActivity extends AppCompatActivity {
             chart.setDescriptionColor(Color.DKGRAY);
             chart.getXAxis().setTextColor(getResources().getColor(R.color.colorAccentDark));
             chart.getAxisLeft().setTextColor(getResources().getColor(R.color.colorAccentDark));
-            chart.getAxisRight().setTextColor(getResources().getColor(R.color.colorAccentDark));
             chart.getLegend().setTextColor(getResources().getColor(R.color.colorAccentDark));
         }
         chart.setData(data);
-
+        chart.getAxisLeft().setAxisMaxValue(5);
+        chart.getAxisLeft().setAxisMinValue(0);
+        chart.getAxisRight().setEnabled(false);
         chart.setDescription("Rating over time");
         chart.animateXY(1500, 1500);
 
@@ -164,26 +165,30 @@ public class ProgressVirtueActivity extends AppCompatActivity {
         c.setTimeInMillis(System.currentTimeMillis());
         int thisYear = c.get(Calendar.YEAR); // Note: Months start at 0 not 1
 
-        double avg=0;
+        float avg=0.0f;
 
         Log.d(TAG,"Current month: "+ month);
         String query = "SELECT * FROM "+ RECORD_TABLE +" WHERE strftime('%m', "+ RECORD_TIME +") = '"+ String.format("%02d", month) +"' AND strftime('%Y', "+ RECORD_TIME +") = '"+ thisYear +"'";
 
         Cursor curse = database.rawQuery(query, null);
-
+        int ctr=0;
+        float accu=0.0f;
         //Cursor mCursor = database.query(true, RECORD_TABLE, cols, null                    , null, null, null, null, null);
         if (curse != null) {
-            int ctr=0;
+
             curse.moveToFirst();
+
             Log.d(TAG,"Found "+ curse.getCount() +" records for month "+ month);
             for(int x=0;x<curse.getCount();x++) {
-                int val = curse.getInt(vid-1);
-                avg = avg + val;
+                Log.d(TAG,"Record "+ x +": "+ curse.getInt(vid-1+2)); // vid is from extras, 1 based
+                int val = curse.getInt(vid-1+2);
+                accu = accu + val;
                 ctr++;
-                avg = avg / ctr;
+                avg = accu / ctr;
+                curse.moveToNext();
             }
-            Log.d(TAG,"Average Score: "+ avg);
             curse.close();
+            Log.d(TAG,"Accu: "+ accu +" ctr "+ ctr +" Avg Score: "+ avg);
         }
 
         return avg;
@@ -218,10 +223,10 @@ public class ProgressVirtueActivity extends AppCompatActivity {
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
         for(int z=0;z<12;z++) {
             double num = getMonthAvg(z);
-            BarEntry v1e1 = new BarEntry((float) num, z); // Jan
+            BarEntry v1e1 = new BarEntry((float) num, z-1); // Jan
             valueSet1.add(v1e1);
         }
-
+        Log.d(TAG,"Adding "+ valueSet1.size() +" values");
         BarDataSet barDataSet1 = new BarDataSet(valueSet1, datasetTitle);
         barDataSet1.setColor(color);
         if(!lightTheme) {

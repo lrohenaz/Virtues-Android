@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.listfist.virtue">
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,19 +26,20 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".VirtueWidget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"
-                    android:label="@string/app_name"/>
+                <action
+                    android:name="android.appwidget.action.APPWIDGET_UPDATE"
+                    android:label="@string/app_name" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/virtue_widget_info"
                 android:label="@string/app_name"
-                />
+                android:resource="@xml/virtue_widget_info" />
         </receiver>
 
         <activity android:name=".VirtueWidgetConfigureActivity">
@@ -88,14 +92,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.listfist.virtue.MainActivity" />
         </activity>
-        <receiver android:name="com.listfist.virtue.NotificationReceiver"
+
+        <receiver
+            android:name=".NotificationReceiver"
             android:enabled="true"
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".VirtueSurveyHistory"
+            android:label="@string/title_activity_virtue_survey_history"
+            android:parentActivityName=".ProgressActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.listfist.virtue.ProgressActivity" />
+        </activity>
     </application>
 
 </manifest>

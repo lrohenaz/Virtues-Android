@@ -29,13 +29,11 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProgressActivity extends AppCompatActivity implements OnChartValueSelectedListener {
     private static final String TAG = SplashActivity.class.getName();
@@ -43,22 +41,6 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
     public final static String RECORD_TABLE="virtueLog"; // name of table
     private Cursor cursor;
 
-    public final static String RECORD_ID="_id"; // id value for record
-    public final static String RECORD_TIME="dt";  // datetime of record
-    public final static String RECORD_1="v1";
-    public final static String RECORD_2="v2";
-    public final static String RECORD_3="v3";
-    public final static String RECORD_4="v4";
-    public final static String RECORD_5="v5";
-    public final static String RECORD_6="v6";
-    public final static String RECORD_7="v7";
-    public final static String RECORD_8="v8";
-    public final static String RECORD_9="v9";
-    public final static String RECORD_10="v10";
-    public final static String RECORD_11="v11";
-    public final static String RECORD_12="v12";
-    public final static String RECORD_13="v13";
-    private List<IBarDataSet> dataSet;
 
     private PieChart mChart;
 
@@ -92,25 +74,15 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
             }
             else {
                 actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimaryDark))); // set your desired color
-
             }
         }
+
 
         // Set up database
         MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
 
         cursor = selectRecords();
-        // in this example, a BarChart is initialized from xml
-        /*
-        BarChart chart = (BarChart) findViewById(R.id.chart);
-        BarData data = new BarData(getXAxisValues(), getDataSet());
-        chart.setData(data);
-        chart.setDescription("My Chart");
-        chart.animateXY(2000, 2000);
-        chart.invalidate();
-        */
-
         mChart = (PieChart) findViewById(R.id.chart1);
         mChart.setUsePercentValues(false);
         mChart.setDescription("");
@@ -118,8 +90,8 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
 
         mChart.setDragDecelerationFrictionCoef(0.95f);
 
+        // Fonts
         tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
-
         mChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
 
         mChart.setDrawHoleEnabled(true);
@@ -142,24 +114,20 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         // enable rotation of the chart by touch
         mChart.setRotationEnabled(true);
         mChart.setHighlightPerTapEnabled(true);
-        // mChart.setUnit(" €");
-        // mChart.setDrawUnitsInChart(true);
 
         // add a selection listener
         mChart.setOnChartValueSelectedListener(this);
 
-        setData(13, 65);
+        setData(13, 65); // 5 stars * 13 virtues = 65 TOTAL PIE
 
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
-        // mChart.spin(2000, 0, 360);
 
+        // Legend
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
-
-        // Customize legend
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         l.setWordWrapEnabled(true);
         if(lightTheme) {
@@ -172,9 +140,6 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
         mChart.setDrawSliceText(false);
         for (IDataSet<?> set : mChart.getData().getDataSets())
             set.setDrawValues(!set.isDrawValuesEnabled());
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
     @Override
@@ -191,6 +156,10 @@ public class ProgressActivity extends AppCompatActivity implements OnChartValueS
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 break;
+            case R.id.actionHistory:
+                Intent intent = new Intent(ProgressActivity.this,VirtueSurveyHistory.class);
+                ProgressActivity.this.startActivity(intent);
+                return true;
             case R.id.actionClearProgress: {
                 //for (IDataSet<?> set : mChart.getData().getDataSets())
                 //    set.setDrawValues(!set.isDrawValuesEnabled());
